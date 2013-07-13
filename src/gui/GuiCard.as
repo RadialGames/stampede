@@ -1,5 +1,6 @@
 package gui
 {
+	import actions.Card;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
@@ -7,15 +8,16 @@ package gui
 	/**
 	 * Sprite representation of a thing you can do to your Rabbaroo.
 	 */
-	public dynamic class GuiCard extends Sprite
+	public dynamic class GuiCard extends GuiAction
 	{
-		public function GuiCard()
+		public function GuiCard(card:Card)
 		{
+			super(card);
+			
 			gfx = new GfxCard();
 			addChild(gfx);
 			
 			gfx.info.text = "skating";
-			this.value = "skating";
 			addEventListener(MouseEvent.MOUSE_DOWN, mouseDown);
 		}
 		
