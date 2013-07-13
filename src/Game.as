@@ -71,15 +71,7 @@ package  {
 				return false;
 			}
 			timeline[slotNum] = deck.pop();
-			recalculateStats();
 			return true;
-		}
-		
-		public static function recalculateStats():void {
-			// stats.reset(); // doesn't exist yet
-			//for (var action:Action in timeline) {
-				// action.do (); // or whatever makes it go
-			//}
 		}
 		
 	}
