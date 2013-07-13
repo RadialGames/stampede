@@ -2,10 +2,8 @@ package  {
 	import flash.display.InteractiveObject;
 	/**
 	 * ...
-	 * @author Andy Moore
-	 * yeah that's right andy moore
+	 * @author Andy Moores
 	 * sameline braces 4 lyfe
-	 * 4 LYFE
 	 */
 	public class Game {
 		
