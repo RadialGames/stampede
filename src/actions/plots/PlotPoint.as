@@ -1,9 +1,10 @@
 package  actions.plots {
+	import actions.Action;
 	/**
 	 * ...
 	 * @author Andy Moore
 	 */
-	public class PlotPoint extends Action {
+	public class PlotPoint extends Action{
 		
 		public var outComeBool:Boolean;
 		

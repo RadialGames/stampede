@@ -1,10 +1,11 @@
 package gui
 {
-	import actions.Card;
+	import actions.cards.Card;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
+	import actions.cards.Card;
 	/**
 	 * Sprite representation of a thing you can do to your Rabbaroo.
 	 */

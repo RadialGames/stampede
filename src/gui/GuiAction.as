@@ -1,7 +1,7 @@
 package gui
 {
 	import actions.Action;
-	import actions.Card;
+	import actions.cards.Card;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;

@@ -1,8 +1,8 @@
 package  {
 	import flash.display.InteractiveObject;
 	import actions.Action;
-	import actions.Card;
-	import actions.PlotPoint;
+	import actions.cards.Card;
+	import actions.plots.PlotPoint;
 	/**
 	 * ...
 	 * @author Andy Moore

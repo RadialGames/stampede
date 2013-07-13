@@ -1,4 +1,5 @@
 package  actions.cards {
+	import actions.Action;
 	/**
 	 * ...
 	 * @author Andy Moore

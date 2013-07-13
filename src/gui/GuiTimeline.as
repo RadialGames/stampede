@@ -1,6 +1,6 @@
 package gui
 {
-	import actions.PlotPoint;
+	import actions.plots.PlotPoint;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
