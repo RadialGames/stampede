@@ -68,7 +68,7 @@ package  {
 			if (slotNum > timeline.length) {
 				return false; // Slotnum shouldn't exist
 			}
-			if (timeline[slotNum] != null || Config.ALLOW_CARD_OVERWRITE == false) {
+			if (timeline[slotNum] != null && Config.ALLOW_CARD_OVERWRITE == false) {
 				return false;
 			}
 			timeline[slotNum] = deck.pop();
