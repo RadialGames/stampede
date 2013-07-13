@@ -29,11 +29,10 @@ package gui
 				gfx.slots.addChild(slot);
 				
 				if (isPlotPoint(i)) {
-					var event:GfxPlotPoint = new GfxPlotPoint();
-					event.info.text = "event";
-					event.x = cardSpacing * i;
-					gfx.cards.addChild(event);
-					guiActions.push(event);
+					var plotPoint:GuiPlotPoint = new GuiPlotPoint(new PlotPoint());
+					plotPoint.x = cardSpacing * i;
+					gfx.cards.addChild(plotPoint);
+					guiActions.push(plotPoint);
 				} else {
 					guiActions.push(null);
 				}
@@ -143,7 +142,7 @@ package gui
 			return Game.timeline[index] is PlotPoint;
 		}
 		
-		/** fills a slot; either a GuiCard or a GfxEvent */
+		/** fills a slot; either a GuiCard or a GuiPlotPoint */
 		protected var guiActions:Vector.<*> = new Vector.<*>();
 		
 		protected var stats:Vector.<GfxStat> = new Vector.<GfxStat>();

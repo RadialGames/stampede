@@ -27,7 +27,7 @@ package
 			
 			Game.init();
 			addChild(new Gui());
-			new GuiFloatText(this, "Hello!", new Point(100, 200));			
+			new GuiFloatText(this, "Hello!", new Point(100, 200));
 		}
 		
 		/**
