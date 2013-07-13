@@ -15,8 +15,11 @@ package actions.cards
 		
 		override public function doAction():void 
 		{
-			outcomeDescription = Game.creatureName + "'s coat shines!";
-			// add blue/clean/water skill
+			simpleCardAction(
+				Game.creatureName + "'s coat shines!",
+				Config.STAT_WATER,
+				Config.CARD_LOW_CHANGE
+			);
 		}
 	}
 
