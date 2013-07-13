@@ -4,12 +4,11 @@ package  {
 	 * ...
 	 * @author Andy Moore
 	 */
-	public class Stats extends Dictionary {
+	public class Stats {
 		
 		protected var _stats:Dictionary;
 		
 		public function Stats() {
-			super();
 			_stats = new Dictionary();
 		}
 		
