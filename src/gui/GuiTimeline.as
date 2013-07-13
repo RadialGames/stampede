@@ -42,7 +42,7 @@ package gui
 				stat.x = statSpacing * i;
 				gfx.stats.addChild(stat);
 				stats.push(stat);*/
-				statsGraph = new StatsGraph(gfx.width, 130, getStatValues());
+				statsGraph = new StatsGraph(gfx.width, 130);
 				gfx.addChild(statsGraph);
 			}
 			
@@ -94,6 +94,8 @@ package gui
 		protected function refresh():void
 		{
 			Game.reset();
+			//statsGraph.reset();
+			
 			for (var i :int = 0; i < Config.NUM_SLOTS; i++) {
 				try {
 					Game.next();
