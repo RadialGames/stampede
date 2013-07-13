@@ -29,6 +29,17 @@ package  actions.cards {
 			
 			return cards;
 		}
+		
+		public function simpleCardAction(
+			cardDesc:String,
+			toSet:String,
+			setAmount:Number):void 
+		{
+			var setStatVal:Number = Game.stats.getStat(toSet);
+			
+			Game.stats.setStat(toSet, setStatVal + setAmount);
+			outcomeDescription = cardDesc;
+		}
 	}
 
 }
