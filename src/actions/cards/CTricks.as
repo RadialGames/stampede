@@ -15,8 +15,11 @@ package actions.cards
 		
 		override public function doAction():void 
 		{
-			outcomeDescription = Game.creatureName + " patiently learns a new command!";
-			// add 2x green/logic/air skill
+			simpleCardAction(
+				Game.creatureName + " patiently learns a new command!",
+				Config.STAT_SKY,
+				Config.CARD_MID_CHANGE
+			);
 		}
 	}
 

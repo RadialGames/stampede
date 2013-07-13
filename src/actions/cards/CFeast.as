@@ -15,8 +15,11 @@ package actions.cards
 		
 		override public function doAction():void 
 		{
-			outcomeDescription = Game.creatureName + " gorges itself on a variety of foods!";
-			// add 3x orange/health/earth skill
+			simpleCardAction(
+				Game.creatureName + " gorges itself on a variety of foods!",
+				Config.STAT_EARTH,
+				Config.CARD_HIGH_CHANGE
+			);
 		}
 	}
 
