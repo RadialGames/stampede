@@ -68,19 +68,11 @@ package  {
 			if (slotNum > timeline.length) {
 				return false; // Slotnum shouldn't exist
 			}
-			if (timeline[slotNum] != null || Config.ALLOW_CARD_OVERWRITE == false) {
+			if (timeline[slotNum] != null && Config.ALLOW_CARD_OVERWRITE == false) {
 				return false;
 			}
 			timeline[slotNum] = deck.pop();
-			recalculateStats();
 			return true;
-		}
-		
-		public static function recalculateStats():void {
-			// stats.reset(); // doesn't exist yet
-			//for (var action:Action in timeline) {
-				// action.do (); // or whatever makes it go
-			//}
 		}
 		
 	}
