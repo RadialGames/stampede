@@ -13,17 +13,17 @@ package  {
 		public static var timeline:Vector.<Action>;
 		public static var deck:Vector.<Card>;
 		
-		public function Game() {
+		public static function init() {
 			reset();
 		}
 		
-		public function reset():void {
+		public static function reset():void {
 			stats = new Stats();
 			setupTimeline();
 			setupDeck();
 		}
 		
-		public function setupDeck():void {
+		public static function setupDeck():void {
 			var tempDeck:Array = new Array();
 			for (var i:Number = 0; i < Config.DECK_SIZE; i++) {
 				// I guess we should figure a way to make new Cards randomly
@@ -37,7 +37,7 @@ package  {
 			//}
 		}
 		
-		public function setupTimeline():void {
+		public static function setupTimeline():void {
 			timeline = new Vector.<Action>();
 			for (var i:Number = 0; i < Config.NUM_SLOTS; i++) {
 				// This should probably be evenly distributed automatically
@@ -52,7 +52,7 @@ package  {
 			}
 		}
 		
-		public function putTopCardOnSlot(slotNum:Number):Boolean { // Returns True if operation successful
+		public static function putTopCardOnSlot(slotNum:Number):Boolean { // Returns True if operation successful
 			if (slotNum > timeline.length) return false; // Slotnum shouldn't exist
 			if (timeline[slotNum] != null) return false; // Can't overwrite cards? This might change.
 			timeline[slotNum] = deck.pop();
@@ -60,7 +60,7 @@ package  {
 			return true;
 		}
 		
-		public function recalculateStats():void {
+		public static function recalculateStats():void {
 			// stats.reset(); // doesn't exist yet
 			//for (var action:Action in timeline) {
 				// action.do (); // or whatever makes it go
