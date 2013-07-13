@@ -2,7 +2,7 @@ package  {
 	import flash.display.InteractiveObject;
 	/**
 	 * ...
-	 * @author Andy Moores
+	 * @author Andy Moore
 	 * sameline braces 4 lyfe
 	 */
 	public class Game {
