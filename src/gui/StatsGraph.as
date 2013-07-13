@@ -32,7 +32,7 @@ package gui
 			for (var i:int = 0; i < Config.ALL_STATS.length; i++) {
 				lines.push(new Sprite());
 				lines[i].graphics.lineStyle(4, Config.STAT_COLOURS[i]);
-				lines[i].graphics.moveTo(0, (stats[i] / Config.STAT_MAX) * graphHeight);
+				lines[i].graphics.moveTo(0, graphHeight - (stats[i] / Config.STAT_MAX) * graphHeight);
 				addChild(lines[i]);
 			}
 		}
@@ -61,6 +61,7 @@ package gui
 		{
 			for (var i:int = 0; i < stats.length; i++) {
 				var yVal:Number = (stats[i] / Config.STAT_MAX) * graphHeight;
+				yVal = graphHeight - yVal;
 				//yVal = Math.random() * graphHeight;
 				
 				lines[i].graphics.lineTo((currentSlot+1) * graphSpacing, yVal );
