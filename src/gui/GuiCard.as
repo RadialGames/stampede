@@ -30,7 +30,7 @@ package gui
 		protected function mouseUp(...ig):void
 		{
 			stopDrag();
-			Gui.instance.cardDropped(this);
+			Gui.instance.timeline.cardDropped(this);
 		}
 		
 		protected var gfx:GfxCard;
