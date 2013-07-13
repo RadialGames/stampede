@@ -9,7 +9,8 @@ package actions
 		
 		public function CPokeWithStick() 
 		{
-			description = "Poke "+Game.creatureName+" with a Stick!"
+			title = "Poke with a Stick!"
+			colour = Config.RED;
 		}
 		
 		override public function doAction():void 
