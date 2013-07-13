@@ -1,6 +1,7 @@
 ﻿package
 {
 	import adobe.utils.CustomActions;
+	import flash.display.Stage;
     import flash.utils.getDefinitionByName;
     import flash.utils.getQualifiedClassName;
 	import com.gskinner.utils.Rndm;
@@ -514,6 +515,22 @@
 				}
 			}
 			return foundClasses;
+		}
+		
+		public static function findAncestor(child:DisplayObject, classToFind:Class):*
+		{
+			if (child is classToFind) {
+				return child;
+			}
+			if (child.parent == null || child.parent is Stage) {
+				return null;
+			}
+			try {
+				return findAncestor(child.parent, classToFind);
+			} catch (error:Error) {
+				Utils.log("reached the end of findAncestor I guess.");
+				return null;
+			}
 		}
 		
 		/**
