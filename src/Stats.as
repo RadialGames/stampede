@@ -6,16 +6,30 @@ package  {
 	 */
 	public class Stats extends Dictionary {
 		
-		// This class might not be necessary at all.
+		protected var _stats:Dictionary;
 		
 		public function Stats() {
 			super();
+			_stats = new Dictionary();
 		}
 		
 		public function reset():void {
-			for (var k:Object in this) {
-				this[k] = 0;
+			_stats = new Dictionary();
+		}
+		
+		public function getStat(statName:String, defaultVal:Number = 50):Number
+		{
+			if ( !_stats.hasOwnProperty(statName) ) {
+				_stats[statName] = defaultVal;
 			}
-		}	
+			return _stats[statName];
+		}
+		
+		public function setStat(statName:String, val:Number):void 
+		{
+			_stats[statName] = val;
+		}
+		
 	}
+
 }
