@@ -8,6 +8,10 @@ package actions {
 		public function Action() {
 			
 		}
+		public function doAction():void 
+		{
+			
+		}
 		
 	}
 

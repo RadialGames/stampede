@@ -12,6 +12,12 @@ package  {
 			super();
 		}
 		
+		public function reset():void {
+			for (var k:Object in this) {
+				this[k] = 0;
+			}
+		}
+		
 	}
 
 }
