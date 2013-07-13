@@ -13,6 +13,7 @@ package  {
 		public static var stats:Stats;
 		public static var timeline:Vector.<Action>;
 		public static var deck:Vector.<Card>;
+		public static var creatureName:String = "Rabaroo";
 		protected static var _currentSlot:int;
 		
 		public static function init():void {
