@@ -39,7 +39,7 @@ package
 		public static const STAT_DEFAULT:int = 50;
 		public static const STAT_MAX:int = 100;
 			
-		public static const NONRANDOM_SEED:int = 12345;
+		public static const NONRANDOM_SEED:int = -1;
 		public static const DEBUG_MODE:Boolean = true;
 		
 		public static const RED:uint = 0xFF0000;
