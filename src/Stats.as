@@ -16,7 +16,7 @@ package  {
 		public function reset():void {
 			_stats = new Dictionary();
 			for (var i:int = 0; i < Config.ALL_STATS.length; i++) {
-				setStat(Config.ALL_STATS[i], i * 10);
+				setStat(Config.ALL_STATS[i], (i * 10)+35);
 			}
 		}
 		

@@ -24,8 +24,14 @@ package gui
 			lines = new Vector.<Sprite>();
 			for (var i:int = 0; i < Config.ALL_STATS.length; i++) {
 				lines.push(new Sprite());
-				lines[i].graphics.lineStyle(Config.STAT_COLOURS[i]);
-				lines[i].graphics.moveTo(0, (stats[i]/Config.STAT_MAX) * graphHeight);
+				lines[i].graphics.lineStyle(4, Config.STAT_COLOURS[i]);
+				lines[i].graphics.moveTo(0, (stats[i] / Config.STAT_MAX) * graphHeight);
+				
+				//lines[i].graphics.lineTo(20,20);
+				//lines[i].graphics.beginFill(0xFF0000);
+				//lines[i].graphics.drawRect(0, 0, 200, 200);
+				
+				addChild(lines[i]);
 			}
 			
 			drawBase();
@@ -46,7 +52,10 @@ package gui
 		public function update(stats:Vector.<Number>, currentSlot:int):void
 		{
 			for (var i:int = 0; i < stats.length; i++) {
-				lines[i].graphics.lineTo(currentSlot * graphSpacing, (stats[i]/Config.STAT_MAX) * graphHeight );
+				var yVal:Number = (stats[i] / Config.STAT_MAX) * graphHeight;
+				//yVal = Math.random() * graphHeight;
+				
+				lines[i].graphics.lineTo((currentSlot+1) * graphSpacing, yVal );
 			}
 		}
 	}

@@ -42,9 +42,11 @@ package gui
 				stat.x = statSpacing * i;
 				gfx.stats.addChild(stat);
 				stats.push(stat);*/
-				statsGraph = new StatsGraph(gfx.width, 100, getStatValues());
+				statsGraph = new StatsGraph(gfx.width, 130, getStatValues());
 				gfx.addChild(statsGraph);
 			}
+			
+			refresh();
 		}
 		
 		public function cardDropped(card:GuiCard):void
@@ -127,13 +129,8 @@ package gui
 		{
 			var values:Vector.<Number> = new Vector.<Number>();
 			for (var j:int = 0; j < Config.ALL_STATS.length; j++) {
-				try {
-					var stat:String = Config.ALL_STATS[j];
-					values.push(Game.stats[stat]);
-				} catch (error:Error) {
-					Utils.log(error);
-					values.push(j);
-				}
+				var stat:String = Config.ALL_STATS[j];
+				values.push(Game.stats.getStat(stat));
 			}
 			return values;
 		}
