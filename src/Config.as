@@ -22,5 +22,9 @@ package
 		
 		public static const NONRANDOM_SEED:int = 12345;
 		public static const DEBUG_MODE:Boolean = true;
+		
+		public static const RED:uint = 0xFF0000;
+		public static const GREEN:uint = 0x00FF00;
+		public static const BLUE:uint = 0x0000FF;
 	}
 }

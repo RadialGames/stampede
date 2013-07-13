@@ -9,7 +9,8 @@ package actions
 		
 		public function PPBully() 
 		{
-			description = "A bully attacks "+Game.creatureName+"!"
+			title = "A bully attacks!"
+			colour = Config.RED;
 		}
 		
 		override public function doAction():void 
