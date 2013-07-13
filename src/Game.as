@@ -57,8 +57,8 @@ package  {
 				//add nulls where there will be cards and add the events
 				if ( i % slotsPerPlotPoint == 0 ) {
 					var plotClass:Class = PlotPoint.allPlotPoints()[Utils.getRandomInt(0, PlotPoint.allPlotPoints().length-1)];
-					//timeline.push(new plotClass() as PlotPoint);
-					timeline.push(new PPBully());
+					timeline.push(new plotClass() as PlotPoint);
+					//timeline.push(new PPBully());
 				}else {
 					timeline.push(null);
 				}
@@ -66,6 +66,7 @@ package  {
 			//It always ends with a PlotPoint
 			plotClass = PlotPoint.allPlotPoints()[Utils.getRandomInt(0, PlotPoint.allPlotPoints().length-1)];
 			timeline.push(new plotClass() as PlotPoint);
+			//timeline.push(new PPBully());
 		}
 		
 		public static function putTopCardOnSlot(slotNum:Number):Boolean { // Returns True if operation successful

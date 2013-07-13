@@ -29,7 +29,7 @@ package gui
 				gfx.slots.addChild(slot);
 				
 				if (isPlotPoint(i)) {
-					var plotPoint:GuiPlotPoint = new GuiPlotPoint(new PlotPoint());
+					var plotPoint:GuiPlotPoint = new GuiPlotPoint(Game.timeline[i] as PlotPoint);
 					plotPoint.x = cardSpacing * i;
 					gfx.cards.addChild(plotPoint);
 					guiActions.push(plotPoint);
