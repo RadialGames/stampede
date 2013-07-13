@@ -14,6 +14,7 @@ package
 		public static const SNIPE_FONT_SIZE:int = 25;
 		
 		public static const ALLOW_CARD_OVERWRITE:Boolean = false;
+		public static var MUTE:Boolean = false;
 		
 		public static const STAT_HAPPINESS:String = "happiness";
 		public static const STAT_TOUGHNESS:String = "toughness"; // vs tenderness?

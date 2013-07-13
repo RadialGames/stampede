@@ -34,7 +34,15 @@ package gui
 			
 			addEventListener(Event.ENTER_FRAME, enterFrame);
 			
+			addChild(mainMenu = new GuiMainMenu(gfx.mainMenu));
+			GuiButton.replaceButton(gfx.mainMenuButton, showMainMenu);
+			
 			drawNextCard();
+		}
+		
+		protected function showMainMenu():void
+		{
+			Utils.addToParent(this, mainMenu);
 		}
 		
 		/**
@@ -45,7 +53,6 @@ package gui
 			// if we're over a card or plotPoint, show the tooltip for it
 			var globalPoint:Point = new Point(stage.mouseX, stage.mouseY);
 			var objectsUnderPoint:Array = stage.getObjectsUnderPoint(globalPoint);
-			Utils.log("\n\nobj under point: " + objectsUnderPoint.length);
 			var showtingTooltip:Boolean = false;
 			for each (var object:DisplayObject in objectsUnderPoint) {
 				var action:GuiAction = Utils.findAncestor(object, GuiAction);
@@ -137,6 +144,8 @@ package gui
 		
 		protected var gfx:GfxGui;
 		public var timeline:GuiTimeline;
+		
+		protected var mainMenu:GuiMainMenu;
 		
 		public static var instance:Gui;
 	}
