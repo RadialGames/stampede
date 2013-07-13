@@ -37,11 +37,13 @@ package gui
 					guiActions.push(null);
 				}
 				
-				var stat:GfxStat = new GfxStat();
+				/*var stat:GfxStat = new GfxStat();
 				stat.info.text = "666\n666";
 				stat.x = statSpacing * i;
 				gfx.stats.addChild(stat);
-				stats.push(stat);
+				stats.push(stat);*/
+				statsGraph = new StatsGraph(900, 100, getStatValues());
+				gfx.addChild(statsGraph);
 			}
 		}
 		
@@ -91,13 +93,15 @@ package gui
 		{
 			Game.reset();
 			for (var i :int = 0; i < Config.NUM_SLOTS; i++) {
-				var stat:GfxStat = stats[i];
+				//var stat:GfxStat = stats[i];
 				var statValues:Vector.<int> = getStatValues();
-				var statInfo:String = "";
-				for (var j:int = 0; j < statValues.length; j++) {
+				//var statInfo:String = "";
+				/*for (var j:int = 0; j < statValues.length; j++) {
 					statInfo += statValues[j] + "\n";
 				}
-				stat.info.text = statInfo;
+				stat.info.text = statInfo;*/
+			
+				statsGraph.update(statValues, i);
 				
 				if (isPlotPoint(i)) {
 					var event:GfxPlotPoint = guiActions[i] as GfxPlotPoint;
@@ -152,5 +156,6 @@ package gui
 		protected var slotSpacing:Number;
 		protected var cardSpacing:Number;
 		protected var statSpacing:Number;
+		protected var statsGraph:StatsGraph;
 	}
 }
