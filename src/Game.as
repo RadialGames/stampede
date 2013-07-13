@@ -1,4 +1,5 @@
 package  {
+	import actions.cards.CBrush;
 	import actions.plots.PPBully;
 	import flash.display.InteractiveObject;
 	import actions.Action;
