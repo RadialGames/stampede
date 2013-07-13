@@ -16,7 +16,7 @@ package actions.cards
 		override public function doAction():void 
 		{
 			outcomeDescription = Game.creatureName + " enjoys an invigorating hot rock massage.";
-			// add blue/clean/water skill
+			// add 3x blue/clean/water skill
 		}
 	}
 
