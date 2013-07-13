@@ -17,11 +17,11 @@ package actions.plots
 		{
 			outcomeDescription = Game.creatureName + " wisely avoids the mushrooms and plays instead!";
 			outComeBool = true;
-			// add red/power/fire skill
+			// add orange/health/earth skill
 			
 			/* outcomeDescription = Game.creatureName + " eats the mushrooms and makes itself sick!";
 			outComeBool = false;
-			deduct red/power/fire skill*/	
+			deduct orange/health/earth skill */	
 		}
 	}
 
