@@ -3,6 +3,7 @@ package
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.text.TextField;
+	import gui.*;
 
 	/**
 	 * ...
@@ -22,7 +23,7 @@ package
 		private function init(e:Event = null):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-			// entry point
+			
 			game = new Game();
 			addChild(new Gui());
 		}

@@ -23,6 +23,7 @@
 	import flash.text.TextFormat;
 	import flash.utils.Dictionary;
 	import flash.utils.Timer;
+	import gui.*;
 	
 	/**
 	 * Static class with string and randomness utility functions used by many classes.
