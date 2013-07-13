@@ -1,4 +1,4 @@
-package  actions {
+package  actions.plots {
 	/**
 	 * ...
 	 * @author Andy Moore
@@ -16,6 +16,17 @@ package  actions {
 			var plotPoints:Vector.<Class> = new Vector.<Class>();
 			
 			plotPoints.push(PPBully);
+			plotPoints.push(PPChess);
+			plotPoints.push(PPExplore);
+			plotPoints.push(PPFarm);
+			plotPoints.push(PPFriend);
+			plotPoints.push(PPLake);
+			plotPoints.push(PPLost);
+			plotPoints.push(PPMushrooms);
+			plotPoints.push(PPPlague);
+			plotPoints.push(PPPlay);
+			plotPoints.push(PPSkating);
+			plotPoints.push(PPWildMonster);
 			
 			return plotPoints;
 		}
