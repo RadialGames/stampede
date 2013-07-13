@@ -2,6 +2,7 @@ package
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.geom.Point;
 	import flash.text.TextField;
 	import gui.*;
 
@@ -26,6 +27,7 @@ package
 			
 			Game.init();
 			addChild(new Gui());
+			new GuiFloatText(this, "Hello!", new Point(100, 200));			
 		}
 		
 		/**

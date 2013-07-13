@@ -16,8 +16,6 @@ package  {
 			for (var k:Object in this) {
 				this[k] = 0;
 			}
-		}
-		
+		}	
 	}
-
 }
