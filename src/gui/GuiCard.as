@@ -2,6 +2,7 @@ package gui
 {
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	/**
 	 * Sprite representation of a thing you can do to your Rabbaroo.
@@ -24,13 +25,14 @@ package gui
 				return;
 			}
 			startDrag();
-			addEventListener(MouseEvent.MOUSE_UP, mouseUp);
+			Main.addStageEventListener(MouseEvent.MOUSE_UP, mouseUp);
 		}
 		
 		protected function mouseUp(...ig):void
 		{
+			Main.removeStageEventListener(MouseEvent.MOUSE_UP, mouseUp);
 			stopDrag();
-			Gui.instance.cardDropped(this);
+			Gui.instance.timeline.cardDropped(this);
 		}
 		
 		protected var gfx:GfxCard;

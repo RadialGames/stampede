@@ -1,7 +1,9 @@
 package gui
 {
 	import flash.display.MovieClip;
+	import flash.display.SimpleButton;
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	/**
@@ -17,67 +19,49 @@ package gui
 			gfx = new GfxGui();
 			addChild(gfx);
 			
-			slotSpacing = gfx.timeline.slots.slot2.x;
-			cardSpacing = gfx.timeline.cards.card2.x;
-			statSpacing = gfx.timeline.stats.stat2.x;
+			timeline = new GuiTimeline(gfx.timeline);
 			
-			Utils.clearChildren(gfx.timeline.slots);
-			Utils.clearChildren(gfx.timeline.cards);
-			Utils.clearChildren(gfx.timeline.stats);
+			GuiButton.replaceButton(gfx.edgeScrollerLeft);
+			gfx.edgeScrollerLeft.addEventListener(MouseEvent.MOUSE_OVER, scrollerOver);
+			gfx.edgeScrollerLeft.useHandCursor = false;
 			
-			for (var i :int = 0; i < Config.NUM_SLOTS; i++) {
-				var slot:GfxSlot = new GfxSlot();
-				slot.x = slotSpacing * i;
-				gfx.timeline.slots.addChild(slot);
-				
-				if (tempIsEvent(i)) {
-					var event:GfxPlotPoint = new GfxPlotPoint();
-					event.info.text = "event";
-					event.x = cardSpacing * i;
-					gfx.timeline.cards.addChild(event);
-					actions.push(event);
-				} else {
-					actions.push(null);
-				}
-				
-				var stat:GfxStat = new GfxStat();
-				stat.info.text = "666\n666";
-				stat.x = statSpacing * i;
-				gfx.timeline.stats.addChild(stat);
-				stats.push(stat);
-			}
+			GuiButton.replaceButton(gfx.edgeScrollerRight);
+			gfx.edgeScrollerRight.addEventListener(MouseEvent.MOUSE_OVER, scrollerOver);
+			gfx.edgeScrollerRight.useHandCursor = false;
 			
 			drawNextCard();
 		}
 		
-		public function cardDropped(card:GuiCard):void
+		protected function scrollerOver(event:MouseEvent):void
 		{
-			var dropPoint:Point = gfx.timeline.cards.globalToLocal(card.localToGlobal(new Point(0, 0)));
-			Utils.log("dropped at " + dropPoint);
+			event.target.addEventListener(MouseEvent.MOUSE_OUT, scrollerOut);
+			event.target.addEventListener(Event.ENTER_FRAME, scrollerEnterFrame);
+		}
+		
+		protected function scrollerEnterFrame(event:Event):void
+		{
+			var left:Boolean = (event.target == gfx.edgeScrollerLeft);
 			
-			if (dropPoint.y < -50 || dropPoint.y > card.height + 50 || dropPoint.x < -50) {
-				Utils.log("Dropped too far outside zone.");
-				card.x = 0;
-				card.y = 0;
-				return;
+			// from 0 (inside) to 1 (outside)
+			var scrollXPercent:Number = event.target.mouseX / event.target.width;
+			var diffX:Number = 20 * scrollXPercent;
+			if (event.target != gfx.edgeScrollerLeft) {
+				diffX *= -1;
 			}
+			gfx.timeline.x += diffX;
 			
-			var index:int = (cardSpacing / 2 + dropPoint.x) / cardSpacing;
-			Utils.log("drop index is " + index);
-			
-			if (tempIsEvent(index)) {
-				Utils.log("drop index is on an event");
-				card.x = 0;
-				card.y = 0;
-				return;
+			// stop from scrolling off the edge
+			if (gfx.timeline.x > gfx.timelineMask.x) {
+				gfx.timeline.x = gfx.timelineMask.x;
+			} else if (gfx.timeline.x + gfx.timeline.width < gfx.timelineMask.x + gfx.timelineMask.width) {
+				gfx.timeline.x = gfx.timelineMask.width + gfx.timelineMask.x - gfx.timeline.width;
 			}
-			
-			gfx.timeline.cards.addChild(card);
-			card.x = index * cardSpacing;
-			card.y = 0;
-			actions[index] = card;
-			refreshStats();
-			drawNextCard();
+		}
+		
+		protected function scrollerOut(event:MouseEvent):void
+		{
+			event.target.removeEventListener(MouseEvent.MOUSE_OUT, scrollerOut);
+			event.target.removeEventListener(Event.ENTER_FRAME, scrollerEnterFrame);
 		}
 		
 		public function drawNextCard():void
@@ -85,8 +69,8 @@ package gui
 			Utils.clearChildren(gfx.nextCard);
 			
 			var nextCard:GuiCard = new GuiCard();
+			nextCard.card = Game.deck.pop();
 			gfx.nextCard.addChild(nextCard);
-			
 		}
 		
 		public function isNextCard(card:GuiCard):Boolean
@@ -97,37 +81,13 @@ package gui
 			return gfx.nextCard.getChildAt(0) == card;
 		}
 		
-		public function refreshStats():void
-		{
-			for (var i :int = 0; i < stats.length; i++) {
-				var stat:GfxStat = stats[i];
-				stat.info.text = i + "\n" + i;
-				
-				if (tempIsEvent(i)) {
-					var event:GfxPlotPoint = actions[i] as GfxPlotPoint;
-					if (event == null) {
-						Utils.logError("event is null for i " + i);
-						continue;
-					}
-					event.info.text = "evnt" + i;
-				}
-			}
-		}
-		
-		private function tempIsEvent(index:int):Boolean
-		{
-			return index % 3 == 2;
-		}
-		
 		/** fills a slot; either a GuiCard or a GfxEvent */
 		protected var actions:Vector.<*> = new Vector.<*>();
 		
 		protected var stats:Vector.<GfxStat> = new Vector.<GfxStat>();
 		
 		protected var gfx:GfxGui;
-		protected var slotSpacing:Number;
-		protected var cardSpacing:Number;
-		protected var statSpacing:Number;
+		public var timeline:GuiTimeline;
 		
 		public static var instance:Gui;
 	}
