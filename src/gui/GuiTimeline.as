@@ -1,5 +1,6 @@
 package gui
 {
+	import actions.PlotPoint;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -32,9 +33,9 @@ package gui
 					event.info.text = "event";
 					event.x = cardSpacing * i;
 					gfx.cards.addChild(event);
-					actions.push(event);
+					guiActions.push(event);
 				} else {
-					actions.push(null);
+					guiActions.push(null);
 				}
 				
 				var stat:GfxStat = new GfxStat();
@@ -43,11 +44,7 @@ package gui
 				gfx.stats.addChild(stat);
 				stats.push(stat);
 			}
-			
-			//gfx.edgeScrollerLeft.addEventListener(MouseEvent.MOUSE_OVER, sqcrollerOver);
 		}
-		
-		
 		
 		public function cardDropped(card:GuiCard):void
 		{
@@ -74,7 +71,7 @@ package gui
 			gfx.cards.addChild(card);
 			card.x = index * cardSpacing;
 			card.y = 0;
-			actions[index] = card;
+			guiActions[index] = card;
 			refresh();
 			
 			Gui.instance.drawNextCard();
@@ -98,7 +95,7 @@ package gui
 				stat.info.text = i + "\n" + i;
 				
 				if (isPlotPoint(i)) {
-					var event:GfxPlotPoint = actions[i] as GfxPlotPoint;
+					var event:GfxPlotPoint = guiActions[i] as GfxPlotPoint;
 					if (event == null) {
 						Utils.logError("event is null for i " + i);
 						continue;
@@ -117,7 +114,7 @@ package gui
 		}
 		
 		/** fills a slot; either a GuiCard or a GfxEvent */
-		protected var actions:Vector.<*> = new Vector.<*>();
+		protected var guiActions:Vector.<*> = new Vector.<*>();
 		
 		protected var stats:Vector.<GfxStat> = new Vector.<GfxStat>();
 		
