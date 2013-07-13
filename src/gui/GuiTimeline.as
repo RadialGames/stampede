@@ -93,7 +93,12 @@ package gui
 			Game.reset();
 			for (var i :int = 0; i < Config.NUM_SLOTS; i++) {
 				var stat:GfxStat = stats[i];
-				stat.info.text = Game.stats[Config.STAT_STRENGTH] + "\n" + i;
+				var statValues:Vector.<int> = getStatValues();
+				var statInfo:String = "";
+				for (var j:int = 0; j < statValues.length; j++) {
+					statInfo += statValues[j] + "\n";
+				}
+				stat.info.text = statInfo;
 				
 				if (isPlotPoint(i)) {
 					var event:GfxPlotPoint = guiActions[i] as GfxPlotPoint;
@@ -104,8 +109,30 @@ package gui
 					event.info.text = "evnt" + i;
 				}
 				
-				Game.next();
+				try {
+					Game.next();
+				} catch (error:Error) {
+					Utils.log(error);
+				}
 			}
+		}
+		
+		/**
+		 * Return an array of the current Config.ALL_STATS values from Game.as
+		 */
+		protected function getStatValues():Vector.<int>
+		{
+			var values:Vector.<int> = new Vector.<int>();
+			for (var j:int = 0; j < Config.ALL_STATS.length; j++) {
+				try {
+					var stat:String = Config.ALL_STATS[j];
+					values.push(Game.stats[stat]);
+				} catch (error:Error) {
+					Utils.log(error);
+					values.push(j);
+				}
+			}
+			return values;
 		}
 		
 		protected function isPlotPoint(index:int):Boolean

@@ -1,6 +1,7 @@
 package gui
 {
 	import flash.display.MovieClip;
+	import flash.display.SimpleButton;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -22,16 +23,17 @@ package gui
 			
 			GuiButton.replaceButton(gfx.edgeScrollerLeft);
 			gfx.edgeScrollerLeft.addEventListener(MouseEvent.MOUSE_OVER, scrollerOver);
+			gfx.edgeScrollerLeft.useHandCursor = false;
 			
 			GuiButton.replaceButton(gfx.edgeScrollerRight);
 			gfx.edgeScrollerRight.addEventListener(MouseEvent.MOUSE_OVER, scrollerOver);
+			gfx.edgeScrollerRight.useHandCursor = false;
 			
 			drawNextCard();
 		}
 		
 		protected function scrollerOver(event:MouseEvent):void
 		{
-			scrolling = true;
 			event.target.addEventListener(MouseEvent.MOUSE_OUT, scrollerOut);
 			event.target.addEventListener(Event.ENTER_FRAME, scrollerEnterFrame);
 		}
@@ -43,7 +45,7 @@ package gui
 			// from 0 (inside) to 1 (outside)
 			var scrollXPercent:Number = event.target.mouseX / event.target.width;
 			var diffX:Number = 20 * scrollXPercent;
-			if (event.target == gfx.edgeScrollerLeft) {
+			if (event.target != gfx.edgeScrollerLeft) {
 				diffX *= -1;
 			}
 			gfx.timeline.x += diffX;
@@ -60,7 +62,6 @@ package gui
 		{
 			event.target.removeEventListener(MouseEvent.MOUSE_OUT, scrollerOut);
 			event.target.removeEventListener(Event.ENTER_FRAME, scrollerEnterFrame);
-			scrolling = false;
 		}
 		
 		public function drawNextCard():void
@@ -87,8 +88,6 @@ package gui
 		
 		protected var gfx:GfxGui;
 		public var timeline:GuiTimeline;
-		
-		protected var scrolling:Boolean = false;
 		
 		public static var instance:Gui;
 	}
