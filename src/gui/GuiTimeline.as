@@ -90,9 +90,10 @@ package gui
 		 */
 		protected function refresh():void
 		{
-			for (var i :int = 0; i < stats.length; i++) {
+			Game.reset();
+			for (var i :int = 0; i < Config.NUM_SLOTS; i++) {
 				var stat:GfxStat = stats[i];
-				stat.info.text = i + "\n" + i;
+				stat.info.text = Game.stats[Config.STAT_STRENGTH] + "\n" + i;
 				
 				if (isPlotPoint(i)) {
 					var event:GfxPlotPoint = guiActions[i] as GfxPlotPoint;
@@ -102,6 +103,8 @@ package gui
 					}
 					event.info.text = "evnt" + i;
 				}
+				
+				Game.next();
 			}
 		}
 		

@@ -48,7 +48,12 @@ package gui
 			}
 			gfx.timeline.x += diffX;
 			
-			//Utils.log("scrolling, left?" + left + ", scrollX: " + scrollX + ", %: " + scrollXPercent);
+			// stop from scrolling off the edge
+			if (gfx.timeline.x > gfx.timelineMask.x) {
+				gfx.timeline.x = gfx.timelineMask.x;
+			} else if (gfx.timeline.x + gfx.timeline.width < gfx.timelineMask.x + gfx.timelineMask.width) {
+				gfx.timeline.x = gfx.timelineMask.width + gfx.timelineMask.x - gfx.timeline.width;
+			}
 		}
 		
 		protected function scrollerOut(event:MouseEvent):void
@@ -63,6 +68,7 @@ package gui
 			Utils.clearChildren(gfx.nextCard);
 			
 			var nextCard:GuiCard = new GuiCard();
+			nextCard.card = Game.deck.pop();
 			gfx.nextCard.addChild(nextCard);
 		}
 		
