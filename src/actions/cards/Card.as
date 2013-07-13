@@ -1,4 +1,4 @@
-package  actions {
+package  actions.cards {
 	/**
 	 * ...
 	 * @author Andy Moore
@@ -13,7 +13,10 @@ package  actions {
 		{
 			var cards:Vector.<Class> = new Vector.<Class>();
 			
-			cards.push(CPokeWithStick);
+			cards.push(CBook);
+			cards.push(CBrush);
+			cards.push(CSpeedBag);
+			cards.push(CVeggies);
 			
 			return cards;
 		}
