@@ -11,6 +11,8 @@ package
 		public static const NUM_PLOTPOINTS:int = 3;
 		public static const DECK_SIZE:int = 40; // 
 		
+		public static const SNIPE_FONT_SIZE:int = 25;
+		
 		public static const ALLOW_CARD_OVERWRITE:Boolean = false;
 		
 		public static const STAT_STRENGTH:String = "strength";

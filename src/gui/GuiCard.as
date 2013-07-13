@@ -2,6 +2,7 @@ package gui
 {
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	/**
 	 * Sprite representation of a thing you can do to your Rabbaroo.
