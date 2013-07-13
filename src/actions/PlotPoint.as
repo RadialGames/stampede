@@ -5,6 +5,8 @@ package  actions {
 	 */
 	public class PlotPoint extends Action {
 		
+		public var outComeBool:Boolean;
+		
 		public function PlotPoint() {
 			
 		}
@@ -18,6 +20,11 @@ package  actions {
 			return plotPoints;
 		}
 		
+		override public function doAction():void 
+		{
+			outcomeDescription = "no PlotPoint description";
+			outComeBool = true;
+		}
 	}
 
 }
