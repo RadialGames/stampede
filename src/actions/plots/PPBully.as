@@ -15,13 +15,14 @@ package actions.plots
 		
 		override public function doAction():void 
 		{
-			outcomeDescription = Game.creatureName + " scares off a potential bully!";
-			outComeBool = true;
-			// add blue/clean/water skill
-			
-			/* outcomeDescription = Game.creatureName + " is picked on by a larger monster.";
-			outComeBool = false;
-			deduct blue/clean/water skill */			
+			simplePlotAction(
+				Game.creatureName + " scares off a potential bully!",
+				Game.creatureName + " is picked on by a larger monster.",
+				Config.STAT_FIRE,
+				Config.PLOT_HIGH_THRESH,
+				Config.STAT_WATER,
+				Config.PLOT_MID_CHANGE
+			);
 		}
 	}
 

@@ -95,6 +95,12 @@ package gui
 		{
 			Game.reset();
 			for (var i :int = 0; i < Config.NUM_SLOTS; i++) {
+				try {
+					Game.next();
+				} catch (error:Error) {
+					Utils.log(error);
+				}
+				
 				//var stat:GfxStat = stats[i];
 				var statValues:Vector.<Number> = getStatValues();
 				//var statInfo:String = "";
@@ -112,12 +118,6 @@ package gui
 						continue;
 					}
 					event.info.text = "evnt" + i;
-				}
-				
-				try {
-					Game.next();
-				} catch (error:Error) {
-					Utils.log(error);
 				}
 			}
 		}

@@ -12,7 +12,7 @@ package  actions.plots {
 			
 		}
 		
-		public static function AllPlotPoints():Vector.<Class>
+		public static function allPlotPoints():Vector.<Class>
 		{
 			var plotPoints:Vector.<Class> = new Vector.<Class>();
 			
@@ -36,6 +36,33 @@ package  actions.plots {
 		{
 			outcomeDescription = "no PlotPoint description";
 			outComeBool = true;
+		}
+		
+		public function simplePlotAction(
+			succeedDesc:String, 
+			failDesc:String, 
+			toCheck:String, 
+			checkThresh:Number, 
+			toSet:String, 
+			setAmount:Number, 
+			setDownAmount:Number = Number.NaN):void
+		{
+			if ( isNaN(setDownAmount) ) {
+				setDownAmount = setAmount;
+			}
+			
+			var checkStatVal:Number = Game.stats.getStat(toCheck);
+			var setStatVal:Number = Game.stats.getStat(toSet);
+			
+			if( (checkThresh > 0 && checkStatVal > checkThresh) || (checkThresh < 0 && checkStatVal < (checkThresh*-1)) ){
+				Game.stats.setStat(toSet, setStatVal + setAmount);
+				outcomeDescription = succeedDesc;
+				outComeBool = true;
+			}else {
+				Game.stats.setStat(toSet, setStatVal - setDownAmount);
+				outcomeDescription = failDesc;
+				outComeBool = false;
+			}
 		}
 	}
 

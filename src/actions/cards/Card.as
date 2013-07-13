@@ -10,7 +10,7 @@ package  actions.cards {
 			
 		}
 		
-		public static function AllCards():Vector.<Class>
+		public static function allCards():Vector.<Class>
 		{
 			var cards:Vector.<Class> = new Vector.<Class>();
 			
