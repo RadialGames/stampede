@@ -6,7 +6,6 @@ package  {
 	/**
 	 * ...
 	 * @author Andy Moore
-	 * yeah that's right andy moore
 	 * sameline braces 4 lyfe
 	 */
 	public class Game {
