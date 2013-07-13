@@ -21,7 +21,12 @@ package
 		public static const STAT_GREED:String = "greed"; // vs generosity?
 		public static const ALL_STATS:Vector.<String> = new <String>[STAT_HAPPINESS,
 			STAT_TOUGHNESS, STAT_CURIOSITY, STAT_GREED];
-		
+		public static const STAT_COLOURS:Vector.<uint> = new <uint>[0xFF0000,
+			0x00FF00, 0x0000FF, 0xFFFF00];
+			
+		public static const STAT_DEFAULT:int = 50;
+		public static const STAT_MAX:int = 100;
+			
 		public static const NONRANDOM_SEED:int = 12345;
 		public static const DEBUG_MODE:Boolean = true;
 		
