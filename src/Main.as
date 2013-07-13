@@ -24,7 +24,7 @@ package
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
-			game = new Game();
+			Game.init();
 			addChild(new Gui());
 		}
 		
