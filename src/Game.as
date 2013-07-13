@@ -43,7 +43,7 @@ package  {
 		public static function initDeck():void {
 			deck = new Vector.<Card>();
 			for (var i:Number = 0; i < Config.DECK_SIZE; i++) {
-				var cardClass:Class = Card.AllCards()[Utils.getRandomInt(0, Card.AllCards.length-1)];
+				var cardClass:Class = Card.AllCards()[Utils.getRandomInt(0, Card.AllCards().length-1)];
 				deck.push(new cardClass() as Card);
 			}
 		}
