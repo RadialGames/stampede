@@ -12,7 +12,7 @@ package  {
 		public static var timeline:Vector.<Action>;
 		public static var deck:Vector.<Card>;
 		
-		public static function init() {
+		public static function init():void {
 			reset();
 		}
 		
