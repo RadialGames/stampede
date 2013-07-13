@@ -15,13 +15,14 @@ package actions.plots
 		
 		override public function doAction():void 
 		{
-			outcomeDescription = Game.creatureName + " goes for a great swim!";
-			outComeBool = true;
-			// add blue/clean/water skill
-			
-			/* outcomeDescription = Game.creatureName + " almost drowns, and sulks on the shore.";
-			outComeBool = false;
-			deduct blue/clean/water skill */			
+			simplePlotAction(
+				Game.creatureName + " goes for a great swim!",
+				Game.creatureName + " almost drowns, and sulks on the shore.",
+				Config.STAT_EARTH,
+				Config.PLOT_HIGH_THRESH,
+				Config.STAT_WATER,
+				Config.PLOT_MID_CHANGE
+			);			
 		}
 	}
 

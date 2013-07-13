@@ -15,13 +15,14 @@ package actions.plots
 		
 		override public function doAction():void 
 		{
-			outcomeDescription = Game.creatureName + " doesn't get sick!";
-			outComeBool = true;
-			// add red/power/fire skill
-			
-			/* outcomeDescription = Game.creatureName + " comes down with the monster plague!";
-			outComeBool = false;
-			deduct red/power/fire skill */			
+			simplePlotAction(
+				Game.creatureName + " doesn't get sick!",
+				Game.creatureName + " comes down with the monster plague!",
+				Config.STAT_EARTH,
+				Config.PLOT_HIGH_THRESH,
+				Config.STAT_FIRE,
+				Config.PLOT_MID_CHANGE
+			);			
 		}
 	}
 
