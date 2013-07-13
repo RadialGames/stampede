@@ -4,19 +4,23 @@ package  {
 	 * ...
 	 * @author Andy Moore
 	 */
-	public class Stats {
+	public class Stats extends Dictionary {
 		
 		protected var _stats:Dictionary;
 		
 		public function Stats() {
-			_stats = new Dictionary();
+			super();
+			reset();
 		}
 		
 		public function reset():void {
 			_stats = new Dictionary();
+			for (var i:int = 0; i < Config.ALL_STATS.length; i++) {
+				setStat(Config.ALL_STATS[i], (i * 10)+35);
+			}
 		}
 		
-		public function getStat(statName:String, defaultVal:Number = 50):Number
+		public function getStat(statName:String, defaultVal:Number = Config.STAT_DEFAULT):Number
 		{
 			if ( !_stats.hasOwnProperty(statName) ) {
 				_stats[statName] = defaultVal;

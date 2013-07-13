@@ -1,6 +1,6 @@
 package gui
 {
-	import actions.PlotPoint;
+	import actions.plots.PlotPoint;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -29,21 +29,24 @@ package gui
 				gfx.slots.addChild(slot);
 				
 				if (isPlotPoint(i)) {
-					var event:GfxPlotPoint = new GfxPlotPoint();
-					event.info.text = "event";
-					event.x = cardSpacing * i;
-					gfx.cards.addChild(event);
-					guiActions.push(event);
+					var plotPoint:GuiPlotPoint = new GuiPlotPoint(new PlotPoint());
+					plotPoint.x = cardSpacing * i;
+					gfx.cards.addChild(plotPoint);
+					guiActions.push(plotPoint);
 				} else {
 					guiActions.push(null);
 				}
 				
-				var stat:GfxStat = new GfxStat();
+				/*var stat:GfxStat = new GfxStat();
 				stat.info.text = "666\n666";
 				stat.x = statSpacing * i;
 				gfx.stats.addChild(stat);
-				stats.push(stat);
+				stats.push(stat);*/
+				statsGraph = new StatsGraph(gfx.width, 130, getStatValues());
+				gfx.addChild(statsGraph);
 			}
+			
+			refresh();
 		}
 		
 		public function cardDropped(card:GuiCard):void
@@ -92,13 +95,21 @@ package gui
 		{
 			Game.reset();
 			for (var i :int = 0; i < Config.NUM_SLOTS; i++) {
-				var stat:GfxStat = stats[i];
-				var statValues:Vector.<int> = getStatValues();
-				var statInfo:String = "";
-				for (var j:int = 0; j < statValues.length; j++) {
+				try {
+					Game.next();
+				} catch (error:Error) {
+					Utils.log(error);
+				}
+				
+				//var stat:GfxStat = stats[i];
+				var statValues:Vector.<Number> = getStatValues();
+				//var statInfo:String = "";
+				/*for (var j:int = 0; j < statValues.length; j++) {
 					statInfo += statValues[j] + "\n";
 				}
-				stat.info.text = statInfo;
+				stat.info.text = statInfo;*/
+			
+				statsGraph.update(statValues, i);
 				
 				if (isPlotPoint(i)) {
 					var event:GfxPlotPoint = guiActions[i] as GfxPlotPoint;
@@ -108,29 +119,18 @@ package gui
 					}
 					event.info.text = "evnt" + i;
 				}
-				
-				try {
-					Game.next();
-				} catch (error:Error) {
-					Utils.log(error);
-				}
 			}
 		}
 		
 		/**
 		 * Return an array of the current Config.ALL_STATS values from Game.as
 		 */
-		protected function getStatValues():Vector.<int>
+		protected function getStatValues():Vector.<Number>
 		{
-			var values:Vector.<int> = new Vector.<int>();
+			var values:Vector.<Number> = new Vector.<Number>();
 			for (var j:int = 0; j < Config.ALL_STATS.length; j++) {
-				try {
-					var stat:String = Config.ALL_STATS[j];
-					values.push(Game.stats[stat]);
-				} catch (error:Error) {
-					Utils.log(error);
-					values.push(j);
-				}
+				var stat:String = Config.ALL_STATS[j];
+				values.push(Game.stats.getStat(stat));
 			}
 			return values;
 		}
@@ -143,7 +143,7 @@ package gui
 			return Game.timeline[index] is PlotPoint;
 		}
 		
-		/** fills a slot; either a GuiCard or a GfxEvent */
+		/** fills a slot; either a GuiCard or a GuiPlotPoint */
 		protected var guiActions:Vector.<*> = new Vector.<*>();
 		
 		protected var stats:Vector.<GfxStat> = new Vector.<GfxStat>();
@@ -153,5 +153,6 @@ package gui
 		protected var slotSpacing:Number;
 		protected var cardSpacing:Number;
 		protected var statSpacing:Number;
+		protected var statsGraph:StatsGraph;
 	}
 }
