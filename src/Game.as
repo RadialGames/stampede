@@ -40,16 +40,10 @@ package  {
 		}
 		
 		public static function initDeck():void {
-			var tempDeck:Array = new Array();
-			for (var i:Number = 0; i < Config.DECK_SIZE; i++) {
-				// I guess we should figure a way to make new Cards randomly
-				tempDeck.push(new Card());
-			}
-			
-			// The shittiest shuffling job ever:
 			deck = new Vector.<Card>();
-			while (tempDeck.length > 0) {
-				deck.push((tempDeck.splice(Utils.getRandomInt(0, tempDeck.length), 1)) as Card);
+			for (var i:Number = 0; i < Config.DECK_SIZE; i++) {
+				var cardClass:Class = Card.AllCards()[Utils.getRandomInt(0, Card.AllCards.length-1)];
+				deck.push(new cardClass() as Card);
 			}
 		}
 		
@@ -70,8 +64,12 @@ package  {
 		}
 		
 		public static function putTopCardOnSlot(slotNum:Number):Boolean { // Returns True if operation successful
-			if (slotNum > timeline.length) return false; // Slotnum shouldn't exist
-			if (timeline[slotNum] != null) return false; // Can't overwrite cards? This might change.
+			if (slotNum > timeline.length) {
+				return false; // Slotnum shouldn't exist
+			}
+			if (timeline[slotNum] != null || Config.ALLOW_CARD_OVERWRITE == false) {
+				return false;
+			}
 			timeline[slotNum] = deck.pop();
 			recalculateStats();
 			return true;
