@@ -1,4 +1,5 @@
-package  actions {
+package  actions.cards {
+	import actions.Action;
 	/**
 	 * ...
 	 * @author Andy Moore
@@ -9,11 +10,14 @@ package  actions {
 			
 		}
 		
-		public static function AllCards():Vector.<Class>
+		public static function allCards():Vector.<Class>
 		{
 			var cards:Vector.<Class> = new Vector.<Class>();
 			
-			cards.push(CPokeWithStick);
+			cards.push(CBook);
+			cards.push(CBrush);
+			cards.push(CSpeedBag);
+			cards.push(CVeggies);
 			
 			return cards;
 		}

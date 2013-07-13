@@ -1,8 +1,9 @@
 package  {
+	import actions.plots.PPBully;
 	import flash.display.InteractiveObject;
 	import actions.Action;
-	import actions.Card;
-	import actions.PlotPoint;
+	import actions.cards.Card;
+	import actions.plots.PlotPoint;
 	/**
 	 * ...
 	 * @author Andy Moore
@@ -31,19 +32,19 @@ package  {
 		
 		public static function next():void 
 		{
-			_currentSlot++;
 			if ( _currentSlot > timeline.length ) {
 				Utils.logError("Can't .next, Timeline is done!");
 			}
 			if ( timeline[_currentSlot] != null ) {
 				timeline[_currentSlot].doAction();
 			}
+			_currentSlot++;
 		}
 		
 		public static function initDeck():void {
 			deck = new Vector.<Card>();
 			for (var i:Number = 0; i < Config.DECK_SIZE; i++) {
-				var cardClass:Class = Card.AllCards()[Utils.getRandomInt(0, Card.AllCards().length-1)];
+				var cardClass:Class = Card.allCards()[Utils.getRandomInt(0, Card.allCards().length-1)];
 				deck.push(new cardClass() as Card);
 			}
 		}
@@ -55,13 +56,16 @@ package  {
 			for (var i:Number = 0; i < Config.NUM_SLOTS-1; i++) {
 				//add nulls where there will be cards and add the events
 				if ( i % slotsPerPlotPoint == 0 ) {
-					timeline.push(new PlotPoint());
+					var plotClass:Class = PlotPoint.allPlotPoints()[Utils.getRandomInt(0, PlotPoint.allPlotPoints().length-1)];
+					//timeline.push(new plotClass() as PlotPoint);
+					timeline.push(new PPBully());
 				}else {
 					timeline.push(null);
 				}
 			}
 			//It always ends with a PlotPoint
-			timeline.push(new PlotPoint());
+			plotClass = PlotPoint.allPlotPoints()[Utils.getRandomInt(0, PlotPoint.allPlotPoints().length-1)];
+			timeline.push(new plotClass() as PlotPoint);
 		}
 		
 		public static function putTopCardOnSlot(slotNum:Number):Boolean { // Returns True if operation successful
