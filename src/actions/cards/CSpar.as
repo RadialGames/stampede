@@ -15,8 +15,11 @@ package actions.cards
 		
 		override public function doAction():void 
 		{
-			outcomeDescription = Game.creatureName + " spars energetically with other monsters!";
-			// add 3x red/power/fire skill
+			simpleCardAction(
+				Game.creatureName + " spars energetically with other monsters!",
+				Config.STAT_FIRE,
+				Config.CARD_HIGH_CHANGE
+			);
 		}
 	}
 

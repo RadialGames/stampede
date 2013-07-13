@@ -15,8 +15,11 @@ package actions.cards
 		
 		override public function doAction():void 
 		{
-			outcomeDescription = Game.creatureName + " enjoys an invigorating hot rock massage.";
-			// add 3x blue/clean/water skill
+			simpleCardAction(
+				Game.creatureName + " enjoys an invigorating hot rock massage.",
+				Config.STAT_WATER,
+				Config.CARD_HIGH_CHANGE
+			);
 		}
 	}
 

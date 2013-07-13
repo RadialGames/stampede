@@ -15,8 +15,11 @@ package actions.cards
 		
 		override public function doAction():void 
 		{
-			outcomeDescription = Game.creatureName + " takes a long, hot bath.";
-			// add 2x blue/clean/water skill
+			simpleCardAction(
+				Game.creatureName + " takes a long, hot bath.",
+				Config.STAT_WATER,
+				Config.CARD_MID_CHANGE
+			);
 		}
 	}
 
