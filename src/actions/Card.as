@@ -9,6 +9,14 @@ package  actions {
 			
 		}
 		
+		public static function AllCards():Vector.<Class>
+		{
+			var cards:Vector.<Class> = new Vector.<Class>();
+			
+			cards.push(CPokeWithStick);
+			
+			return cards;
+		}
 	}
 
 }

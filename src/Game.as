@@ -13,20 +13,30 @@ package  {
 		public static var stats:Stats;
 		public static var timeline:Vector.<Action>;
 		public static var deck:Vector.<Card>;
+		protected static var _currentSlot:int;
 		
 		public static function init():void {
 			stats = new Stats();
 			initTimeline();
 			initDeck();
+			reset();
 		}
+		public static function get currentSlot():int { return _currentSlot; }
 		
 		public static function reset():void {
-			stats = new Stats();
+			stats.reset()
+			_currentSlot = 0;
 		}
 		
 		public static function next():void 
 		{
-			
+			_currentSlot++;
+			if ( _currentSlot > timeline.length ) {
+				Utils.logError("Can't .next, Timeline is done!");
+			}
+			if ( timeline[_currentSlot] != null ) {
+				timeline[_currentSlot].doAction();
+			}
 		}
 		
 		public static function initDeck():void {

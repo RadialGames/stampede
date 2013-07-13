@@ -9,6 +9,15 @@ package  actions {
 			
 		}
 		
+		public static function AllPlotPoints():Vector.<Class>
+		{
+			var plotPoints:Vector.<Class> = new Vector.<Class>();
+			
+			plotPoints.push(PPBully);
+			
+			return plotPoints;
+		}
+		
 	}
 
 }
