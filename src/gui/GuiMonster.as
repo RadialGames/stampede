@@ -19,6 +19,7 @@ package gui
 		{
 			this.gfx = gfx;
 			gfx.addEventListener(Event.ENTER_FRAME, enterFrame);
+			bubbleOnMouseOver(1.5);
 		}
 		
 		public function setMonster(monster:Monster):void
@@ -39,5 +40,39 @@ package gui
 		}
 		
 		protected var gfx:MovieClip;
+		
+		public function cancelBubble():void {
+			if (isNaN(originalScale))
+				mouseOverShrink(null);
+			gfx.removeEventListener(MouseEvent.MOUSE_OVER, mouseOverGrow);
+		}
+		
+		private var scaleAmount:Number;
+		private var overrideTween:Boolean;
+		public function bubbleOnMouseOver(scaleAmount:Number = 1.2, overrideTween:Boolean = true):void {
+			this.overrideTween = overrideTween;
+			this.scaleAmount = scaleAmount;
+			gfx.addEventListener(MouseEvent.MOUSE_OVER, mouseOverGrow);
+		}
+		
+		private var originalScale:Number;
+		private function mouseOverGrow(e:MouseEvent):void {
+			gfx.addEventListener(MouseEvent.MOUSE_OUT, mouseOverShrink);
+			if (isNaN(originalScale)) originalScale = gfx.scaleX;
+			eaze(gfx)
+				.to(0.2, { scaleX:originalScale * scaleAmount, scaleY:originalScale * scaleAmount } , overrideTween);
+		}
+		
+		private function mouseOverShrink(e:MouseEvent):void {
+			gfx.removeEventListener(MouseEvent.MOUSE_OUT, mouseOverShrink);
+			eaze(gfx)
+				.to(0.2, { scaleX:originalScale, scaleY:originalScale }, overrideTween)
+				.onComplete(mouseOverShrinkComplete);
+		}
+		
+		private function mouseOverShrinkComplete():void {
+			originalScale = NaN;
+		}
+			
 	}
 }
