@@ -47,6 +47,8 @@ package gui
 			monster = new GuiMonster(gfx.monster);
 			
 			MusicPlayer.playMusic(MusicPlayer.MAINMENU);
+			
+			Utils.removeFromParent(gfx.winScreen);
 		}
 		
 		protected function showMainMenu():void
