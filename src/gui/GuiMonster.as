@@ -33,7 +33,7 @@ package gui
 			if (gfx.hasOwnProperty(monster.name)) {
 				Utils.toggleChildVisibility(gfx, monster.name);
 			} else {
-				Utils.toggleChildVisibility(gfx, "tungee");
+				Utils.toggleChildVisibility(gfx, "Negagore");
 			}
 		}
 		
