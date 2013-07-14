@@ -7,8 +7,8 @@ package
 	 */
 	public class Config
 	{
-		public static const NUM_SLOTS:int = 8;
-		public static const NUM_PLOTPOINTS:int = 3;
+		public static const NUM_SLOTS:int = 20;
+		public static const NUM_PLOTPOINTS:int = 5;
 		public static const DECK_SIZE:int = 40; //
 		
 		public static const SNIPE_FONT_SIZE:int = 30;

@@ -27,12 +27,12 @@ package gui
 			
 			timeline = new GuiTimeline(gfx.timeline);
 			
-			GuiButton.replaceButton(gfx.edgeScrollerLeft);
-			gfx.edgeScrollerLeft.addEventListener(MouseEvent.MOUSE_OVER, scrollerOver);
+			//GuiButton.replaceButton(gfx.edgeScrollerLeft);
+			//gfx.edgeScrollerLeft.addEventListener(MouseEvent.MOUSE_OVER, scrollerOver);
 			gfx.edgeScrollerLeft.useHandCursor = false;
 			
-			GuiButton.replaceButton(gfx.edgeScrollerRight);
-			gfx.edgeScrollerRight.addEventListener(MouseEvent.MOUSE_OVER, scrollerOver);
+			//GuiButton.replaceButton(gfx.edgeScrollerRight);
+			//gfx.edgeScrollerRight.addEventListener(MouseEvent.MOUSE_OVER, scrollerOver);
 			gfx.edgeScrollerRight.useHandCursor = false;
 			
 			addEventListener(Event.ENTER_FRAME, enterFrame);
@@ -102,12 +102,24 @@ package gui
 			if (!showtingTooltip) {
 				hideTooltip();
 			}
+			
+			// if we're over a scroller, scroll that mutherfucker
+			var scrollerFound:Boolean = false;
+			for each (var thingy:DisplayObject in objectsUnderPoint) {
+				var scroller:GfxEdgeScroller = Utils.findAncestor(thingy, GfxEdgeScroller);
+				if (scroller != null) {
+					scrollerOver(scroller);
+					scrollerFound = true;
+				}
+			}
+			if (!scrollerFound) {
+				scrollerOut();
+			}
 		}
 		
-		protected function scrollerOver(event:MouseEvent):void
+		protected function scrollerOver(scroller:GfxEdgeScroller):void
 		{
-			event.target.addEventListener(MouseEvent.MOUSE_OUT, scrollerOut);
-			event.target.addEventListener(Event.ENTER_FRAME, scrollerEnterFrame);
+			scroller.addEventListener(Event.ENTER_FRAME, scrollerEnterFrame);
 		}
 		
 		protected function scrollerEnterFrame(event:Event):void
@@ -130,10 +142,10 @@ package gui
 			}
 		}
 		
-		protected function scrollerOut(event:MouseEvent):void
+		protected function scrollerOut():void
 		{
-			event.target.removeEventListener(MouseEvent.MOUSE_OUT, scrollerOut);
-			event.target.removeEventListener(Event.ENTER_FRAME, scrollerEnterFrame);
+			gfx.edgeScrollerLeft.removeEventListener(Event.ENTER_FRAME, scrollerEnterFrame);
+			gfx.edgeScrollerRight.removeEventListener(Event.ENTER_FRAME, scrollerEnterFrame);
 		}
 		
 		public var tooltipFadingIn:Boolean = false;
