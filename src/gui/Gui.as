@@ -160,9 +160,9 @@ package gui
 			}
 			EazeTween.killTweensOf(gfx.tooltip);
 			gfx.tooltip.alpha = 0;
-			tooltipFadingIn = false;
-			
-			//eaze(gfx.tooltip).to(0.2, { alpha:0 }, true);
+			gfx.tooltip.parent.removeChild(gfx.tooltip);
+			tooltipFadingIn = false;			
+			//eaze(gfx.tooltip).to(0.2, { alphaVisible:0 }, true);
 			//Utils.fadeOut(gfx.tooltip, 100, true);
 		}
 		
