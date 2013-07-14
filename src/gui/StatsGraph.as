@@ -32,9 +32,10 @@ package gui
 			lines = new Vector.<Sprite>();
 			for (var i:int = 0; i < Config.ALL_STATS.length; i++) {
 				lines.push(new Sprite());
-				lines[i].graphics.lineStyle(4, Config.STAT_COLOURS[i]);
+				lines[i].graphics.lineStyle(Config.STATS_LINE_THICKNESS, Config.STAT_COLOURS[i]);
 				lines[i].graphics.moveTo(0, graphHeight - (stats[i] / Config.STAT_MAX) * graphHeight);
 				lines[i].visible = Game.stats.activeStats[i];
+				lines[i].y += i * (Config.STATS_LINE_THICKNESS - 1);
 				addChild(lines[i]);
 				if (lines[i].visible) {
 					lines[i].alpha = 0.5;
