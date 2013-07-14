@@ -9,6 +9,7 @@ package gui
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	import monsters.Monster;
 	/**
 	 * ...
 	 * @author Sarah Northway
@@ -163,7 +164,10 @@ package gui
 			
 			if (percentCardsDrawn >= 1) {
 				MusicPlayer.playMusic(MusicPlayer.ROCKIN);
-				new GuiFloatText(this, "YOU finished the GAME!!!", new Point(100, 200));
+				var monster:Monster = Utils.pickRandom(Monster.allMonsters);
+				new GuiFloatText(this, "YOU got a " + monster.name + "!!!", new Point(100, 200));
+				SaveManager.collectMonster(monster);
+				gfx.monster.text = monster.name;
 			} else {
 				drawNextCard();
 			}

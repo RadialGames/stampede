@@ -109,7 +109,7 @@ package gui
 				if (isPlotPoint(i)) {
 					var event:GfxPlotPoint = guiActions[i] as GfxPlotPoint;
 					if (event == null) {
-						Utils.logError("event is null for i " + i);
+						//Utils.logError("event is null for i " + i);
 						continue;
 					}
 					event.info.text = "evnt" + i;

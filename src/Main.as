@@ -28,6 +28,7 @@ package
 			Utils.pickOriginalRandomSeed();
 			Game.init();
 			addChild(new Gui());
+			SaveManager.load();
 			new GuiFloatText(this, "Hello!", new Point(100, 200));
 		}
 		
