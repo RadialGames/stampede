@@ -1,6 +1,7 @@
 package  {
 	import actions.cards.CBrush;
 	import actions.cards.TBlue;
+	import actions.cards.TBrown;
 	import actions.cards.TRed;
 	import actions.cards.TWhite;
 	import actions.plots.PPBully;
@@ -8,6 +9,7 @@ package  {
 	import actions.Action;
 	import actions.cards.Card;
 	import actions.plots.PlotPoint;
+	import monsters.Monster;
 	/**
 	 * ...
 	 * @author Andy Moore
@@ -20,14 +22,30 @@ package  {
 		public static var deck:Vector.<Card>;
 		public static var creatureName:String = "Rabaroo";
 		protected static var _currentSlot:int;
+		public static var currentMonster:Monster;
 		
-		public static function init():void {
-			stats = new Stats();
+		public static function get currentSlot():int { return _currentSlot; }
+		
+		public static function init(monster:Monster):void {
+			currentMonster = monster;
+			stats = new Stats(monster);
 			initTimeline();
-			initDeck();
+			initDeck(monster);
 			reset();
 		}
-		public static function get currentSlot():int { return _currentSlot; }
+		
+		public static function nextMonster(prevMonster:Monster):void 
+		{
+			for (var i:int = 0; i < Monster.allMonsters.length; i++) {
+				if ( Monster.allMonsters[i] == prevMonster ) {
+					if ( i+1 == Monster.allMonsters.length ) {
+						trace("YOU WIN!")
+						return;
+					}
+					init(Monster.allMonsters[i+1]);
+				}
+			}
+		}
 		
 		public static function reset():void {
 			stats.reset()
@@ -45,20 +63,18 @@ package  {
 			_currentSlot++;
 		}
 		
-		public static function initDeck():void {
+		protected static function initDeck(monster:Monster):void {
 			deck = new Vector.<Card>();
-			for (var i:Number = 0; i < Config.DECK_SIZE; i++) {
-				//var cardClass:Class = Card.allCards()[Utils.getRandomInt(0, Card.allCards().length-1)];
-				//deck.push(new cardClass() as Card);
-				deck.push(new TRed());
-				deck.push(new TRed());
-				deck.push(new TBlue());
-				deck.push(new TBlue());
-				deck.push(new TWhite());
+			/*for (var i:Number = 0; i < Config.DECK_SIZE; i++) {
+				var cardClass:Class = Card.allCards()[Utils.getRandomInt(0, Card.allCards().length-1)];
+				deck.push(new cardClass() as Card);
+			}*/
+			for each (var cardClass:Class in monster.deck) {
+				deck.push(new cardClass() as Card);
 			}
 		}
 		
-		public static function initTimeline():void {
+		protected static function initTimeline():void {
 			timeline = new Vector.<Action>();
 			var slotsPerPlotPoint:int = Math.floor(Config.NUM_SLOTS / (Config.NUM_PLOTPOINTS - 1));
 			

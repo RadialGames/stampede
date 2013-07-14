@@ -1,5 +1,6 @@
 package  {
 	import flash.utils.Dictionary;
+	import monsters.Monster;
 	/**
 	 * ...
 	 * @author Andy Moore
@@ -7,8 +8,10 @@ package  {
 	public class Stats extends Dictionary {
 		
 		protected var _stats:Dictionary;
+		public var activeStats:Vector.<Boolean>;
 		
-		public function Stats() {
+		public function Stats(monster:Monster) {
+			activeStats = monster.activeStats;
 			super();
 			reset();
 		}
@@ -16,7 +19,7 @@ package  {
 		public function reset():void {
 			_stats = new Dictionary();
 			for (var i:int = 0; i < Config.ALL_STATS.length; i++) {
-				setStat(Config.ALL_STATS[i], 0);// (i * 10) + 35);
+				setStat(Config.ALL_STATS[i], 50);// (i * 10) + 35);
 			}
 		}
 		

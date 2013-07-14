@@ -15,7 +15,7 @@ package actions.cards
 		
 		override public function doAction():void 
 		{
-			Game.stats.setStat(Config.STAT_RED, Game.stats.getStat(Config.STAT_RED) + (1+Game.currentSlot)*10);
+			Game.stats.setStat(Config.STAT_RED, Game.stats.getStat(Config.STAT_RED) + (1+Game.currentSlot)*5);
 		}
 	}
 

@@ -15,13 +15,10 @@ package actions.cards
 		
 		override public function doAction():void 
 		{
-			if( Game.currentSlot > Config.NUM_SLOTS / 2 ){
-				Game.stats.setStat(Config.STAT_WHITE, Game.stats.getStat(Config.STAT_WHITE) + (Math.ceil((Game.currentSlot+1) / 2))*10);
+			if( Game.currentSlot >= Config.NUM_SLOTS / 2 ){
+				Game.stats.setStat(Config.STAT_WHITE, Game.stats.getStat(Config.STAT_WHITE) + 20);
 			}else {
-				Game.stats.setStat(
-					Config.STAT_WHITE, 
-					Game.stats.getStat(Config.STAT_WHITE) + (Math.floor(((Config.NUM_SLOTS - Game.currentSlot)+1) / 2)*10)
-				);
+				Game.stats.setStat(Config.STAT_WHITE, Game.stats.getStat(Config.STAT_WHITE) - 20);
 			}
 		}
 	}

@@ -33,6 +33,7 @@ package gui
 				lines.push(new Sprite());
 				lines[i].graphics.lineStyle(4, Config.STAT_COLOURS[i]);
 				lines[i].graphics.moveTo(0, graphHeight - (stats[i] / Config.STAT_MAX) * graphHeight);
+				lines[i].visible = Game.stats.activeStats[i];
 				addChild(lines[i]);
 			}
 		}
