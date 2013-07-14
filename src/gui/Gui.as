@@ -2,6 +2,7 @@ package gui
 {
 	import actions.Action;
 	import actions.cards.Card;
+	import aze.motion.easing.Bounce;
 	import aze.motion.easing.Quadratic;
 	import aze.motion.eaze;
 	import aze.motion.EazeTween;
@@ -30,6 +31,7 @@ package gui
 			timeline = new GuiTimeline(gfx.timeline);
 			
 			Utils.removeFromParent(gfx.introMenu);
+			gfx.introMenu.addEventListener(MouseEvent.CLICK, closeIntro);
 			
 			//GuiButton.replaceButton(gfx.edgeScrollerLeft);
 			//gfx.edgeScrollerLeft.addEventListener(MouseEvent.MOUSE_OVER, scrollerOver);
@@ -60,11 +62,14 @@ package gui
 		private function onMouseDown(e:MouseEvent):void {
 			//Main.particles.addParticle(new Point(stage.mouseX, stage.mouseY), Utils.getRandomNumber(2,5));
 		}
-		
+
 		protected function showMainMenu():void
 		{
 			MusicPlayer.playMusic(MusicPlayer.MAINMENU);
 			Utils.addToParent(this, mainMenu);
+			mainMenu.y = 640;
+			eaze(mainMenu).to(0.6, { y:0 }, true)
+				.easing(Bounce.easeOut);			
 		}
 		
 		/**
@@ -76,15 +81,29 @@ package gui
 			cardsDrawn = 0;
 			drawNextCard();
 			timeline.reset();
+			Utils.addToParent(gfx, gfx.introMenu);
+			gfx.introMenu.gotoAndPlay(1);
+			MusicPlayer.playMusic(MusicPlayer.LULLABY);
 			eaze(mainMenu).to(0.6, { y: 640 }, true)
 				.easing(Quadratic.easeIn)
-				.onComplete(reallyStartGame);
+				.onComplete(reallyStartGame);			
 		}
 		
 		public function reallyStartGame():void {
-			Utils.removeFromParent(mainMenu);
-			mainMenu.x = 0;
-			mainMenu.y = 0;
+			Utils.removeFromParent(mainMenu);			
+		}
+		
+		protected function closeIntro(...ig):void
+		{
+			MusicPlayer.playMusic(Utils.pickRandom(MusicPlayer.GAME_SONGS));
+			eaze(gfx.introMenu).to(0.6, { y: 640 }, true)
+				.easing(Quadratic.easeIn)
+				.onComplete(reallyStartGame);			
+		}
+		
+		public function reallyCloseIntro():void {
+			Utils.removeFromParent(gfx.introMenu);
+			gfx.introMenu.y = 0;
 		}
 		
 		/**
@@ -257,6 +276,10 @@ package gui
 					Utils.addToParent(gfx, gfx.winScreen);
 				} else {
 					// more monsters to go
+					GuiMonster.setMonsterSomewhere(gfx.winScreen.monster, Game.currentMonster);
+					gfx.winScreen.info.text = "You raised a\n" + Game.currentMonster.name;
+					Utils.addToParent(gfx, gfx.winScreen);
+					
 					startGame(monster);
 				}
 			}	
@@ -265,7 +288,9 @@ package gui
 		protected function hideWinScreen():void
 		{
 			Utils.removeFromParent(gfx.winScreen);
-			showMainMenu();
+			if ( Game.currentMonster == Monster.allMonsters[Monster.allMonsters.length-1] ){
+				showMainMenu();
+			}
 		}
 		
 		protected function drawNextCard():void
@@ -279,35 +304,33 @@ package gui
 				Utils.logError(error);
 				card = new Card();
 			}
-			if ( card == null ) {
-				card = new Card();
+			if ( card != null ) {
+				var nextCard:GuiCard = new GuiCard(card);
+				gfx.nextCard.addChild(nextCard);
 			}
 			
-			var nextCard:GuiCard = new GuiCard(card);
-			gfx.nextCard.addChild(nextCard);
-			
-			if (percentCardsDrawn < 0.20) {
-				MusicPlayer.playMusic(MusicPlayer.ORCHESTRAAAL);
-			} else if (percentCardsDrawn < 0.40) {
-				MusicPlayer.playMusic(MusicPlayer.DRUMS);
-			} else if (percentCardsDrawn < 0.60) {
-				MusicPlayer.playMusic(MusicPlayer.STAMPEDE);
-			} else if (percentCardsDrawn < 0.70) {
-				MusicPlayer.playMusic(MusicPlayer.LULLABY);
-			} else {
-				MusicPlayer.playMusic(MusicPlayer.RACIST);
-			}
+			//if (percentCardsDrawn < 0.20) {
+				//MusicPlayer.playMusic(MusicPlayer.ORCHESTRAAAL);
+			//} else if (percentCardsDrawn < 0.40) {
+				//MusicPlayer.playMusic(MusicPlayer.DRUMS);
+			//} else if (percentCardsDrawn < 0.60) {
+				//MusicPlayer.playMusic(MusicPlayer.STAMPEDE);
+			//} else if (percentCardsDrawn < 0.70) {
+				//MusicPlayer.playMusic(MusicPlayer.LULLABY);
+			//} else {
+				//MusicPlayer.playMusic(MusicPlayer.RACIST);
+			//}
 			cardsDrawn++;
 		}
 		
 		protected function get percentCardsDrawn():Number
 		{
-			return cardsDrawn / (Config.NUM_SLOTS - Config.NUM_PLOTPOINTS);
+			return cardsDrawn / Game.currentMonster.deck.length;
 		}
 		
 		public function isNextCard(card:GuiCard):Boolean
 		{
-			if (gfx.nextCard.numChildren == 0) {
+			if (gfx.nextCard.numChildren == 0 ) {
 				return false;
 			}
 			return gfx.nextCard.getChildAt(0) == card;

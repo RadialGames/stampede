@@ -13,7 +13,7 @@ package monsters
 			name = "Aqualope";
 			description = Game.creatureName + " burst into a Aqualope!";
 			
-			solution = new <Number>[30,30,30,30,30,30];
+			solution = new <Number>[30,30,30,30,50,50];
 			activeStats = new <Boolean>[true, true, true, true, false, false];
 			
 			buildDeck(TWhite, TBlue, TRed, TRed, TBrown, TBrown);
