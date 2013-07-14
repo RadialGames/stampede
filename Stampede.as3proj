@@ -52,6 +52,7 @@
   <!-- SWC Libraries -->
   <libraryPaths>
     <element path="assets\sound.swc" />
+    <element path="assets\gui.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
