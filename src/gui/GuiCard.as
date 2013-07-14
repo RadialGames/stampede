@@ -26,9 +26,9 @@ package gui
 		
 		protected function mouseDown(...ig):void
 		{
-			//if (!Gui.instance.isNextCard(this)) {
-				//return;
-			//}
+			if (!Gui.instance.isNextCard(this) && !Config.ALLOW_MOVING_CARDS) {
+				return;
+			}
 			startDrag();
 			eaze(this).to(0.2, { scaleX:1.2, scaleY:1.2 }, false);
 			Main.addStageEventListener(MouseEvent.MOUSE_UP, mouseUp);

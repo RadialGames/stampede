@@ -15,6 +15,7 @@ package
 		public static const SNIPE_COLOUR:uint = BLUE;
 		
 		public static const ALLOW_CARD_OVERWRITE:Boolean = false;
+		public static const ALLOW_MOVING_CARDS:Boolean = true;
 		public static var MUTE:Boolean = false;
 		
 		public static const STAT_EARTH:String = "earth";

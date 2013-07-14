@@ -204,6 +204,23 @@ package gui
 				drawNextCard();
 			}
 		}
+
+		/**
+		 * After a card is placed, refresh the timeline, check for win & draw next card.
+		 */
+		public function cardMoved():void
+		{
+			timeline.refresh();
+			
+			// will trigger gfx.strongFemaleCharacter to animation on enterFrame
+			animationTick = 0;
+			
+			if (percentCardsDrawn >= 1) {
+				finishGame();
+			} else {
+				//drawNextCard();
+			}
+		}
 		
 		protected function finishGame():void
 		{
