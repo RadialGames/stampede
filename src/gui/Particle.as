@@ -48,7 +48,7 @@ package gui
 			
 			this.x += moveVec.x;
 			this.y += moveVec.y;
-			this.rotation += rotateSpeed;
+			//this.rotation += rotateSpeed; // makes things really slow for marginal better looks
 		}
 		
 		public function removeAndKill():void {
