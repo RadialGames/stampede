@@ -77,13 +77,21 @@ package  {
 			//timeline.push(new plotClass() as PlotPoint);
 		}
 		
-		public static function putTopCardOnSlot(slotNum:Number):Boolean { // Returns True if operation successful
+		public static function putCardOnSlot(card:Action, slotNum:Number):Boolean { // Returns True if operation successful
+			if (Config.ALLOW_SWAPPING_CARDS && Config.ALLOW_CARD_OVERWRITE) {
+				throw new Error("Fuck you, don't make this harder for all of us");
+			}
+			
 			if (slotNum > timeline.length) {
+				Utils.log("slotNum too high");
 				return false; // Slotnum shouldn't exist
 			}
-			if (timeline[slotNum] != null && Config.ALLOW_CARD_OVERWRITE == false) {
+			
+			if (timeline[slotNum] != null && (!Config.ALLOW_CARD_OVERWRITE && !Config.ALLOW_SWAPPING_CARDS)) {
+				Utils.log("overwrite or swap false");
 				return false;
 			}
+						
 			//timeline[slotNum] = deck.pop(); // this is handled elsewhere now cuz, sarah, that's what happened
 			return true;
 		}
