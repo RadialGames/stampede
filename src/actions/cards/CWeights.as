@@ -17,7 +17,7 @@ package actions.cards
 		{
 			simpleCardAction(
 				Game.creatureName + " carries some heavy weights!",
-				Config.STAT_FIRE,
+				Config.STAT_RED,
 				Config.CARD_MID_CHANGE
 			);
 		}

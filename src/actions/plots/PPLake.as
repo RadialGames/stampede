@@ -18,9 +18,9 @@ package actions.plots
 			simplePlotAction(
 				Game.creatureName + " goes for a great swim!",
 				Game.creatureName + " almost drowns, and sulks on the shore.",
-				Config.STAT_EARTH,
+				Config.STAT_BROWN,
 				Config.PLOT_HIGH_THRESH,
-				Config.STAT_WATER,
+				Config.STAT_BLUE,
 				Config.PLOT_MID_CHANGE
 			);			
 		}

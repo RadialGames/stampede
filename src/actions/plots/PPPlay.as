@@ -18,9 +18,9 @@ package actions.plots
 			simplePlotAction(
 				Game.creatureName + " roughhouses with other monsters!",
 				Game.creatureName + " has no friends to play with.",
-				Config.STAT_WATER,
+				Config.STAT_BLUE,
 				Config.PLOT_HIGH_THRESH,
-				Config.STAT_FIRE,
+				Config.STAT_RED,
 				Config.PLOT_MID_CHANGE
 			);		
 		}

@@ -17,7 +17,7 @@ package actions.cards
 		{
 			simpleCardAction(
 				Game.creatureName + "'s coat shines!",
-				Config.STAT_WATER,
+				Config.STAT_BLUE,
 				Config.CARD_LOW_CHANGE
 			);
 		}

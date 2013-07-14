@@ -18,9 +18,9 @@ package actions.plots
 			simplePlotAction(
 				Game.creatureName + " plays a complicated game with other monsters!",
 				Game.creatureName + " can't figure out how to play.",
-				Config.STAT_SKY,
+				Config.STAT_WHITE,
 				Config.PLOT_HIGH_THRESH,
-				Config.STAT_WATER,
+				Config.STAT_BLUE,
 				Config.PLOT_MID_CHANGE
 			);		
 		}

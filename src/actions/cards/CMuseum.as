@@ -17,7 +17,7 @@ package actions.cards
 		{
 			simpleCardAction(
 				Game.creatureName + " immerses itself in culture!",
-				Config.STAT_SKY,
+				Config.STAT_WHITE,
 				Config.CARD_HIGH_CHANGE
 			);
 		}

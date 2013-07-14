@@ -17,12 +17,11 @@ package
 		public static const ALLOW_CARD_OVERWRITE:Boolean = false;
 		public static var MUTE:Boolean = false;
 		
-		public static const STAT_EARTH:String = "earth";
-		public static const STAT_SKY:String = "sky";
-		public static const STAT_WATER:String = "water";
-		public static const STAT_FIRE:String = "fire";
-		public static const ALL_STATS:Vector.<String> = new <String>[STAT_EARTH,
-			STAT_SKY, STAT_WATER, STAT_FIRE];
+		public static const STAT_BROWN:String = "earth";
+		public static const STAT_WHITE:String = "sky";
+		public static const STAT_BLUE:String = "water";
+		public static const STAT_RED:String = "fire";
+		public static const ALL_STATS:Vector.<String> = new <String>[STAT_BROWN, STAT_WHITE, STAT_BLUE, STAT_RED];
 		public static const STAT_COLOURS:Vector.<uint> = new <uint>[0x41270D,
 			0x0000FF, 0xFFFFFF, 0xFF0000];
 		

@@ -17,7 +17,7 @@ package actions.cards
 		{
 			simpleCardAction(
 				Game.creatureName + " spars energetically with other monsters!",
-				Config.STAT_FIRE,
+				Config.STAT_RED,
 				Config.CARD_HIGH_CHANGE
 			);
 		}

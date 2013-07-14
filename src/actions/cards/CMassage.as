@@ -17,7 +17,7 @@ package actions.cards
 		{
 			simpleCardAction(
 				Game.creatureName + " enjoys an invigorating hot rock massage.",
-				Config.STAT_WATER,
+				Config.STAT_BLUE,
 				Config.CARD_HIGH_CHANGE
 			);
 		}
