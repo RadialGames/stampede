@@ -10,7 +10,7 @@ package monsters
 		
 		public function RedBrownMonster() 
 		{
-			name = "Terratrope";
+			name = "Omniolyte";
 			description = Game.creatureName + " evolved into a Terratrope!";
 			
 			solution = new <Number>[50,50,80,80,30,30];

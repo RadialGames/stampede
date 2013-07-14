@@ -10,7 +10,7 @@ package monsters
 		
 		public function HarderMonster2() 
 		{
-			name = "Aqualope";
+			name = "Mlorb";
 			description = Game.creatureName + " evolved into a Aqualope!";
 			
 			solution = new <Number>[10,10,50,50,90,90];
