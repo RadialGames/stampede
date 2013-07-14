@@ -9,9 +9,9 @@ package actions.cards
 		
 		public function TWhite() 
 		{
-			title = "White"
+			title = "Training"
 			colour = Config.WHITE;
-			outcomeDescription = "Raises late, lowers early.";
+			outcomeDescription = "Teaching the monster to follow commands.\nRaises stats late, lowers early.";
 		}
 		
 		override public function doAction():void 

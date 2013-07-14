@@ -9,9 +9,9 @@ package actions.cards
 		
 		public function TOrange() 
 		{
-			title = "Orange"
+			title = "Meat"
 			colour = Config.ORANGE;
-			outcomeDescription = "Lowers on even slots, raises on odd.";
+			outcomeDescription = "Feeding the monster some delicious meat.\nLowers states on even spaces, raises on odd.";
 		}
 		
 		override public function doAction():void 
