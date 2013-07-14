@@ -25,7 +25,8 @@ package
 		public static const STAT_RED:String = "fire";
 		public static const STAT_GREEN:String = "grass";
 		public static const STAT_ORANGE:String = "sun";
-		public static const ALL_STATS:Vector.<String> = new <String>[STAT_WHITE, STAT_BLUE, STAT_RED, STAT_BROWN, STAT_GREEN, STAT_ORANGE];
+		public static const ALL_STATS:Vector.<String> = 
+			new <String>[STAT_WHITE, STAT_BLUE, STAT_RED, STAT_BROWN, STAT_GREEN, STAT_ORANGE];
 		public static const STAT_COLOURS:Vector.<uint> = new <uint>[
 			0xFFFFFF, 0x0000FF, 0xFF0000, 0x804000, 0x00FF00, 0xFF8000];
 		
