@@ -9,9 +9,9 @@ package actions.cards
 		
 		public function TGreen() 
 		{
-			title = "Green"
+			title = "Veggies"
 			colour = Config.GREEN;			
-			outcomeDescription = "Raises on even slots, lowers on odd.";
+			outcomeDescription = "Feeding the monster some healthy greens.\nRaises stats on even spaces, lowers on odd.";
 		}
 		
 		override public function doAction():void 

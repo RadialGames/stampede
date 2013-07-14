@@ -180,7 +180,7 @@ package gui
 				}
 			}
 			
-			Gui.instance.setEndingMonster(Monster.whichMoster());
+			Gui.instance.setEndingMonster(Game.currentMonster); // Monster.whichMoster());
 		}
 		
 		/**

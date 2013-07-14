@@ -49,7 +49,9 @@ package  {
 		{
 			for (var i:int = 0; i < Monster.allMonsters.length; i++) {
 				if ( Monster.allMonsters[i] == currentMonster ) {
+					Utils.log("YAY");
 					if ( i+1 == Monster.allMonsters.length ) {
+						Utils.log("BOO");
 						return null;
 					}
 					return Monster.allMonsters[i+1];

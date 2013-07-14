@@ -234,29 +234,23 @@ package gui
 		
 		protected function finishGame():void {
 			var monster:Monster;
-			if ( Game.isFinished() ) {
+			if (Game.isFinished() || Config.ALWAYS_WIN_WITH_NO_DECK) {
 				monster = Game.returnNextMonster();
-				if (monster == null) Utils.log("Ran out of monsters");
-				else startGame(monster);
-			} else {
-				if (Config.ALWAYS_WIN_WITH_NO_DECK) {
-					monster = Game.returnNextMonster();
-					if (monster == null) Utils.log("Ran out of monsters");
-					else startGame(monster);
+				if (monster == null) {
+					MusicPlayer.playMusic(MusicPlayer.ROCKIN);
+					var finalMonster:Monster = Utils.pickRandom(Monster.allMonsters);
+					new GuiFloatText(Main.snipeLayer, "YOU got a " + finalMonster.name + "!!!", new Point(100, 200));
+					SaveManager.collectMonster(finalMonster);
+					setEndingMonster(finalMonster);
+					
+					GuiMonster.setMonsterSomewhere(gfx.winScreen.monster, finalMonster);
+					gfx.winScreen.info.text = "You raised a\n" + finalMonster.name;
+					Utils.addToParent(gfx, gfx.winScreen);
+				} else {
+					// more monsters to go
+					startGame(monster);
 				}
-			}
-			
-			// this was old game gameover code:
-			
-			/*MusicPlayer.playMusic(MusicPlayer.ROCKIN);
-			var finalMonster:Monster = Utils.pickRandom(Monster.allMonsters);
-			new GuiFloatText(Main.snipeLayer, "YOU got a " + finalMonster.name + "!!!", new Point(100, 200));
-			SaveManager.collectMonster(finalMonster);
-			setEndingMonster(finalMonster);
-			
-			GuiMonster.setMonsterSomewhere(gfx.winScreen.monster, finalMonster);
-			gfx.winScreen.info.text = "You raised a\n" + finalMonster.name;
-			Utils.addToParent(gfx, gfx.winScreen);*/
+			}	
 		}
 		
 		protected function hideWinScreen():void
