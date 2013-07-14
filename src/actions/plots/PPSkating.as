@@ -15,13 +15,14 @@ package actions.plots
 		
 		override public function doAction():void 
 		{
-			outcomeDescription = Game.creatureName + " skates beautifully!";
-			outComeBool = true;
-			// add red/power/fire skill
-			
-			/* outcomeDescription = Game.creatureName + " can't stop falling down on the ice.";
-			outComeBool = false;
-			deduct red/power/fire skill */			
+			simplePlotAction(
+				Game.creatureName + " skates beautifully!",
+				Game.creatureName + " can't stop falling down on the ice.",
+				Config.STAT_SKY,
+				Config.PLOT_HIGH_THRESH,
+				Config.STAT_FIRE,
+				Config.PLOT_MID_CHANGE
+			);		
 		}
 	}
 

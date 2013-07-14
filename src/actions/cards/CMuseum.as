@@ -15,8 +15,11 @@ package actions.cards
 		
 		override public function doAction():void 
 		{
-			outcomeDescription = Game.creatureName + " immerses itself in culture!";
-			// add 3x green/logic/air skill
+			simpleCardAction(
+				Game.creatureName + " immerses itself in culture!",
+				Config.STAT_SKY,
+				Config.CARD_HIGH_CHANGE
+			);
 		}
 	}
 

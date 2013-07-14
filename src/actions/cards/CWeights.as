@@ -15,8 +15,11 @@ package actions.cards
 		
 		override public function doAction():void 
 		{
-			outcomeDescription = Game.creatureName + " carries some heavy weights!";
-			// add 2x red/power/fire skill
+			simpleCardAction(
+				Game.creatureName + " carries some heavy weights!",
+				Config.STAT_FIRE,
+				Config.CARD_MID_CHANGE
+			);
 		}
 	}
 

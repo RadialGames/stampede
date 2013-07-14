@@ -15,13 +15,14 @@ package actions.plots
 		
 		override public function doAction():void 
 		{
-			outcomeDescription = Game.creatureName + " wisely avoids the mushrooms and plays instead!";
-			outComeBool = true;
-			// add orange/health/earth skill
-			
-			/* outcomeDescription = Game.creatureName + " eats the mushrooms and makes itself sick!";
-			outComeBool = false;
-			deduct orange/health/earth skill */	
+			simplePlotAction(
+				Game.creatureName + " wisely avoids the mushrooms and plays instead!",
+				Game.creatureName + " eats the mushrooms and makes itself sick!",
+				Config.STAT_SKY,
+				Config.PLOT_HIGH_THRESH,
+				Config.STAT_EARTH,
+				Config.PLOT_MID_CHANGE
+			);
 		}
 	}
 

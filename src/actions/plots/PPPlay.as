@@ -15,13 +15,14 @@ package actions.plots
 		
 		override public function doAction():void 
 		{
-			outcomeDescription = Game.creatureName + " roughhouses with other monsters!";
-			outComeBool = true;
-			// add red/power/fire skill
-			
-			/* outcomeDescription = Game.creatureName + " has no friends to play with.";
-			outComeBool = false;
-			deduct red/power/fire skill */			
+			simplePlotAction(
+				Game.creatureName + " roughhouses with other monsters!",
+				Game.creatureName + " has no friends to play with.",
+				Config.STAT_WATER,
+				Config.PLOT_HIGH_THRESH,
+				Config.STAT_FIRE,
+				Config.PLOT_MID_CHANGE
+			);		
 		}
 	}
 

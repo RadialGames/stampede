@@ -32,11 +32,15 @@ package
 		public static const PLOT_LOW_CHANGE:Number = 10;
 		public static const PLOT_MID_CHANGE:Number = 20;
 		public static const PLOT_HIGH_CHANGE:Number = 40;
+		
+		public static const CARD_LOW_CHANGE:Number = 5;
+		public static const CARD_MID_CHANGE:Number = 10;
+		public static const CARD_HIGH_CHANGE:Number = 15;
 			
 		public static const STAT_DEFAULT:int = 50;
 		public static const STAT_MAX:int = 100;
 			
-		public static const NONRANDOM_SEED:int = 12345;
+		public static const NONRANDOM_SEED:int = -1;
 		public static const DEBUG_MODE:Boolean = true;
 		
 		public static const RED:uint = 0xFF0000;

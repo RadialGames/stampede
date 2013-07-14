@@ -18,7 +18,7 @@ package gui
 			gfx = new GfxCard();
 			addChild(gfx);
 			
-			gfx.info.text = "skating";
+			gfx.info.text = card.title;
 			addEventListener(MouseEvent.MOUSE_DOWN, mouseDown);
 		}
 		

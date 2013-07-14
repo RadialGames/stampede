@@ -15,8 +15,11 @@ package actions.cards
 		
 		override public function doAction():void 
 		{
-			outcomeDescription = Game.creatureName + " munches away happily!";
-			// add orange/health/earth skill
+			simpleCardAction(
+				Game.creatureName + " munches away happily!",
+				Config.STAT_EARTH,
+				Config.CARD_LOW_CHANGE
+			);
 		}
 	}
 

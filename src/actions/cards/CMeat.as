@@ -15,8 +15,11 @@ package actions.cards
 		
 		override public function doAction():void 
 		{
-			outcomeDescription = Game.creatureName + " devours some cruelty-free imitation meat!";
-			// add 2x orange/health/earth skill
+			simpleCardAction(
+				Game.creatureName + " devours some cruelty-free imitation meat!",
+				Config.STAT_EARTH,
+				Config.CARD_MID_CHANGE
+			);
 		}
 	}
 

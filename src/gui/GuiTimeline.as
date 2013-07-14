@@ -29,7 +29,7 @@ package gui
 				gfx.slots.addChild(slot);
 				
 				if (isPlotPoint(i)) {
-					var plotPoint:GuiPlotPoint = new GuiPlotPoint(new PlotPoint());
+					var plotPoint:GuiPlotPoint = new GuiPlotPoint(Game.timeline[i] as PlotPoint);
 					plotPoint.x = cardSpacing * i;
 					gfx.cards.addChild(plotPoint);
 					guiActions.push(plotPoint);
@@ -37,12 +37,7 @@ package gui
 					guiActions.push(null);
 				}
 				
-				/*var stat:GfxStat = new GfxStat();
-				stat.info.text = "666\n666";
-				stat.x = statSpacing * i;
-				gfx.stats.addChild(stat);
-				stats.push(stat);*/
-				statsGraph = new StatsGraph(gfx.width, 130, getStatValues());
+				statsGraph = new StatsGraph(gfx.width, 130);
 				gfx.addChild(statsGraph);
 			}
 			
@@ -75,7 +70,8 @@ package gui
 			card.x = index * cardSpacing;
 			card.y = 0;
 			guiActions[index] = card;
-			
+			Game.timeline[index] = card.action;
+			refresh();
 			Gui.instance.cardPlaced();
 		}
 		
@@ -93,6 +89,8 @@ package gui
 		public function refresh():void
 		{
 			Game.reset();
+			statsGraph.reset();
+			
 			for (var i :int = 0; i < Config.NUM_SLOTS; i++) {
 				try {
 					Game.next();
@@ -100,14 +98,8 @@ package gui
 					Utils.log(error);
 				}
 				
-				//var stat:GfxStat = stats[i];
 				var statValues:Vector.<Number> = getStatValues();
-				//var statInfo:String = "";
-				/*for (var j:int = 0; j < statValues.length; j++) {
-					statInfo += statValues[j] + "\n";
-				}
-				stat.info.text = statInfo;*/
-			
+				
 				statsGraph.update(statValues, i);
 				
 				if (isPlotPoint(i)) {
@@ -137,7 +129,7 @@ package gui
 		protected function isPlotPoint(index:int):Boolean
 		{
 			if (Game.timeline == null) {
-				return (index % 3 == 2);
+				return false;// (index % 3 == 2);
 			}
 			return Game.timeline[index] is PlotPoint;
 		}

@@ -15,13 +15,14 @@ package actions.plots
 		
 		override public function doAction():void 
 		{
-			outcomeDescription = Game.creatureName + " fights off the wild monster!";
-			outComeBool = true;
-			// add orange/health/earth skill
-			
-			/* outcomeDescription = Game.creatureName + " gets really beat up!";
-			outComeBool = false;
-			deduct orange/health/earth skill */			
+			simplePlotAction(
+				Game.creatureName + " fights off the wild monster!",
+				Game.creatureName + " gets really beat up!",
+				Config.STAT_FIRE,
+				Config.PLOT_HIGH_THRESH,
+				Config.STAT_EARTH,
+				Config.PLOT_MID_CHANGE
+			);
 		}
 	}
 

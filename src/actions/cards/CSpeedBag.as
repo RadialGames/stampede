@@ -15,8 +15,11 @@ package actions.cards
 		
 		override public function doAction():void 
 		{
-			outcomeDescription = Game.creatureName + " works up a sweat!";
-			// add red/power/fire skill
+			simpleCardAction(
+				Game.creatureName + " works up a sweat!",
+				Config.STAT_FIRE,
+				Config.CARD_LOW_CHANGE
+			);
 		}
 	}
 
