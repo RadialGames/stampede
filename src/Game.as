@@ -1,5 +1,8 @@
 package  {
 	import actions.cards.CBrush;
+	import actions.cards.TBlue;
+	import actions.cards.TRed;
+	import actions.cards.TWhite;
 	import actions.plots.PPBully;
 	import flash.display.InteractiveObject;
 	import actions.Action;
@@ -45,8 +48,13 @@ package  {
 		public static function initDeck():void {
 			deck = new Vector.<Card>();
 			for (var i:Number = 0; i < Config.DECK_SIZE; i++) {
-				var cardClass:Class = Card.allCards()[Utils.getRandomInt(0, Card.allCards().length-1)];
-				deck.push(new cardClass() as Card);
+				//var cardClass:Class = Card.allCards()[Utils.getRandomInt(0, Card.allCards().length-1)];
+				//deck.push(new cardClass() as Card);
+				deck.push(new TRed());
+				deck.push(new TRed());
+				deck.push(new TBlue());
+				deck.push(new TBlue());
+				deck.push(new TWhite());
 			}
 		}
 		
@@ -54,9 +62,9 @@ package  {
 			timeline = new Vector.<Action>();
 			var slotsPerPlotPoint:int = Math.floor(Config.NUM_SLOTS / (Config.NUM_PLOTPOINTS - 1));
 			
-			for (var i:Number = 0; i < Config.NUM_SLOTS-1; i++) {
+			for (var i:Number = 0; i < Config.NUM_SLOTS; i++) {
 				//add nulls where there will be cards and add the events
-				if ( i % slotsPerPlotPoint == 0 ) {
+				if ( i % slotsPerPlotPoint == 0 && i != 0 ) {
 					var plotClass:Class = PlotPoint.allPlotPoints()[Utils.getRandomInt(0, PlotPoint.allPlotPoints().length-1)];
 					timeline.push(new plotClass() as PlotPoint);
 					//timeline.push(new PPBully());
@@ -65,9 +73,8 @@ package  {
 				}
 			}
 			//It always ends with a PlotPoint
-			plotClass = PlotPoint.allPlotPoints()[Utils.getRandomInt(0, PlotPoint.allPlotPoints().length-1)];
-			timeline.push(new plotClass() as PlotPoint);
-			//timeline.push(new PPBully());
+			//plotClass = PlotPoint.allPlotPoints()[Utils.getRandomInt(0, PlotPoint.allPlotPoints().length-1)];
+			//timeline.push(new plotClass() as PlotPoint);
 		}
 		
 		public static function putTopCardOnSlot(slotNum:Number):Boolean { // Returns True if operation successful

@@ -7,8 +7,8 @@ package
 	 */
 	public class Config
 	{
-		public static const NUM_SLOTS:int = 20;
-		public static const NUM_PLOTPOINTS:int = 5;
+		public static const NUM_SLOTS:int = 6;
+		public static const NUM_PLOTPOINTS:int = 0;
 		public static const DECK_SIZE:int = 40; //
 		
 		public static const SNIPE_FONT_SIZE:int = 30;
@@ -22,9 +22,9 @@ package
 		public static const STAT_WHITE:String = "sky";
 		public static const STAT_BLUE:String = "water";
 		public static const STAT_RED:String = "fire";
-		public static const ALL_STATS:Vector.<String> = new <String>[STAT_BROWN, STAT_WHITE, STAT_BLUE, STAT_RED];
-		public static const STAT_COLOURS:Vector.<uint> = new <uint>[0x41270D,
-			0x0000FF, 0xFFFFFF, 0xFF0000];
+		public static const ALL_STATS:Vector.<String> = new <String>[STAT_WHITE, STAT_BLUE, STAT_RED];//new <String>[STAT_WHITE, STAT_BLUE, STAT_RED, STAT_BROWN];
+		public static const STAT_COLOURS:Vector.<uint> = new <uint>[
+			0xFFFFFF, 0x0000FF, 0xFF0000, 0x41270D];
 		
 		public static const PLOT_LOW_THRESH:Number = 20;
 		public static const PLOT_MID_THRESH:Number = 50;
@@ -52,5 +52,6 @@ package
 		public static const GREEN:uint = 0x00CC00;
 		public static const BLUE:uint = 0x0000FF;
 		public static const ORANGE:uint = 0xFFA500;
+		public static const WHITE:uint = 0xFFFFFF;
 	}
 }
