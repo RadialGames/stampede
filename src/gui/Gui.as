@@ -28,6 +28,8 @@ package gui
 			
 			timeline = new GuiTimeline(gfx.timeline);
 			
+			Utils.removeFromParent(gfx.introMenu);
+			
 			//GuiButton.replaceButton(gfx.edgeScrollerLeft);
 			//gfx.edgeScrollerLeft.addEventListener(MouseEvent.MOUSE_OVER, scrollerOver);
 			//gfx.edgeScrollerLeft.useHandCursor = false;
@@ -230,13 +232,21 @@ package gui
 			}
 		}
 		
-		protected function finishGame():void
-		{
+		protected function finishGame():void {
+			var monster:Monster;
 			if ( Game.isFinished() ) {
-				
-			}else {
-				
+				monster = Game.returnNextMonster();
+				if (monster == null) Utils.log("Ran out of monsters");
+				else startGame(monster);
+			} else {
+				if (Config.ALWAYS_WIN_WITH_NO_DECK) {
+					monster = Game.returnNextMonster();
+					if (monster == null) Utils.log("Ran out of monsters");
+					else startGame(monster);
+				}
 			}
+			
+			// this was old game gameover code:
 			
 			/*MusicPlayer.playMusic(MusicPlayer.ROCKIN);
 			var finalMonster:Monster = Utils.pickRandom(Monster.allMonsters);
