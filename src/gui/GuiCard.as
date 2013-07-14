@@ -26,7 +26,7 @@ package gui
 		
 		protected function mouseDown(...ig):void
 		{
-			if (!Gui.instance.isNextCard(this)) {
+			if (!Gui.instance.isNextCard(this) && !Config.ALLOW_MOVING_CARDS) {
 				return;
 			}
 			startDrag();
