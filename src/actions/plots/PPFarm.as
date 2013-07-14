@@ -18,9 +18,9 @@ package actions.plots
 			simplePlotAction(
 				Game.creatureName + " helps out around the farm!",
 				Game.creatureName + " is too weak to help out around the farm.",
-				Config.STAT_FIRE,
+				Config.STAT_RED,
 				Config.PLOT_HIGH_THRESH,
-				Config.STAT_SKY,
+				Config.STAT_WHITE,
 				Config.PLOT_MID_CHANGE
 			);		
 		}

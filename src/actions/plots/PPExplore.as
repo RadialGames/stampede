@@ -18,9 +18,9 @@ package actions.plots
 			simplePlotAction(
 				Game.creatureName + " explores a nearby cave!",
 				Game.creatureName + " gets tired and goes home.",
-				Config.STAT_EARTH,
+				Config.STAT_BROWN,
 				Config.PLOT_HIGH_THRESH,
-				Config.STAT_SKY,
+				Config.STAT_WHITE,
 				Config.PLOT_MID_CHANGE
 			);		
 		}

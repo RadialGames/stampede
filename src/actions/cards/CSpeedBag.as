@@ -17,7 +17,7 @@ package actions.cards
 		{
 			simpleCardAction(
 				Game.creatureName + " works up a sweat!",
-				Config.STAT_FIRE,
+				Config.STAT_RED,
 				Config.CARD_LOW_CHANGE
 			);
 		}

@@ -17,7 +17,7 @@ package actions.cards
 		{
 			simpleCardAction(
 				Game.creatureName + " devours some cruelty-free imitation meat!",
-				Config.STAT_EARTH,
+				Config.STAT_BROWN,
 				Config.CARD_MID_CHANGE
 			);
 		}

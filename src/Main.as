@@ -6,6 +6,7 @@ package
 	import flash.geom.Point;
 	import flash.text.TextField;
 	import gui.*;
+	import monsters.EasyMidMonster;
 
 	/**
 	 * ...
@@ -27,7 +28,7 @@ package
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
 			Utils.pickOriginalRandomSeed();
-			Game.init();
+			//Game.init(new EasyMidMonster());
 			addChild(new Gui());
 			SaveManager.load();
 			snipeLayer = new Sprite();

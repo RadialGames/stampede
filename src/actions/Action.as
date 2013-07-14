@@ -5,9 +5,9 @@ package actions {
 	 */
 	public class Action {
 		
-		public var title:String;
-		public var colour:uint
-		public var outcomeDescription:String;
+		public var title:String = "";
+		public var colour:uint = 0x000000;
+		public var outcomeDescription:String = "";
 		
 		public function Action() {
 			

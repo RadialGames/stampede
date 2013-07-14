@@ -18,9 +18,9 @@ package actions.plots
 			simplePlotAction(
 				Game.creatureName + " wisely avoids the mushrooms and plays instead!",
 				Game.creatureName + " eats the mushrooms and makes itself sick!",
-				Config.STAT_SKY,
+				Config.STAT_WHITE,
 				Config.PLOT_HIGH_THRESH,
-				Config.STAT_EARTH,
+				Config.STAT_BROWN,
 				Config.PLOT_MID_CHANGE
 			);
 		}

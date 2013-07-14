@@ -18,9 +18,9 @@ package actions.plots
 			simplePlotAction(
 				Game.creatureName + " doesn't get sick!",
 				Game.creatureName + " comes down with the monster plague!",
-				Config.STAT_EARTH,
+				Config.STAT_BROWN,
 				Config.PLOT_HIGH_THRESH,
-				Config.STAT_FIRE,
+				Config.STAT_RED,
 				Config.PLOT_MID_CHANGE
 			);			
 		}
