@@ -27,6 +27,7 @@ package  {
 		public static function get currentSlot():int { return _currentSlot; }
 		
 		public static function init(monster:Monster):void {
+			trace(monster.name);
 			currentMonster = monster;
 			stats = new Stats(monster);
 			initTimeline();

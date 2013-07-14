@@ -47,7 +47,7 @@ package gui
 			Utils.clearChildren(gfx.monsters);
 			for (var i :int = 0; i < Monster.allMonsters.length; i++) {
 				var monster:Monster = Monster.allMonsters[i];
-				var monsterButton:GuiButton = GuiButton.replaceButton(new GfxMonster(), function():void{Gui.instance.startGame(monster)});
+				var monsterButton:GuiButton = replaceMonsterButton(monster);
 				var inners:Array = Utils.buttonClasses(monsterButton, GfxMonsterInner);
 				for each (var inner:GfxMonsterInner in inners) {
 					GuiMonster.setMonsterSomewhere(inner, monster);
@@ -67,6 +67,12 @@ package gui
 			gfx.resetButton.text = "reset monsters";
 			
 			hideCredits();
+		}
+		
+		protected function replaceMonsterButton(monster:Monster):GuiButton
+		{
+			var monsterButton:GuiButton = GuiButton.replaceButton(new GfxMonster(), function():void { Gui.instance.startGame(monster) } );
+			return monsterButton;
 		}
 		
 		protected function showCredits():void

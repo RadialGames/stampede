@@ -28,6 +28,8 @@ package gui
 			
 			timeline = new GuiTimeline(gfx.timeline);
 			
+			Utils.removeFromParent(gfx.introMenu);
+			
 			//GuiButton.replaceButton(gfx.edgeScrollerLeft);
 			//gfx.edgeScrollerLeft.addEventListener(MouseEvent.MOUSE_OVER, scrollerOver);
 			gfx.edgeScrollerLeft.useHandCursor = false;

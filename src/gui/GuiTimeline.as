@@ -47,11 +47,15 @@ package gui
 				if (statsGraph != null) {
 					Utils.removeFromParent(statsGraph);
 				}
-				statsGraph = new StatsGraph(gfx.width, 130);
+				statsGraph = new StatsGraph(gfx.width-160, 100);
+				statsGraph.x = 0;
+				statsGraph.y = 10;
 				gfx.addChild(statsGraph);
 				
-				//monsterSolution = new MonsterSolution(100, 130);
-				//gfx.addChild(monsterSolution);
+				monsterSolution = new MonsterSolution(100, 100);
+				monsterSolution.x = 800
+				statsGraph.y = 10;
+				gfx.addChild(monsterSolution);
 			}
 			
 			refresh();
