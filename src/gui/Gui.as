@@ -43,6 +43,9 @@ package gui
 			gfx.strongFemaleProtagonist.gotoAndStop(1);
 			animationTick = 1000 * 10;
 			
+			// controls monster running around or whatever
+			monster = new GuiMonster(gfx.monster);
+			
 			MusicPlayer.playMusic(MusicPlayer.MAINMENU);
 		}
 		
@@ -178,10 +181,10 @@ package gui
 			
 			if (percentCardsDrawn >= 1) {
 				MusicPlayer.playMusic(MusicPlayer.ROCKIN);
-				var monster:Monster = Utils.pickRandom(Monster.allMonsters);
-				new GuiFloatText(Main.snipeLayer, "YOU got a " + monster.name + "!!!", new Point(100, 200));
-				SaveManager.collectMonster(monster);
-				gfx.monster.text = monster.name;
+				var finalMonster:Monster = Utils.pickRandom(Monster.allMonsters);
+				new GuiFloatText(Main.snipeLayer, "YOU got a " + finalMonster.name + "!!!", new Point(100, 200));
+				SaveManager.collectMonster(finalMonster);
+				setEndingMonster(finalMonster);
 			} else {
 				drawNextCard();
 			}
@@ -228,9 +231,10 @@ package gui
 			return gfx.nextCard.getChildAt(0) == card;
 		}
 		
-		public function setEndingMonsterName(value:String):void
+		public function setEndingMonster(value:Monster):void
 		{
-			gfx.monster.text = value;
+			gfx.monsterName.text = value.name;
+			monster.setMonster(value);
 		}
 		
 		/** fills a slot; either a GuiCard or a GfxEvent */
@@ -244,6 +248,7 @@ package gui
 		protected var animationTick:int = 0;
 		
 		protected var mainMenu:GuiMainMenu;
+		protected var monster:GuiMonster;
 		
 		public static var instance:Gui;
 	}

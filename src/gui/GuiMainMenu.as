@@ -50,7 +50,13 @@ package gui
 				for each (var inner:GfxMonsterInner in inners) {
 					inner.monsterName.text = monster.name;
 					if (!SaveManager.hasCollectedMonster(monster)) {
-						Utils.removeFromParent(inner.tungee);
+						Utils.removeFromParent(inner.monster);
+					} else {
+						if (inner.monster.hasOwnProperty(monster.name)) {
+							Utils.toggleChildVisibility(inner.monster, monster.name);
+						} else {
+							Utils.toggleChildVisibility(inner.monster, "tungee");
+						}
 					}
 				}
 				if (!SaveManager.hasCollectedMonster(monster)) {
