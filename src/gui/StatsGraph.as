@@ -46,8 +46,8 @@ package gui
 		
 		public function drawBase():void 
 		{
-			graphics.beginFill(0x666666);
-			graphics.drawRect(0, 0, graphWidth, graphHeight);
+			//graphics.beginFill(0x666666);
+			//graphics.drawRect(0, 0, graphWidth, graphHeight);
 			
 			/*var textField:TextField;
 			for each (var statName:String in Config.ALL_STATS) {
@@ -84,7 +84,6 @@ package gui
 				lines[i].graphics.lineTo((currentSlot + 0.75) * graphSpacing, yVal);
 				lines[i].graphics.lineTo((currentSlot + 1.25) * graphSpacing, yVal);
 			}
-			trace(stats);
 		}
 		
 		protected function getStatValues():Vector.<Number>
