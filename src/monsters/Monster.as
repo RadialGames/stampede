@@ -11,25 +11,29 @@ package monsters
 		public var description:String;
 		public var graphic:Sprite;
 		
-		protected static var allMonsters:Vector.<Monster>;
+		protected static var _allMonsters:Vector.<Monster>;
 		
 		public function Monster() 
 		{
 			
 		}
 		
+		public static function get allMonsters():Vector.<Monster>
+		{
+			if ( _allMonsters == null ) {
+				initMonsters();
+			}
+			return _allMonsters;
+		}
+		
 		protected static function initMonsters():void
 		{
-			allMonsters = new Vector.<Monster>();
-			allMonsters.push(new Sloth());
+			_allMonsters = new Vector.<Monster>();
+			_allMonsters.push(new Sloth());
 		}
 		
 		public static function whichMoster():Monster
 		{
-			if ( allMonsters == null ) {
-				initMonsters();
-			}
-			
 			for each (var monster:Monster in allMonsters) {
 				if ( monster.willEvolveInto() ) {
 					return monster;
