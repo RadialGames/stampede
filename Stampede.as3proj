@@ -21,6 +21,7 @@
   <!-- Build options -->
   <build>
     <option accessible="False" />
+    <option advancedTelemetry="False" />
     <option allowSourcePathOverlap="False" />
     <option benchmark="False" />
     <option es="False" />
@@ -52,6 +53,7 @@
   <!-- SWC Libraries -->
   <libraryPaths>
     <element path="assets\gui.swc" />
+    <element path="assets\sound.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

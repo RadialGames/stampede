@@ -72,8 +72,7 @@ package gui
 			guiActions[index] = card;
 			Game.timeline[index] = card.action;
 			refresh();
-			
-			Gui.instance.drawNextCard();
+			Gui.instance.cardPlaced();
 		}
 		
 		protected function isNextCard(card:GuiCard):Boolean
@@ -87,7 +86,7 @@ package gui
 		/**
 		 * Called when any card is placed. Reload all stats and plotPoints
 		 */
-		protected function refresh():void
+		public function refresh():void
 		{
 			Game.reset();
 			statsGraph.reset();

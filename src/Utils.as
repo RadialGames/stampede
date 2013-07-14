@@ -1014,11 +1014,19 @@
 		 * frame, starting at 0 and ending at 1 after durationMillis. FadeIn will complete
 		 * immediately if the object is removed from the stage.
 		 */
-		public static function fadeIn (object :*, durationMillis :int = 1000) :void
+		public static function fadeIn (object :*, durationMillis :int = 1000, setToZero:Boolean = false) :void
 		{
 			var startTime :Number = (new Date()).getTime();
-			object.alpha = 0;
+			if (setToZero) {
+				object.alpha = 0;
+			}
+			var prevAlpha:Number = object.alpha;
 			var fading :Function = function(...ig):void {
+				if (prevAlpha != object.alpha) {
+					Utils.log("detected doublefade.");
+					Main.removeStageEventListener(Event.ENTER_FRAME, fading);
+					return;
+				}
 				var percent:Number = ((new Date()).getTime() - startTime) / durationMillis;
 				if (percent >= 1 || object.stage == null) {
 					Main.removeStageEventListener(Event.ENTER_FRAME, fading);
@@ -1026,6 +1034,7 @@
 				} else {
 					object.alpha = percent;
 				}
+				prevAlpha = object.alpha;
 			}
 			Main.addStageEventListener(Event.ENTER_FRAME, fading);
 		}
@@ -1039,8 +1048,14 @@
 			removeWhenComplete:Boolean = false) :void
 		{
 			var startTime :Number = (new Date()).getTime();
-			object.alpha = 1;
+			//object.alpha = 1;
+			var prevAlpha:Number = object.alpha;
 			var fading :Function = function(...ig):void {
+				if (prevAlpha != object.alpha) {
+					Utils.log("detected doublefade.");
+					Main.removeStageEventListener(Event.ENTER_FRAME, fading);
+					return;
+				}
 				var percent:Number = ((new Date()).getTime() - startTime) / durationMillis;
 				if (percent >= 1 || object.stage == null) {
 					Main.removeStageEventListener(Event.ENTER_FRAME, fading);
@@ -1051,6 +1066,7 @@
 				} else {
 					object.alpha = 1 - percent;
 				}
+				prevAlpha = object.alpha;
 			}
 			Main.addStageEventListener(Event.ENTER_FRAME, fading);
 		}

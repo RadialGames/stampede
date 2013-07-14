@@ -14,6 +14,7 @@ package
 		public static const SNIPE_FONT_SIZE:int = 25;
 		
 		public static const ALLOW_CARD_OVERWRITE:Boolean = false;
+		public static var MUTE:Boolean = false;
 		
 		public static const STAT_EARTH:String = "earth";
 		public static const STAT_SKY:String = "sky";
