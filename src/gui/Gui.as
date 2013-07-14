@@ -50,6 +50,11 @@ package gui
 			
 			Utils.removeFromParent(gfx.winScreen);
 			GuiButton.replaceButton(gfx.winScreen.doneButton, hideWinScreen);
+			addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+		}
+		
+		private function onMouseDown(e:MouseEvent):void {
+			Main.particles.addParticle(new Point(stage.mouseX, stage.mouseY), Utils.getRandomNumber(2,5));			
 		}
 		
 		protected function showMainMenu():void

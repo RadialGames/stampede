@@ -32,6 +32,8 @@ package
 			SaveManager.load();
 			snipeLayer = new Sprite();
 			addChild(snipeLayer);
+			particles = new ShittyParticleManager();
+			snipeLayer.addChild(particles);
 		}
 		
 		/**
@@ -57,6 +59,7 @@ package
 		public static var instance:Main;
 		public static var game:Game;
 		public static var snipeLayer:Sprite;
+		public static var particles:ShittyParticleManager;
 	}
 
 }
