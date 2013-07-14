@@ -28,7 +28,13 @@ package monsters
 		
 		protected static function initMonsters():void
 		{
-			_allMonsters = new Vector.<Monster>();
+			_allMonsters = new Vector.<Monster>();			
+			_allMonsters.push(new OmniMonster());			
+			_allMonsters.push(new NegaMonster());			
+			_allMonsters.push(new EarthMonster());			
+			_allMonsters.push(new SkyMonster());			
+			_allMonsters.push(new WaterMonster());			
+			_allMonsters.push(new FireMonster());	
 			_allMonsters.push(new Sloth());
 		}
 		
