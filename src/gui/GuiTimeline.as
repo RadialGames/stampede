@@ -49,6 +49,9 @@ package gui
 				}
 				statsGraph = new StatsGraph(gfx.width, 130);
 				gfx.addChild(statsGraph);
+				
+				//monsterSolution = new MonsterSolution(100, 130);
+				//gfx.addChild(monsterSolution);
 			}
 			
 			refresh();
@@ -201,5 +204,6 @@ package gui
 		
 		protected var slotSpacing:Number;
 		protected var statsGraph:StatsGraph;
+		protected var monsterSolution:MonsterSolution;
 	}
 }

@@ -6,6 +6,8 @@ package  actions.cards {
 	 */
 	public class Card extends Action {
 		
+		public var isOutcomePositive:Boolean;
+		
 		public function Card() {
 			
 		}
