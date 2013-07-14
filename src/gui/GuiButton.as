@@ -1,6 +1,7 @@
 ﻿package gui
 {
 	import adobe.utils.ProductManager;
+	import aze.motion.eaze;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.InteractiveObject;
@@ -415,5 +416,41 @@
 		public static const BUTTON_STATE_UP:int = 1;
 		public static const BUTTON_STATE_OVER:int = 2;
 		public static const BUTTON_STATE_DOWN:int = 3;
+		
+		
+		public function cancelBubble():void {
+			if (isNaN(originalScale))
+				mouseOverShrink(null);
+			this.removeEventListener(MouseEvent.MOUSE_OVER, mouseOverGrow);
+		}
+		
+		private var scaleAmount:Number;
+		private var overrideTween:Boolean;
+		public function bubbleOnMouseOver(scaleAmount:Number = 1.2, overrideTween:Boolean = true):void {
+			this.overrideTween = overrideTween;
+			this.scaleAmount = scaleAmount;
+			this.addEventListener(MouseEvent.MOUSE_OVER, mouseOverGrow);
+		}
+		
+		private var originalScale:Number;
+		private function mouseOverGrow(e:MouseEvent):void {
+			this.addEventListener(MouseEvent.MOUSE_OUT, mouseOverShrink);
+			if (isNaN(originalScale)) originalScale = this.scaleX;
+			eaze(this)
+				.to(0.2, { scaleX:originalScale * scaleAmount, scaleY:originalScale * scaleAmount } , overrideTween);
+		}
+		
+		private function mouseOverShrink(e:MouseEvent):void {
+			this.removeEventListener(MouseEvent.MOUSE_OUT, mouseOverShrink);
+			eaze(this)
+				.to(0.2, { scaleX:originalScale, scaleY:originalScale }, overrideTween)
+				.onComplete(mouseOverShrinkComplete);
+		}
+		
+		private function mouseOverShrinkComplete():void {
+			originalScale = NaN;
+		}		
 	}
+	
+
 }
