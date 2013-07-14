@@ -23,6 +23,11 @@ package gui
 		
 		public function setMonster(monster:Monster):void
 		{
+			setMonsterSomewhere(gfx, monster);
+		}
+		
+		public static function setMonsterSomewhere(gfx:MovieClip, monster:Monster):void
+		{
 			if (gfx.hasOwnProperty(monster.name)) {
 				Utils.toggleChildVisibility(gfx, monster.name);
 			} else {

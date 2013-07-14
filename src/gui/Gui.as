@@ -49,6 +49,7 @@ package gui
 			MusicPlayer.playMusic(MusicPlayer.MAINMENU);
 			
 			Utils.removeFromParent(gfx.winScreen);
+			GuiButton.replaceButton(gfx.winScreen.doneButton, hideWinScreen);
 		}
 		
 		protected function showMainMenu():void
@@ -138,6 +139,10 @@ package gui
 		public var tooltipFadingIn:Boolean = false;
 		protected function showTooltip(guiAction:GuiAction):void
 		{
+			if (gfx.winScreen.stage) {
+				return;
+			}
+			
 			if (Utils.isEmpty(guiAction.action.outcomeDescription)) {
 				gfx.tooltip.info.text = "OutcomeDescription is blank for this";
 			} else {
@@ -182,14 +187,29 @@ package gui
 			animationTick = 0;
 			
 			if (percentCardsDrawn >= 1) {
-				MusicPlayer.playMusic(MusicPlayer.ROCKIN);
-				var finalMonster:Monster = Utils.pickRandom(Monster.allMonsters);
-				new GuiFloatText(Main.snipeLayer, "YOU got a " + finalMonster.name + "!!!", new Point(100, 200));
-				SaveManager.collectMonster(finalMonster);
-				setEndingMonster(finalMonster);
+				finishGame();
 			} else {
 				drawNextCard();
 			}
+		}
+		
+		protected function finishGame():void
+		{
+			MusicPlayer.playMusic(MusicPlayer.ROCKIN);
+			var finalMonster:Monster = Utils.pickRandom(Monster.allMonsters);
+			new GuiFloatText(Main.snipeLayer, "YOU got a " + finalMonster.name + "!!!", new Point(100, 200));
+			SaveManager.collectMonster(finalMonster);
+			setEndingMonster(finalMonster);
+			
+			GuiMonster.setMonsterSomewhere(gfx.winScreen.monster, finalMonster);
+			gfx.winScreen.info.text = "You raised a\n" + finalMonster.name;
+			Utils.addToParent(gfx, gfx.winScreen);
+		}
+		
+		protected function hideWinScreen():void
+		{
+			Utils.removeFromParent(gfx.winScreen);
+			showMainMenu();
 		}
 		
 		protected function drawNextCard():void
