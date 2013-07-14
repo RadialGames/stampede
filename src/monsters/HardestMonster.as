@@ -10,7 +10,7 @@ package monsters
 		
 		public function HardestMonster() 
 		{
-			name = "Negagore";
+			name = "Bobolyte";
 			description = Game.creatureName + " evolved into a Negagore!";
 			
 			solution = new <Number>[45,45,45,45,45,45];

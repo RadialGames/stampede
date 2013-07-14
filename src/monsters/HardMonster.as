@@ -10,7 +10,7 @@ package monsters
 		
 		public function HardMonster() 
 		{
-			name = "Firebat";
+			name = "Pinkdross";
 			description = Game.creatureName + " evolved into a Firebat!";
 			
 			solution = new <Number>[30,30,30,30,30,30];

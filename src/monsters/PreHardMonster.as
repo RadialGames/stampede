@@ -10,7 +10,7 @@ package monsters
 		
 		public function PreHardMonster() 
 		{
-			name = "Firebat";
+			name = "Mockalope";
 			description = Game.creatureName + " evolved into a Firebat!";
 			
 			solution = new <Number>[30,30,50,50,30,30];

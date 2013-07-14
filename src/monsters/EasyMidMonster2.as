@@ -10,7 +10,7 @@ package monsters
 		
 		public function EasyMidMonster2() 
 		{
-			name = "Blorb";
+			name = "Terratrope";
 			description = Game.creatureName + " evolved into a Blorb!";
 			
 			solution = new <Number>[10,10,50,50,50,50];

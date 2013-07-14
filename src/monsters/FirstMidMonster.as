@@ -10,7 +10,7 @@ package monsters
 		
 		public function FirstMidMonster() 
 		{
-			name = "Terratrope";
+			name = "Firebat";
 			description = Game.creatureName + " evolved into a Terratrope!";
 			
 			solution = new <Number>[30,30,30,30,50,50];

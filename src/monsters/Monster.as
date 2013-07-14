@@ -41,6 +41,7 @@ package monsters
 			_allMonsters.push(new FirstMidMonster2());		
 			_allMonsters.push(new RedBrownMonster());
 			_allMonsters.push(new MidMonster());
+			
 			_allMonsters.push(new PreHardMonster());
 			_allMonsters.push(new PreHardMonster2());
 			_allMonsters.push(new HardMonster());	

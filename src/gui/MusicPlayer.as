@@ -163,7 +163,7 @@
 			}
 		}
 		
-		protected static var _musicVolume:Number = 0.8;
+		protected static var _musicVolume:Number = 0.6;
 		
 		protected static var currentMusic :Music;
 		protected static var fadingInMusic :Music;

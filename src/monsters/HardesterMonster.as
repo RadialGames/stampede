@@ -10,7 +10,7 @@ package monsters
 		
 		public function HardesterMonster() 
 		{
-			name = "Omniolyte";
+			name = "Negagore";
 			description = Game.creatureName + " evolved into an Omniolyte!";
 			
 			solution = new <Number>[85,65,65,65,85,85];

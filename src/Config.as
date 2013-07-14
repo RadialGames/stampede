@@ -59,7 +59,7 @@ package
 		public static const BLUE:uint = 0x0000FF;
 		public static const ORANGE:uint = 0xFFA500;
 		public static const WHITE:uint = 0xFFFFFF;
-		public static const BROWN:uint = 0x804000;
+		public static const BROWN:uint = 0x000000;
 		public static const PURPLE:uint = 0x800080;
 		
 	}
