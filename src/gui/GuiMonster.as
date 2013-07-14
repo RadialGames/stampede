@@ -19,6 +19,7 @@ package gui
 		{
 			this.gfx = gfx;
 			gfx.addEventListener(Event.ENTER_FRAME, enterFrame);
+			gfx.addEventListener(MouseEvent.CLICK, monsterClick);
 			bubbleOnMouseOver(1.5);
 		}
 		
@@ -36,11 +37,33 @@ package gui
 			}
 		}
 		
+		private var chaseMode:Boolean = false;
+		protected function monsterClick(...ig):void {
+			if (chaseMode) {
+				chaseMode = false;
+				eaze(gfx).to(0.5, { x:0, y:0 }, false);
+			} else {
+				chaseMode = true;
+			}
+		}
+		
 		public var ticks:Number = 0;
+		public var velocity:Point = new Point();
 		protected function enterFrame(...ig):void
 		{
 			ticks++;
 			gfx.rotation = Math.sin(ticks / 5) * 5;
+			
+			if (chaseMode) {
+				var mouseLoc:Point = new Point(gfx.stage.mouseX, gfx.stage.mouseY);
+				var thisLoc:Point = new Point(gfx.x, gfx.y);
+				var relative:Point = mouseLoc.subtract(thisLoc);
+				relative.normalize(3);
+				velocity = velocity.add(relative);
+				if (velocity.length > 15) velocity.normalize(15);
+				gfx.x += velocity.x;
+				gfx.y += velocity.y;
+			}
 			//Utils.log("im walking here");
 		}
 		
