@@ -3,6 +3,7 @@ package gui
 	import actions.plots.PlotPoint;
 	import aze.motion.easing.Bounce;
 	import aze.motion.eaze;
+	import aze.motion.EazeTween;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -72,21 +73,24 @@ package gui
 			
 			if (dropPoint.y < -50 || dropPoint.y > card.height + 50 || dropPoint.x < -50) {
 				Utils.log("Dropped too far outside zone.");
-				eaze(card).to(0.3, { x:failX, y:0 }, true);
+				EazeTween.killTweensOf(card);
+				eaze(card).to(0.3, { x:failX, y:0, scaleX:1, scaleY:1 }, true);
 				new GuiFloatText(Main.snipeLayer, "You suck at placing cards!", card.localToGlobal(new Point(0,-50)));
 				return;
 			}
 			
 			if (isPlotPoint(index)) {
 				Utils.log("drop index is on an event");
-				eaze(card).to(0.3, { x:failX, y:0 }, true);
+				EazeTween.killTweensOf(card);
+				eaze(card).to(0.3, { x:failX, y:0, scaleX:1, scaleY:1 }, true);
 				new GuiFloatText(Main.snipeLayer, "You suck at placing cards!", card.localToGlobal(new Point(0,-50)));
 				return;
 			}
 			
 			if (!Game.putCardOnSlot(card.action, index)) {
 				Utils.log("drop index disallowed by game.as");
-				eaze(card).to(0.3, { x:failX, y:0 }, true);
+				EazeTween.killTweensOf(card);
+				eaze(card).to(0.3, { x:failX, y:0, scaleX:1, scaleY:1 }, true);
 				new GuiFloatText(Main.snipeLayer, "You suck at placing cards!", card.localToGlobal(new Point(0,-50)));
 				return;
 			}
