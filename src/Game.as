@@ -38,6 +38,7 @@ package  {
 		public static function isFinished():Boolean
 		{
 			for (var i:int = 0; i < Config.ALL_STATS.length; i++) {
+				trace(Config.ALL_STATS[i], Game.stats.getStat(Config.ALL_STATS[i]))
 				if ( Game.stats.getStat(Config.ALL_STATS[i]) != currentMonster.solution[i] ) {
 					return false;
 				}

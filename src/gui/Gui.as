@@ -248,6 +248,10 @@ package gui
 					Utils.addToParent(gfx, gfx.winScreen);
 				} else {
 					// more monsters to go
+					GuiMonster.setMonsterSomewhere(gfx.winScreen.monster, Game.currentMonster);
+					gfx.winScreen.info.text = "You raised a\n" + Game.currentMonster.name;
+					Utils.addToParent(gfx, gfx.winScreen);
+					
 					startGame(monster);
 				}
 			}	
@@ -256,7 +260,9 @@ package gui
 		protected function hideWinScreen():void
 		{
 			Utils.removeFromParent(gfx.winScreen);
-			showMainMenu();
+			if ( Game.currentMonster == Monster.allMonsters[Monster.allMonsters.length-1] ){
+				showMainMenu();
+			}
 		}
 		
 		protected function drawNextCard():void
@@ -291,7 +297,7 @@ package gui
 		
 		protected function get percentCardsDrawn():Number
 		{
-			return cardsDrawn / (Config.NUM_SLOTS - Config.NUM_PLOTPOINTS);
+			return cardsDrawn / Game.currentMonster.deck.length;
 		}
 		
 		public function isNextCard(card:GuiCard):Boolean
