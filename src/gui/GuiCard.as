@@ -18,7 +18,7 @@ package gui
 			
 			gfx = new GfxCard();
 			addChild(gfx);
-			eaze(gfx).to(1).tint(card.colour);
+			eaze(gfx).to(1).tint(card.colour, 0.8, 0.8);
 			
 			gfx.info.text = card.title;
 			addEventListener(MouseEvent.MOUSE_DOWN, mouseDown);
