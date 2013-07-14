@@ -57,6 +57,7 @@ package gui
 				//card.x = 0;
 				//card.y = 0;
 				eaze(card).to(0.3, { x:0, y:0 }, true);
+				new GuiFloatText(Main.snipeLayer, "You suck at placing cards!", card.localToGlobal(new Point(0,-50)));
 				return;
 			}
 			
@@ -68,6 +69,7 @@ package gui
 				//card.x = 0;
 				//card.y = 0;
 				eaze(card).to(0.3, { x:0, y:0 }, true);
+				new GuiFloatText(Main.snipeLayer, "You suck at placing cards!", card.localToGlobal(new Point(0,-50)));
 				return;
 			}
 			
@@ -79,6 +81,7 @@ package gui
 			refresh();
 			Gui.instance.cardPlaced();
 			eaze(card).from(0.6, { y:card.y - 50 }, false).easing(Bounce.easeOut);
+			new GuiFloatText(Main.snipeLayer, card.action.outcomeDescription, card.localToGlobal(new Point(0,-50)));
 		}
 		
 		protected function isNextCard(card:GuiCard):Boolean
