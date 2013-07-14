@@ -94,6 +94,7 @@ package  {
 		}
 		
 		public static function putCardOnSlot(card:Action, slotNum:Number):Boolean { // Returns True if operation successful
+			// this is kinda hacky and shouldn't be here, but sarah was writing code siultaneously and we kinda crossed wires -Andy
 			if (Config.ALLOW_SWAPPING_CARDS && Config.ALLOW_CARD_OVERWRITE) {
 				throw new Error("Fuck you, don't make this harder for all of us");
 			}

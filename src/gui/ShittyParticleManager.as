@@ -19,7 +19,7 @@ package gui
 		public function addParticle(position:Point, qty:Number):void {
 			var newBit:Particle;
 			for (var i:Number = 0; i < qty; i++) {
-				newBit = new Particle(GfxMonster);
+				newBit = new Particle(GfxMonsterInner); // currently ignores what you pass it here
 				newBit.x = position.x;
 				newBit.y = position.y;
 				bits.push(newBit);

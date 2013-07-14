@@ -62,5 +62,4 @@ package
 		public static var snipeLayer:Sprite;
 		public static var particles:ShittyParticleManager;
 	}
-
 }
