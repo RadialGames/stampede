@@ -40,8 +40,8 @@ public class GuiFloatText extends Sprite {
 		var format:TextFormat = new TextFormat("adams hand");
 		format.align = TextFormatAlign.CENTER;
 		format.size = Config.SNIPE_FONT_SIZE;
-		format.color = 0x000000;
-		var myFilters:Array = [new DropShadowFilter(5, 53, 0x0, 0.3, 0, 0, 2, 3, false, false, false)];
+		format.color = Config.SNIPE_COLOUR;
+		var myFilters:Array = [new DropShadowFilter(2, 45, 0x0, 0.1, 0, 0, 2, 3, false, false, false)];
 		
 		clip = new BitmapText(textToDisplay, format, myFilters);
 					
