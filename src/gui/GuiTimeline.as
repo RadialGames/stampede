@@ -177,8 +177,7 @@ package gui
 				}
 			}
 			
-			Gui.instance.setEndingMonster(Monster.whichMoster());
-			Utils.log(statValues);
+			Gui.instance.setEndingMonster(Game.currentMonster); // Monster.whichMoster());
 		}
 		
 		/**

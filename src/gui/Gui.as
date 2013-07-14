@@ -237,7 +237,6 @@ package gui
 			if (Game.isFinished() || Config.ALWAYS_WIN_WITH_NO_DECK) {
 				monster = Game.returnNextMonster();
 				if (monster == null) {
-					Utils.log("Ran out of monsters");
 					MusicPlayer.playMusic(MusicPlayer.ROCKIN);
 					var finalMonster:Monster = Utils.pickRandom(Monster.allMonsters);
 					new GuiFloatText(Main.snipeLayer, "YOU got a " + finalMonster.name + "!!!", new Point(100, 200));
