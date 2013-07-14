@@ -1,6 +1,8 @@
 package gui
 {
 	import actions.Action;
+	import aze.motion.easing.Bounce;
+	import aze.motion.easing.Linear;
 	import aze.motion.easing.Quadratic;
 	import aze.motion.eaze;
 	import flash.display.DisplayObject;
@@ -70,7 +72,7 @@ package gui
 			}
 			gfx.resetButton.text = "reset monsters";
 			
-			hideCredits();
+			reallyHideCredits();
 		}
 		
 		protected function replaceMonsterButton(monster:Monster):GuiButton
@@ -82,11 +84,21 @@ package gui
 		protected function showCredits():void
 		{
 			Utils.addToParent(gfx, gfx.credits);
+			gfx.credits.y = 600;
+			eaze(gfx.credits).to(1, { y:0 }, true)
+				.easing(Bounce.easeOut);
 			MusicPlayer.playMusic(MusicPlayer.CREDITS);
 		}
 		
 		protected function hideCredits():void
 		{
+			eaze(gfx.credits).to(0.6, { y:600 }, true)
+				.easing(Quadratic.easeIn)
+				.onComplete(reallyHideCredits);
+			//reallyHideCredits();
+		}
+		
+		protected function reallyHideCredits():void {
 			Utils.removeFromParent(gfx.credits);
 			MusicPlayer.playMusic(MusicPlayer.MAINMENU);
 		}

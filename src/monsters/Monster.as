@@ -1,4 +1,4 @@
-package monsters
+package monsters 
 {
 	import actions.cards.Card;
 	import flash.display.Sprite;
@@ -6,7 +6,7 @@ package monsters
 	 * ...
 	 * @author Colin Northway
 	 */
-	public class Monster
+	public class Monster 
 	{
 		public var name:String;
 		public var description:String;
@@ -18,7 +18,7 @@ package monsters
 		
 		protected static var _allMonsters:Vector.<Monster>;
 		
-		public function Monster()
+		public function Monster() 
 		{
 			
 		}
@@ -33,28 +33,14 @@ package monsters
 		
 		protected static function initMonsters():void
 		{
-			_allMonsters = new Vector.<Monster>();
-			_allMonsters.push(new HardesterMonster());
-			_allMonsters.push(new HardestMonster());
-			_allMonsters.push(new HarderMonster());
-			_allMonsters.push(new HardMonster());
+			_allMonsters = new Vector.<Monster>();				
+			_allMonsters.push(new EasyMidMonster());
+			_allMonsters.push(new FirstMidMonster());	
 			_allMonsters.push(new MidMonster());
-			_allMonsters.push(new FirstMidMonster());
-			_allMonsters.push(new EasyMidMonster());
-			_allMonsters.push(new EasyMidMonster());
-			_allMonsters.push(new EasyMidMonster());
-			_allMonsters.push(new EasyMidMonster());
-			_allMonsters.push(new EasyMidMonster());
-			_allMonsters.push(new EasyMidMonster());
-			_allMonsters.push(new EasyMidMonster());
-			_allMonsters.push(new EasyMidMonster());
-			/*_allMonsters.push(new OmniMonster());
-			_allMonsters.push(new NegaMonster());
-			_allMonsters.push(new EarthMonster());
-			_allMonsters.push(new SkyMonster());
-			_allMonsters.push(new WaterMonster());
-			_allMonsters.push(new FireMonster());
-			_allMonsters.push(new Sloth());*/
+			_allMonsters.push(new HardMonster());	
+			_allMonsters.push(new HarderMonster());
+			_allMonsters.push(new HardestMonster());										
+			_allMonsters.push(new HardesterMonster());
 		}
 		
 		public static function whichMoster():Monster
@@ -73,7 +59,7 @@ package monsters
 			return false;
 		}
 		
-		public function buildDeck(...classes):void
+		public function buildDeck(...classes):void 
 		{
 			deck = new Vector.<Class>();
 			for (var i:int = 0; i < classes.length; i++) {
