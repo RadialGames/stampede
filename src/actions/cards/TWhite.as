@@ -16,9 +16,13 @@ package actions.cards
 		
 		override public function doAction():void 
 		{
-			if( Game.currentSlot >= Config.NUM_SLOTS / 2 ){
+			if ( Game.currentSlot >= Config.NUM_SLOTS / 2 ) {
+				isOutcomePositive = true;
+				
 				Game.stats.setStat(Config.STAT_WHITE, Game.stats.getStat(Config.STAT_WHITE) + 20);
 			}else {
+				isOutcomePositive = false;
+				
 				Game.stats.setStat(Config.STAT_WHITE, Game.stats.getStat(Config.STAT_WHITE) - 20);
 			}
 		}
