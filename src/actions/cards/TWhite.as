@@ -11,6 +11,7 @@ package actions.cards
 		{
 			title = "White"
 			colour = Config.WHITE;
+			outcomeDescription = "Raises late, lowers early.";
 		}
 		
 		override public function doAction():void 
