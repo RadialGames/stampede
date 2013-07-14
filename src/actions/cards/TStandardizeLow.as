@@ -16,13 +16,14 @@ package actions.cards
 		
 		override public function doAction():void 
 		{
+			isOutcomePositive = false;
 			var lowestStat:Number = 100;
 			for each (var stat:String in Config.ALL_STATS) {
 				if (Game.stats.getStat(stat) < lowestStat) {
 					lowestStat = Game.stats.getStat(stat)
 				}
 			}
-			for each (var adjustStat:String in Config.ALL_STATS) {
+			for each (var adjustStat:String in Config.ALL_STATS) {				
 				Game.stats.setStat(adjustStat, lowestStat)
 			}
 		}

@@ -18,9 +18,12 @@ package actions.cards
 		{
 			for each (var stat:String in Config.ALL_STATS) {
 				if (Game.stats.getStat(stat) > 50) {
+					isOutcomePositive = false;					
 					Game.stats.setStat(stat, Game.stats.getStat(stat) - 20);
 				}
 				else {
+					isOutcomePositive = true;
+					
 					Game.stats.setStat(stat, Game.stats.getStat(stat) + 20);
 				}
 			}

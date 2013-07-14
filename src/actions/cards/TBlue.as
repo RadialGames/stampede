@@ -18,7 +18,9 @@ package actions.cards
 		{
 			if( Game.currentSlot < Config.NUM_SLOTS / 2 ){
 				Game.stats.setStat(Config.STAT_BLUE, Game.stats.getStat(Config.STAT_BLUE) + 20);
+				isOutcomePositive = true;
 			}else {
+				isOutcomePositive = false;								
 				Game.stats.setStat(Config.STAT_BLUE, Game.stats.getStat(Config.STAT_BLUE) - 20);
 			}
 		}
