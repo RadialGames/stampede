@@ -14,8 +14,9 @@ package
 		public static const SNIPE_FONT_SIZE:int = 30;
 		public static const SNIPE_COLOUR:uint = BLUE;
 		
-		public static const ALLOW_CARD_OVERWRITE:Boolean = false;
+		public static const ALLOW_CARD_OVERWRITE:Boolean = false; // if this is true AND ALLOW_SWAPPING_CARDS is true, the universe might end
 		public static const ALLOW_MOVING_CARDS:Boolean = true;
+		public static const ALLOW_SWAPPING_CARDS:Boolean = true; // requires ALLOW_MOVING_CARDS to be true
 		public static var MUTE:Boolean = false;
 		
 		public static const STAT_EARTH:String = "earth";

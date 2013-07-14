@@ -84,7 +84,7 @@ package gui
 				return;
 			}
 			
-			if (!Game.putTopCardOnSlot(index)) {
+			if (!Game.putCardOnSlot(card.action, index)) {
 				Utils.log("drop index disallowed by game.as");
 				eaze(card).to(0.3, { x:failX, y:0 }, true);
 				new GuiFloatText(Main.snipeLayer, "You suck at placing cards!", card.localToGlobal(new Point(0,-50)));
@@ -97,8 +97,16 @@ package gui
 			} else {
 				// card DOES exist on the timeline
 				// remove the old entry
-				guiActions[failIndex] = null;
-				Game.timeline[failIndex] = null;
+				if (Game.timeline[index] != null) {
+					// we're swapping!!!
+					eaze(guiActions[index]).to(0.6, { x:failIndex * slotSpacing } );
+					guiActions[failIndex] = guiActions[index];
+					Game.timeline[failIndex] = Game.timeline[index];
+				} else {
+					// we're not swapping :(
+					guiActions[failIndex] = null;
+					Game.timeline[failIndex] = null;
+				}
 			}
 			card.x = index * slotSpacing;
 			card.y = 0;
