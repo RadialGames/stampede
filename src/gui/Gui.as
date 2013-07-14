@@ -55,7 +55,7 @@ package gui
 		}
 		
 		private function onMouseDown(e:MouseEvent):void {
-			Main.particles.addParticle(new Point(stage.mouseX, stage.mouseY), Utils.getRandomNumber(2,5));			
+			//Main.particles.addParticle(new Point(stage.mouseX, stage.mouseY), Utils.getRandomNumber(2,5));			
 		}
 		
 		protected function showMainMenu():void
