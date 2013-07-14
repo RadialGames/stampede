@@ -2,6 +2,8 @@ package gui
 {
 	import actions.Action;
 	import actions.cards.Card;
+	import aze.motion.easing.Bounce;
+	import aze.motion.easing.Quadratic;
 	import aze.motion.eaze;
 	import aze.motion.EazeTween;
 	import flash.display.DisplayObject;
@@ -60,11 +62,14 @@ package gui
 		private function onMouseDown(e:MouseEvent):void {
 			//Main.particles.addParticle(new Point(stage.mouseX, stage.mouseY), Utils.getRandomNumber(2,5));
 		}
-		
+
 		protected function showMainMenu():void
 		{
 			MusicPlayer.playMusic(MusicPlayer.MAINMENU);
 			Utils.addToParent(this, mainMenu);
+			mainMenu.y = 640;
+			eaze(mainMenu).to(0.6, { y:0 }, true)
+				.easing(Bounce.easeOut);			
 		}
 		
 		/**
@@ -73,19 +78,32 @@ package gui
 		public function startGame(monster:Monster):void
 		{
 			Game.init(monster);
-			Utils.removeFromParent(mainMenu);
 			cardsDrawn = 0;
 			drawNextCard();
 			timeline.reset();
 			Utils.addToParent(gfx, gfx.introMenu);
 			gfx.introMenu.gotoAndPlay(1);
 			MusicPlayer.playMusic(MusicPlayer.LULLABY);
+			eaze(mainMenu).to(0.6, { y: 640 }, true)
+				.easing(Quadratic.easeIn)
+				.onComplete(reallyStartGame);			
+		}
+		
+		public function reallyStartGame():void {
+			Utils.removeFromParent(mainMenu);			
 		}
 		
 		protected function closeIntro(...ig):void
 		{
-			Utils.removeFromParent(gfx.introMenu);
 			MusicPlayer.playMusic(Utils.pickRandom(MusicPlayer.GAME_SONGS));
+			eaze(gfx.introMenu).to(0.6, { y: 640 }, true)
+				.easing(Quadratic.easeIn)
+				.onComplete(reallyStartGame);			
+		}
+		
+		public function reallyCloseIntro():void {
+			Utils.removeFromParent(gfx.introMenu);
+			gfx.introMenu.y = 0;
 		}
 		
 		/**

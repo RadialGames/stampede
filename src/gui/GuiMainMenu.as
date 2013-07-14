@@ -84,7 +84,7 @@ package gui
 		protected function showCredits():void
 		{
 			Utils.addToParent(gfx, gfx.credits);
-			gfx.credits.y = 600;
+			gfx.credits.y = 640;
 			eaze(gfx.credits).to(1, { y:0 }, true)
 				.easing(Bounce.easeOut);
 			MusicPlayer.playMusic(MusicPlayer.CREDITS);
@@ -92,7 +92,7 @@ package gui
 		
 		protected function hideCredits():void
 		{
-			eaze(gfx.credits).to(0.6, { y:600 }, true)
+			eaze(gfx.credits).to(0.6, { y:640 }, true)
 				.easing(Quadratic.easeIn)
 				.onComplete(reallyHideCredits);
 			//reallyHideCredits();
