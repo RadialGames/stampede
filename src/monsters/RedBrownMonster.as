@@ -5,18 +5,19 @@ package monsters
 	 * ...
 	 * @author Colin Northway
 	 */
-	public class FirstMidMonster extends Monster
+	public class RedBrownMonster extends Monster
 	{
 		
-		public function FirstMidMonster() 
+		public function RedBrownMonster() 
 		{
 			name = "Terratrope";
 			description = Game.creatureName + " evolved into a Terratrope!";
 			
-			solution = new <Number>[30,30,30,30,50,50];
+			// NOT BALANCED
+			solution = new <Number>[50,50,30,30,30,30];
 			activeStats = new <Boolean>[true, true, true, true, false, false];
 			
-			buildDeck(TWhite, TBlue, TRed, TBrown);
+			buildDeck(TRed, TRed, TBrown, TBrown, TGreen, TOrange);
 		}
 		
 	}

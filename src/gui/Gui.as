@@ -274,11 +274,21 @@ package gui
 					GuiMonster.setMonsterSomewhere(gfx.winScreen.monster, finalMonster);
 					gfx.winScreen.info.text = "You raised a\n" + finalMonster.name + "!";
 					Utils.addToParent(gfx, gfx.winScreen);
+					gfx.winScreen.scaleX = 1;
+					gfx.winScreen.scaleY = 1;
+					gfx.winScreen.y = 640;
+					eaze(gfx.winScreen).to(0.6, { y:0 }, true)
+						.easing(Bounce.easeOut);
 				} else {
 					// more monsters to go
 					GuiMonster.setMonsterSomewhere(gfx.winScreen.monster, Game.currentMonster);
 					gfx.winScreen.info.text = "You raised a\n" + Game.currentMonster.name + "!";
 					Utils.addToParent(gfx, gfx.winScreen);
+					gfx.winScreen.scaleX = 1;
+					gfx.winScreen.scaleY = 1;
+					gfx.winScreen.y = 640;
+					eaze(gfx.winScreen).to(0.6, { y:0 }, true)
+						.easing(Bounce.easeOut);
 					
 					startGame(monster);
 				}
@@ -287,6 +297,11 @@ package gui
 		
 		protected function hideWinScreen():void
 		{
+			eaze(gfx.winScreen).to(0.3, { scaleX:0, scaleY:0 }, true)
+				.onComplete(reallyHideWinScreen);
+		}
+		
+		private function reallyHideWinScreen():void {
 			Utils.removeFromParent(gfx.winScreen);
 			if ( Game.currentMonster == Monster.allMonsters[Monster.allMonsters.length-1] ){
 				showMainMenu();

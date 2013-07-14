@@ -10,8 +10,8 @@ package monsters
 		
 		public function HardMonster() 
 		{
-			name = "Negagore";
-			description = Game.creatureName + " burst into a Negagore!";
+			name = "Firebat";
+			description = Game.creatureName + " evolved into a Firebat!";
 			
 			solution = new <Number>[30,30,30,30,30,30];
 			activeStats = new <Boolean>[true, true, true, true, true, true];

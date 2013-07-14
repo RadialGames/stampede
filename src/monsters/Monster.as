@@ -34,6 +34,7 @@ package monsters
 		protected static function initMonsters():void
 		{
 			_allMonsters = new Vector.<Monster>();				
+			_allMonsters.push(new HardestMonster2());			
 			_allMonsters.push(new EasyMidMonster());
 			_allMonsters.push(new FirstMidMonster());	
 			_allMonsters.push(new MidMonster());

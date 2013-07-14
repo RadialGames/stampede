@@ -11,7 +11,7 @@ package actions.cards
 		{
 			title = "Training"
 			colour = Config.WHITE;
-			outcomeDescription = "Teaching the monster to follow commands.\nRaises stats late, lowers early.";
+			outcomeDescription = "Teaching the monster to follow commands.\nRaises the White stat late, lowers it early.";
 		}
 		
 		override public function doAction():void 

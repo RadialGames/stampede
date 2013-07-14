@@ -11,7 +11,7 @@ package actions.cards
 		{
 			title = "Play with Others"
 			colour = Config.PURPLE;
-			outcomeDescription = "Have the monster play with other monsters.\nMoves stats toward the center.";
+			outcomeDescription = "Have the monster play with other monsters.\nMoves all the stats toward the center.";
 		}
 		
 		override public function doAction():void 
