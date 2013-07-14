@@ -68,6 +68,9 @@ package gui
 				if (i > 6) {
 					monsterButton.y = monsterYSpacing;
 				}
+				if (i % 2 == 0) {
+					monsterButton.y += 10;
+				}
 				gfx.monsters.addChild(monsterButton);
 			}
 			gfx.resetButton.text = "reset monsters";

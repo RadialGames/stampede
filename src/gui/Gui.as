@@ -69,7 +69,7 @@ package gui
 			Utils.addToParent(this, mainMenu);
 			mainMenu.y = 640;
 			eaze(mainMenu).to(0.6, { y:0 }, true)
-				.easing(Bounce.easeOut);			
+				.easing(Bounce.easeOut);
 		}
 		
 		/**
@@ -86,7 +86,7 @@ package gui
 			MusicPlayer.playMusic(MusicPlayer.LULLABY);
 			eaze(mainMenu).to(0.6, { y: 640 }, true)
 				.easing(Quadratic.easeIn)
-				.onComplete(reallyStartGame);			
+				.onComplete(reallyStartGame);
 		}
 		
 		public function reallyStartGame():void {
@@ -98,7 +98,7 @@ package gui
 			MusicPlayer.playMusic(Utils.pickRandom(MusicPlayer.GAME_SONGS));
 			eaze(gfx.introMenu).to(0.6, { y: 640 }, true)
 				.easing(Quadratic.easeIn)
-				.onComplete(reallyStartGame);			
+				.onComplete(reallyStartGame);
 		}
 		
 		public function reallyCloseIntro():void {
@@ -272,7 +272,7 @@ package gui
 					setEndingMonster(finalMonster);
 					
 					GuiMonster.setMonsterSomewhere(gfx.winScreen.monster, finalMonster);
-					gfx.winScreen.info.text = "You raised a\n" + finalMonster.name;
+					gfx.winScreen.info.text = "You raised a\n" + finalMonster.name + "!";
 					Utils.addToParent(gfx, gfx.winScreen);
 					gfx.winScreen.scaleX = 1;
 					gfx.winScreen.scaleY = 1;
@@ -282,7 +282,7 @@ package gui
 				} else {
 					// more monsters to go
 					GuiMonster.setMonsterSomewhere(gfx.winScreen.monster, Game.currentMonster);
-					gfx.winScreen.info.text = "You raised a\n" + Game.currentMonster.name;
+					gfx.winScreen.info.text = "You raised a\n" + Game.currentMonster.name + "!";
 					Utils.addToParent(gfx, gfx.winScreen);
 					gfx.winScreen.scaleX = 1;
 					gfx.winScreen.scaleY = 1;
@@ -292,7 +292,7 @@ package gui
 					
 					startGame(monster);
 				}
-			}	
+			}
 		}
 		
 		protected function hideWinScreen():void
