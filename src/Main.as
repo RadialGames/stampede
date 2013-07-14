@@ -32,7 +32,6 @@ package
 			SaveManager.load();
 			snipeLayer = new Sprite();
 			addChild(snipeLayer);
-			new GuiFloatText(snipeLayer, "Hello!", new Point(100, 200));
 		}
 		
 		/**
