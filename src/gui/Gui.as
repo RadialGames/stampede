@@ -87,6 +87,8 @@ package gui
 			eaze(mainMenu).to(0.6, { y: 640 }, true)
 				.easing(Quadratic.easeIn)
 				.onComplete(reallyStartGame);
+				
+			SaveManager.collectMonster(monster);
 		}
 		
 		public function reallyStartGame():void {
@@ -266,13 +268,12 @@ package gui
 				monster = Game.returnNextMonster();
 				if (monster == null) {
 					MusicPlayer.playMusic(MusicPlayer.ROCKIN);
-					var finalMonster:Monster = Utils.pickRandom(Monster.allMonsters);
-					new GuiFloatText(Main.snipeLayer, "YOU got a " + finalMonster.name + "!!!", new Point(100, 200));
-					SaveManager.collectMonster(finalMonster);
-					setEndingMonster(finalMonster);
 					
-					GuiMonster.setMonsterSomewhere(gfx.winScreen.monster, finalMonster);
-					gfx.winScreen.info.text = "You raised a\n" + finalMonster.name + "!";
+					new GuiFloatText(Main.snipeLayer, "YOU got a " + Game.currentMonster.name + "!!!", new Point(100, 200));
+					setEndingMonster(Game.currentMonster);
+					GuiMonster.setMonsterSomewhere(gfx.winScreen.monster, Game.currentMonster);
+					gfx.winScreen.info.text = "You raised a " + Game.currentMonster.name + "!";
+					
 					Utils.addToParent(gfx, gfx.winScreen);
 					gfx.winScreen.scaleX = 1;
 					gfx.winScreen.scaleY = 1;
@@ -282,7 +283,7 @@ package gui
 				} else {
 					// more monsters to go
 					GuiMonster.setMonsterSomewhere(gfx.winScreen.monster, Game.currentMonster);
-					gfx.winScreen.info.text = "You raised a\n" + Game.currentMonster.name + "!";
+					gfx.winScreen.info.text = "You raised a " + Game.currentMonster.name + "!";
 					Utils.addToParent(gfx, gfx.winScreen);
 					gfx.winScreen.scaleX = 1;
 					gfx.winScreen.scaleY = 1;

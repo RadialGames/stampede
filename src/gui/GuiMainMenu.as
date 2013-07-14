@@ -67,9 +67,13 @@ package gui
 				monsterButton.x = (i % 7) * monsterXSpacing;
 				if (i > 6) {
 					monsterButton.y = monsterYSpacing;
-				}
-				if (i % 2 == 0) {
-					monsterButton.y += 10;
+					if (i % 2 == 1) {
+						monsterButton.y += 10;
+					}
+				} else {
+					if (i % 2 == 0) {
+						monsterButton.y += 10;
+					}
 				}
 				gfx.monsters.addChild(monsterButton);
 			}
