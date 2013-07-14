@@ -13,7 +13,7 @@ package monsters
 			name = "Bobolyte";
 			description = Game.creatureName + " evolved into a Negagore!";
 			
-			solution = new <Number>[45,45,45,45,45,45];
+			solution = new <Number>[70,30,50,30,70,70];
 			activeStats = new <Boolean>[true, true, true, true, true, true];
 			
 			buildDeck(TWhite, TBlue, TRed, TBrown, TGreen, TOrange, TStandardizeLow, TNormalize);
