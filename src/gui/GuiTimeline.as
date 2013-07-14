@@ -76,6 +76,13 @@ package gui
 				return;
 			}
 			
+			if (!Game.putTopCardOnSlot(index)) {
+				Utils.log("drop index disallowed by game.as");
+				eaze(card).to(0.3, { x:0, y:0 }, true);
+				new GuiFloatText(Main.snipeLayer, "You suck at placing cards!", card.localToGlobal(new Point(0,-50)));
+				return;
+			}
+			
 			gfx.cards.addChild(card);
 			card.x = index * cardSpacing;
 			card.y = 0;
@@ -84,7 +91,8 @@ package gui
 			refresh();
 			Gui.instance.cardPlaced();
 			eaze(card).from(0.6, { y:card.y - 50 }, false).easing(Bounce.easeOut);
-			new GuiFloatText(Main.snipeLayer, card.action.outcomeDescription, card.localToGlobal(new Point(0,-50)));
+			if (card.action.outcomeDescription == null) Utils.log("no outcomedesc on card");
+			else new GuiFloatText(Main.snipeLayer, card.action.outcomeDescription, card.localToGlobal(new Point(0,-50)));
 		}
 		
 		protected function isNextCard(card:GuiCard):Boolean

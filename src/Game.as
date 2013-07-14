@@ -77,7 +77,7 @@ package  {
 			if (timeline[slotNum] != null && Config.ALLOW_CARD_OVERWRITE == false) {
 				return false;
 			}
-			timeline[slotNum] = deck.pop();
+			//timeline[slotNum] = deck.pop(); // this is handled elsewhere now cuz, sarah, that's what happened
 			return true;
 		}
 		
