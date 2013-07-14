@@ -17,7 +17,7 @@ package actions.cards
 		{
 			simpleCardAction(
 				Game.creatureName + " gorges itself on a variety of foods!",
-				Config.STAT_EARTH,
+				Config.STAT_BROWN,
 				Config.CARD_HIGH_CHANGE
 			);
 		}

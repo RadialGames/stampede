@@ -18,9 +18,9 @@ package actions.plots
 			simplePlotAction(
 				Game.creatureName + " fights off the wild monster!",
 				Game.creatureName + " gets really beat up!",
-				Config.STAT_FIRE,
+				Config.STAT_RED,
 				Config.PLOT_HIGH_THRESH,
-				Config.STAT_EARTH,
+				Config.STAT_BROWN,
 				Config.PLOT_MID_CHANGE
 			);
 		}

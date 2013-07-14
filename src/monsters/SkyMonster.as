@@ -17,7 +17,7 @@ package monsters
 		
 		override public function willEvolveInto():Boolean 
 		{
-			if ( Game.stats.getStat(Config.STAT_SKY) > Config.EVOLVE_REQ_HIGH ) {
+			if ( Game.stats.getStat(Config.STAT_WHITE) > Config.EVOLVE_REQ_HIGH ) {
 				return true;
 			}else {
 				return false;

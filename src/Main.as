@@ -6,6 +6,7 @@ package
 	import flash.geom.Point;
 	import flash.text.TextField;
 	import gui.*;
+	import monsters.EasyMidMonster;
 
 	/**
 	 * ...
@@ -27,11 +28,13 @@ package
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
 			Utils.pickOriginalRandomSeed();
-			Game.init();
+			//Game.init(new EasyMidMonster());
 			addChild(new Gui());
 			SaveManager.load();
 			snipeLayer = new Sprite();
 			addChild(snipeLayer);
+			particles = new ShittyParticleManager();
+			snipeLayer.addChild(particles);
 		}
 		
 		/**
@@ -57,6 +60,6 @@ package
 		public static var instance:Main;
 		public static var game:Game;
 		public static var snipeLayer:Sprite;
+		public static var particles:ShittyParticleManager;
 	}
-
 }

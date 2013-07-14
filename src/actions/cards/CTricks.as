@@ -17,7 +17,7 @@ package actions.cards
 		{
 			simpleCardAction(
 				Game.creatureName + " patiently learns a new command!",
-				Config.STAT_SKY,
+				Config.STAT_WHITE,
 				Config.CARD_MID_CHANGE
 			);
 		}

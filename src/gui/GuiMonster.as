@@ -41,26 +41,28 @@ package gui
 		protected function monsterClick(...ig):void {
 			if (chaseMode) {
 				chaseMode = false;
-				eaze(gfx).to(0.5, { x:0, y:0 }, false);
+				//eaze(gfx).to(0.5, { x:0, y:0 }, false);
 			} else {
 				chaseMode = true;
 			}
 		}
 		
+		public var mouseAvoidScore:Number = 0;
 		public var ticks:Number = 0;
 		public var velocity:Point = new Point();
-		protected function enterFrame(...ig):void
-		{
+		protected function enterFrame(...ig):void {
 			ticks++;
 			gfx.rotation = Math.sin(ticks / 5) * 5;
 			
 			if (chaseMode) {
+				mouseAvoidScore++;
+				Utils.log("MouseAvoidScore: " + mouseAvoidScore);
 				var mouseLoc:Point = new Point(gfx.stage.mouseX, gfx.stage.mouseY);
 				var thisLoc:Point = new Point(gfx.x, gfx.y);
 				var relative:Point = mouseLoc.subtract(thisLoc);
-				relative.normalize(3);
+				relative.normalize(5);
 				velocity = velocity.add(relative);
-				if (velocity.length > 15) velocity.normalize(15);
+				if (velocity.length > 25) velocity.normalize(25);
 				gfx.x += velocity.x;
 				gfx.y += velocity.y;
 			}
@@ -85,6 +87,7 @@ package gui
 		
 		private var originalScale:Number;
 		private function mouseOverGrow(e:MouseEvent):void {
+			mouseAvoidScore = 0;
 			gfx.addEventListener(MouseEvent.MOUSE_OUT, mouseOverShrink);
 			if (isNaN(originalScale)) originalScale = gfx.scaleX;
 			eaze(gfx)

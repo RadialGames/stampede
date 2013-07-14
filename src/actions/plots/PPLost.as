@@ -18,9 +18,9 @@ package actions.plots
 			simplePlotAction(
 				Game.creatureName + " stays calm and finds its way home!",
 				Game.creatureName + " cries and spends the night alone in the woods!",
-				Config.STAT_WATER,
+				Config.STAT_BLUE,
 				Config.PLOT_HIGH_THRESH,
-				Config.STAT_SKY,
+				Config.STAT_WHITE,
 				Config.PLOT_MID_CHANGE
 			);			
 		}

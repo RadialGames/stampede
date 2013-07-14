@@ -3,6 +3,7 @@ package gui
 	import actions.plots.PlotPoint;
 	import aze.motion.easing.Bounce;
 	import aze.motion.eaze;
+	import aze.motion.EazeTween;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -72,21 +73,24 @@ package gui
 			
 			if (dropPoint.y < -50 || dropPoint.y > card.height + 50 || dropPoint.x < -50) {
 				Utils.log("Dropped too far outside zone.");
-				eaze(card).to(0.3, { x:failX, y:0 }, true);
+				EazeTween.killTweensOf(card);
+				eaze(card).to(0.3, { x:failX, y:0, scaleX:1, scaleY:1 }, true);
 				new GuiFloatText(Main.snipeLayer, "You suck at placing cards!", card.localToGlobal(new Point(0,-50)));
 				return;
 			}
 			
 			if (isPlotPoint(index)) {
 				Utils.log("drop index is on an event");
-				eaze(card).to(0.3, { x:failX, y:0 }, true);
+				EazeTween.killTweensOf(card);
+				eaze(card).to(0.3, { x:failX, y:0, scaleX:1, scaleY:1 }, true);
 				new GuiFloatText(Main.snipeLayer, "You suck at placing cards!", card.localToGlobal(new Point(0,-50)));
 				return;
 			}
 			
-			if (!Game.putTopCardOnSlot(index)) {
+			if (!Game.putCardOnSlot(card.action, index)) {
 				Utils.log("drop index disallowed by game.as");
-				eaze(card).to(0.3, { x:failX, y:0 }, true);
+				EazeTween.killTweensOf(card);
+				eaze(card).to(0.3, { x:failX, y:0, scaleX:1, scaleY:1 }, true);
 				new GuiFloatText(Main.snipeLayer, "You suck at placing cards!", card.localToGlobal(new Point(0,-50)));
 				return;
 			}
@@ -97,14 +101,22 @@ package gui
 			} else {
 				// card DOES exist on the timeline
 				// remove the old entry
-				guiActions[failIndex] = null;
-				Game.timeline[failIndex] = null;
+				if (Game.timeline[index] != null) {
+					// we're swapping!!!
+					eaze(guiActions[index]).to(0.6, { x:failIndex * slotSpacing } );
+					guiActions[failIndex] = guiActions[index];
+					Game.timeline[failIndex] = Game.timeline[index];
+				} else {
+					// we're not swapping :(
+					guiActions[failIndex] = null;
+					Game.timeline[failIndex] = null;
+				}
 			}
 			card.x = index * slotSpacing;
 			card.y = 0;
 			guiActions[index] = card;
 			Game.timeline[index] = card.action;
-			refresh();
+			//Utils.log("guitimeline card dropped");
 			if (isNaN(failX)) {
 				// NOT exist on timeline, standard
 				Gui.instance.cardPlaced();
@@ -116,7 +128,7 @@ package gui
 			}
 			eaze(card).from(0.6, { y:card.y - 50 }, false).easing(Bounce.easeOut);
 			if (card.action.outcomeDescription == null) Utils.log("no outcomedesc on card");
-			else new GuiFloatText(Main.snipeLayer, card.action.outcomeDescription, card.localToGlobal(new Point(0,-50)));
+			else new GuiFloatText(Main.snipeLayer, card.action.outcomeDescription, card.localToGlobal(new Point(0, -50)));
 		}
 		
 		protected function isNextCard(card:GuiCard):Boolean
@@ -133,6 +145,7 @@ package gui
 		public function refresh():void
 		{
 			Game.reset();
+			Utils.log("GuiTimeLineRefresh");
 			statsGraph.reset();
 			
 			for (var i :int = 0; i < Config.NUM_SLOTS; i++) {

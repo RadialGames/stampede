@@ -18,10 +18,10 @@ package monsters
 		override public function willEvolveInto():Boolean 
 		{
 			if ( 
-				Game.stats.getStat(Config.STAT_EARTH) <= Config.EVOLVE_REQ_VERY_LOW &&
-				Game.stats.getStat(Config.STAT_FIRE) <= Config.EVOLVE_REQ_VERY_LOW &&
-				Game.stats.getStat(Config.STAT_WATER) <= Config.EVOLVE_REQ_VERY_LOW &&
-				Game.stats.getStat(Config.STAT_SKY) <= Config.EVOLVE_REQ_VERY_LOW
+				Game.stats.getStat(Config.STAT_BROWN) <= Config.EVOLVE_REQ_VERY_LOW &&
+				Game.stats.getStat(Config.STAT_RED) <= Config.EVOLVE_REQ_VERY_LOW &&
+				Game.stats.getStat(Config.STAT_BLUE) <= Config.EVOLVE_REQ_VERY_LOW &&
+				Game.stats.getStat(Config.STAT_WHITE) <= Config.EVOLVE_REQ_VERY_LOW
 			) {
 				return true;
 			}else {

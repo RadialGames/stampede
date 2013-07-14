@@ -17,7 +17,7 @@ package actions.cards
 		{
 			simpleCardAction(
 				Game.creatureName + " quietly listens to the story.",
-				Config.STAT_SKY,
+				Config.STAT_WHITE,
 				Config.CARD_LOW_CHANGE
 			);
 		}

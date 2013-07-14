@@ -11,6 +11,7 @@ package gui
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	import monsters.EasyMidMonster;
 	import monsters.Monster;
 	/**
 	 * ...
@@ -50,6 +51,11 @@ package gui
 			
 			Utils.removeFromParent(gfx.winScreen);
 			GuiButton.replaceButton(gfx.winScreen.doneButton, hideWinScreen);
+			addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+		}
+		
+		private function onMouseDown(e:MouseEvent):void {
+			Main.particles.addParticle(new Point(stage.mouseX, stage.mouseY), Utils.getRandomNumber(2,5));			
 		}
 		
 		protected function showMainMenu():void
@@ -63,10 +69,10 @@ package gui
 		 */
 		public function startGame():void
 		{
+			Game.init(Monster.allMonsters[0]);
 			Utils.removeFromParent(mainMenu);
 			cardsDrawn = 0;
 			drawNextCard();
-			Game.init();
 			timeline.reset();
 		}
 		
@@ -105,7 +111,7 @@ package gui
 			
 			// if we're over a scroller, scroll that mutherfucker
 			var scrollerFound:Boolean = false;
-			for each (var thingy:DisplayObject in objectsUnderPoint) {
+			/*for each (var thingy:DisplayObject in objectsUnderPoint) {
 				var scroller:GfxEdgeScroller = Utils.findAncestor(thingy, GfxEdgeScroller);
 				if (scroller != null) {
 					scrollerOver(scroller);
@@ -114,7 +120,7 @@ package gui
 			}
 			if (!scrollerFound) {
 				scrollerOut();
-			}
+			}*/
 		}
 		
 		protected function scrollerOver(scroller:GfxEdgeScroller):void
@@ -224,7 +230,7 @@ package gui
 		
 		protected function finishGame():void
 		{
-			MusicPlayer.playMusic(MusicPlayer.ROCKIN);
+			/*MusicPlayer.playMusic(MusicPlayer.ROCKIN);
 			var finalMonster:Monster = Utils.pickRandom(Monster.allMonsters);
 			new GuiFloatText(Main.snipeLayer, "YOU got a " + finalMonster.name + "!!!", new Point(100, 200));
 			SaveManager.collectMonster(finalMonster);
@@ -232,7 +238,7 @@ package gui
 			
 			GuiMonster.setMonsterSomewhere(gfx.winScreen.monster, finalMonster);
 			gfx.winScreen.info.text = "You raised a\n" + finalMonster.name;
-			Utils.addToParent(gfx, gfx.winScreen);
+			Utils.addToParent(gfx, gfx.winScreen);*/
 		}
 		
 		protected function hideWinScreen():void
@@ -252,6 +258,10 @@ package gui
 				Utils.logError(error);
 				card = new Card();
 			}
+			if ( card == null ) {
+				card = new Card();
+			}
+			
 			var nextCard:GuiCard = new GuiCard(card);
 			gfx.nextCard.addChild(nextCard);
 			

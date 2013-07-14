@@ -1,5 +1,6 @@
 package monsters 
 {
+	import actions.cards.Card;
 	import flash.display.Sprite;
 	/**
 	 * ...
@@ -10,6 +11,10 @@ package monsters
 		public var name:String;
 		public var description:String;
 		public var graphic:Sprite;
+		
+		public var solution:Vector.<Number> = new Vector.<Number>();
+		public var activeStats:Vector.<Boolean> = new Vector.<Boolean>();
+		public var deck:Vector.<Class> = new Vector.<Class>();
 		
 		protected static var _allMonsters:Vector.<Monster>;
 		
@@ -28,14 +33,16 @@ package monsters
 		
 		protected static function initMonsters():void
 		{
-			_allMonsters = new Vector.<Monster>();			
-			_allMonsters.push(new OmniMonster());			
-			_allMonsters.push(new NegaMonster());			
-			_allMonsters.push(new EarthMonster());			
-			_allMonsters.push(new SkyMonster());			
-			_allMonsters.push(new WaterMonster());			
-			_allMonsters.push(new FireMonster());	
-			_allMonsters.push(new Sloth());
+			_allMonsters = new Vector.<Monster>();
+			_allMonsters.push(new HardMonster());
+			_allMonsters.push(new EasyMidMonster());
+			/*_allMonsters.push(new OmniMonster());
+			_allMonsters.push(new NegaMonster());
+			_allMonsters.push(new EarthMonster());
+			_allMonsters.push(new SkyMonster());
+			_allMonsters.push(new WaterMonster());
+			_allMonsters.push(new FireMonster());
+			_allMonsters.push(new Sloth());*/
 		}
 		
 		public static function whichMoster():Monster
@@ -54,6 +61,13 @@ package monsters
 			return false;
 		}
 		
+		public function buildDeck(...classes):void 
+		{
+			deck = new Vector.<Class>();
+			for (var i:int = 0; i < classes.length; i++) {
+				deck.push(classes[i] as Class);
+			}
+		}
 		
 	}
 

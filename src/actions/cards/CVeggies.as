@@ -17,7 +17,7 @@ package actions.cards
 		{
 			simpleCardAction(
 				Game.creatureName + " munches away happily!",
-				Config.STAT_EARTH,
+				Config.STAT_BROWN,
 				Config.CARD_LOW_CHANGE
 			);
 		}
