@@ -54,11 +54,7 @@ package gui
 					if (!SaveManager.hasCollectedMonster(monster)) {
 						Utils.removeFromParent(inner.monster);
 					} else {
-						if (inner.monster.hasOwnProperty(monster.name)) {
-							Utils.toggleChildVisibility(inner.monster, monster.name);
-						} else {
-							Utils.toggleChildVisibility(inner.monster, "tungee");
-						}
+						GuiMonster.setMonsterSomewhere(inner.monster, monster);
 					}
 				}
 				if (!SaveManager.hasCollectedMonster(monster)) {
