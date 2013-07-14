@@ -10,12 +10,17 @@ package actions.cards
 		public function TGreen() 
 		{
 			title = "Green"
-			colour = Config.GREEN;
+			colour = Config.GREEN;			
+			outcomeDescription = "Raises on even slots, lowers on odd.";
 		}
 		
 		override public function doAction():void 
-		{
-			Game.stats.setStat(Config.STAT_GREEN, Game.stats.getStat(Config.STAT_GREEN) + (((Config.NUM_SLOTS-1) - Game.currentSlot)+1)*5);
+		{			
+			if ( Game.currentSlot % 2 == 0) {
+				Game.stats.setStat(Config.STAT_GREEN, Game.stats.getStat(Config.STAT_GREEN) - 20);
+			}else {
+				Game.stats.setStat(Config.STAT_GREEN, Game.stats.getStat(Config.STAT_GREEN) + 20);
+			}
 		}
 	}
 

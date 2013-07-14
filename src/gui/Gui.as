@@ -69,7 +69,7 @@ package gui
 		 */
 		public function startGame():void
 		{
-			Game.init(new EasyMidMonster());
+			Game.init(Monster.allMonsters[0]);
 			Utils.removeFromParent(mainMenu);
 			cardsDrawn = 0;
 			drawNextCard();

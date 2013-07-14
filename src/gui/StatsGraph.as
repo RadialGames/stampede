@@ -84,6 +84,7 @@ package gui
 				lines[i].graphics.lineTo((currentSlot + 0.75) * graphSpacing, yVal);
 				lines[i].graphics.lineTo((currentSlot + 1.25) * graphSpacing, yVal);
 			}
+			trace(stats);
 		}
 		
 		protected function getStatValues():Vector.<Number>
