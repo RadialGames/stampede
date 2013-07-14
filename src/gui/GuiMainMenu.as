@@ -51,6 +51,7 @@ package gui
 			for (var i :int = 0; i < Monster.allMonsters.length; i++) {
 				var monster:Monster = Monster.allMonsters[i];
 				var monsterButton:GuiButton = replaceMonsterButton(monster);
+				monsterButton.bubbleOnMouseOver(1.5);
 				var inners:Array = Utils.buttonClasses(monsterButton, GfxMonsterInner);
 				for each (var inner:GfxMonsterInner in inners) {
 					GuiMonster.setMonsterSomewhere(inner, monster);
