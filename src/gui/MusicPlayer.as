@@ -180,5 +180,7 @@
 		public static const STAMPEDE:Class = SndStampede;
 		public static const MAINMENU:Class = SndMainmenu;
 		public static const RACIST:Class = SndRacist;
+		
+		public static const GAME_SONGS:Array = [DRUMS, ORCHESTRAAAL, ROCKIN, STAMPEDE, RACIST];
 	}
 }
