@@ -83,6 +83,7 @@ package gui
 			timeline.reset();
 			Utils.addToParent(gfx, gfx.introMenu);
 			gfx.introMenu.gotoAndPlay(1);
+			gfx.introMenu.y = 0;
 			MusicPlayer.playMusic(MusicPlayer.LULLABY);
 			eaze(mainMenu).to(0.6, { y: 640 }, true)
 				.easing(Quadratic.easeIn)
