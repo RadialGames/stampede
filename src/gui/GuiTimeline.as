@@ -5,6 +5,7 @@ package gui
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	import monsters.Monster;
 	/**
 	 * Slots, stats, placed cards and plotpoints. Controls Gui.gfx.timeline.
 	 * @author Sarah Northway
@@ -114,6 +115,8 @@ package gui
 					event.info.text = "evnt" + i;
 				}
 			}
+			
+			Gui.instance.setEndingMonsterName(Monster.whichMoster().name);
 		}
 		
 		/**
