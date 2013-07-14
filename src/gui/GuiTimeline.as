@@ -20,11 +20,14 @@ package gui
 			
 			slotSpacing = gfx.slots.slot2.x;
 			cardSpacing = gfx.cards.card2.x;
-			statSpacing = gfx.stats.stat2.x;
-			
+		}
+		
+		public function reset():void
+		{
 			Utils.clearChildren(gfx.slots);
 			Utils.clearChildren(gfx.cards);
-			Utils.clearChildren(gfx.stats);
+			
+			Utils.clearVector(guiActions);
 			
 			for (var i :int = 0; i < Config.NUM_SLOTS; i++) {
 				var slot:GfxSlot = new GfxSlot();
@@ -114,7 +117,7 @@ package gui
 				if (isPlotPoint(i)) {
 					var event:GfxPlotPoint = guiActions[i] as GfxPlotPoint;
 					if (event == null) {
-						Utils.logError("event is null for i " + i);
+						//Utils.logError("event is null for i " + i);
 						continue;
 					}
 					event.info.text = "evnt" + i;
@@ -148,13 +151,10 @@ package gui
 		/** fills a slot; either a GuiCard or a GuiPlotPoint */
 		protected var guiActions:Vector.<*> = new Vector.<*>();
 		
-		protected var stats:Vector.<GfxStat> = new Vector.<GfxStat>();
-		
 		protected var gfx:MovieClip;
 		
 		protected var slotSpacing:Number;
 		protected var cardSpacing:Number;
-		protected var statSpacing:Number;
 		protected var statsGraph:StatsGraph;
 	}
 }

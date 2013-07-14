@@ -29,6 +29,7 @@ package
 			Utils.pickOriginalRandomSeed();
 			Game.init();
 			addChild(new Gui());
+			SaveManager.load();
 			snipeLayer = new Sprite();
 			addChild(snipeLayer);
 			new GuiFloatText(snipeLayer, "Hello!", new Point(100, 200));

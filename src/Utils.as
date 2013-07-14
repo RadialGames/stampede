@@ -1023,7 +1023,6 @@
 			var prevAlpha:Number = object.alpha;
 			var fading :Function = function(...ig):void {
 				if (prevAlpha != object.alpha) {
-					Utils.log("detected doublefade.");
 					Main.removeStageEventListener(Event.ENTER_FRAME, fading);
 					return;
 				}
@@ -1052,7 +1051,6 @@
 			var prevAlpha:Number = object.alpha;
 			var fading :Function = function(...ig):void {
 				if (prevAlpha != object.alpha) {
-					Utils.log("detected doublefade.");
 					Main.removeStageEventListener(Event.ENTER_FRAME, fading);
 					return;
 				}

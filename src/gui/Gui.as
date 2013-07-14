@@ -11,6 +11,7 @@ package gui
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	import monsters.Monster;
 	/**
 	 * ...
 	 * @author Sarah Northway
@@ -39,11 +40,15 @@ package gui
 			addChild(mainMenu = new GuiMainMenu(gfx.mainMenu));
 			GuiButton.replaceButton(gfx.mainMenuButton, showMainMenu);
 			
+			gfx.strongFemaleProtagonist.gotoAndStop(1);
+			animationTick = 1000 * 10;
+			
 			MusicPlayer.playMusic(MusicPlayer.MAINMENU);
 		}
 		
 		protected function showMainMenu():void
 		{
+			MusicPlayer.playMusic(MusicPlayer.MAINMENU);
 			Utils.addToParent(this, mainMenu);
 		}
 		
@@ -55,6 +60,8 @@ package gui
 			Utils.removeFromParent(mainMenu);
 			cardsDrawn = 0;
 			drawNextCard();
+			Game.init();
+			timeline.reset();
 		}
 		
 		/**
@@ -62,7 +69,18 @@ package gui
 		 */
 		protected function enterFrame(...ig):void
 		{
+			// fade music in or out
 			MusicPlayer.threadTick();
+			
+			// animate strongFemaleCharacter for 2 seconds
+			if (animationTick < stage.frameRate * 2) {
+				// framerate is 1 frame every second/3
+				if (animationTick % (stage.frameRate/3) == 0) {
+					var newFrame:int = gfx.strongFemaleProtagonist.currentFrame % gfx.strongFemaleProtagonist.totalFrames + 1;
+					gfx.strongFemaleProtagonist.gotoAndStop(newFrame);
+				}
+				animationTick++;
+			}
 			
 			// if we're over a card or plotPoint, show the tooltip for it
 			var globalPoint:Point = new Point(stage.mouseX, stage.mouseY);
@@ -155,9 +173,15 @@ package gui
 		{
 			timeline.refresh();
 			
+			// will trigger gfx.strongFemaleCharacter to animation on enterFrame
+			animationTick = 0;
+			
 			if (percentCardsDrawn >= 1) {
 				MusicPlayer.playMusic(MusicPlayer.ROCKIN);
-				new GuiFloatText(this, "YOU finished the GAME!!!", new Point(100, 200));
+				var monster:Monster = Utils.pickRandom(Monster.allMonsters);
+				new GuiFloatText(this, "YOU got a " + monster.name + "!!!", new Point(100, 200));
+				SaveManager.collectMonster(monster);
+				gfx.monster.text = monster.name;
 			} else {
 				drawNextCard();
 			}
@@ -217,6 +241,7 @@ package gui
 		protected var gfx:GfxGui;
 		public var timeline:GuiTimeline;
 		protected var cardsDrawn:int = 0;
+		protected var animationTick:int = 0;
 		
 		protected var mainMenu:GuiMainMenu;
 		
