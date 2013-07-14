@@ -37,7 +37,7 @@ package gui
 			addChild(mainMenu = new GuiMainMenu(gfx.mainMenu));
 			GuiButton.replaceButton(gfx.mainMenuButton, showMainMenu);
 			
-			drawNextCard();
+			MusicPlayer.playMusic(MusicPlayer.MAINMENU);
 		}
 		
 		protected function showMainMenu():void
@@ -46,10 +46,22 @@ package gui
 		}
 		
 		/**
+		 * Called by mainMenu startButton.
+		 */
+		public function startGame():void
+		{
+			Utils.removeFromParent(mainMenu);
+			cardsDrawn = 0;
+			drawNextCard();
+		}
+		
+		/**
 		 * Show or hide the tooltip when over a card.
 		 */
 		protected function enterFrame(...ig):void
 		{
+			MusicPlayer.threadTick();
+			
 			// if we're over a card or plotPoint, show the tooltip for it
 			var globalPoint:Point = new Point(stage.mouseX, stage.mouseY);
 			var objectsUnderPoint:Array = stage.getObjectsUnderPoint(globalPoint);
@@ -106,15 +118,38 @@ package gui
 				gfx.tooltip.info.text = guiAction.action.outcomeDescription;
 			}
 			gfx.tooltip.x = guiAction.localToGlobal(new Point(0, 0)).x + (guiAction.width / 2);
+			
+			if (gfx.tooltip.parent != null && gfx.tooltip.alpha == 1) {
+				return;
+			}
 			Utils.addToParent(gfx, gfx.tooltip);
+			Utils.fadeIn(gfx.tooltip, 100, false);
 		}
 		
 		public function hideTooltip(...ig):void
 		{
-			Utils.removeFromParent(gfx.tooltip);
+			if (gfx.tooltip.parent == null) {
+				return;
+			}
+			Utils.fadeOut(gfx.tooltip, 100, true);
 		}
 		
-		public function drawNextCard():void
+		/**
+		 * After a card is placed, refresh the timeline, check for win & draw next card.
+		 */
+		public function cardPlaced():void
+		{
+			timeline.refresh();
+			
+			if (percentCardsDrawn >= 1) {
+				MusicPlayer.playMusic(MusicPlayer.ROCKIN);
+				new GuiFloatText(this, "YOU finished the GAME!!!", new Point(100, 200));
+			} else {
+				drawNextCard();
+			}
+		}
+		
+		protected function drawNextCard():void
 		{
 			Utils.clearChildren(gfx.nextCard);
 			
@@ -127,6 +162,24 @@ package gui
 			}
 			var nextCard:GuiCard = new GuiCard(card);
 			gfx.nextCard.addChild(nextCard);
+			
+			if (percentCardsDrawn < 0.20) {
+				MusicPlayer.playMusic(MusicPlayer.ORCHESTRAAAL);
+			} else if (percentCardsDrawn < 0.40) {
+				MusicPlayer.playMusic(MusicPlayer.DRUMS);
+			} else if (percentCardsDrawn < 0.60) {
+				MusicPlayer.playMusic(MusicPlayer.STAMPEDE);
+			} else if (percentCardsDrawn < 0.70) {
+				MusicPlayer.playMusic(MusicPlayer.LULLABY);
+			} else {
+				MusicPlayer.playMusic(MusicPlayer.RACIST);
+			}
+			cardsDrawn++;
+		}
+		
+		protected function get percentCardsDrawn():Number
+		{
+			return cardsDrawn / (Config.NUM_SLOTS - Config.NUM_PLOTPOINTS);
 		}
 		
 		public function isNextCard(card:GuiCard):Boolean
@@ -137,6 +190,11 @@ package gui
 			return gfx.nextCard.getChildAt(0) == card;
 		}
 		
+		public function setEndingMonsterName(value:String):void
+		{
+			gfx.monster.text = value;
+		}
+		
 		/** fills a slot; either a GuiCard or a GfxEvent */
 		protected var actions:Vector.<*> = new Vector.<*>();
 		
@@ -144,6 +202,7 @@ package gui
 		
 		protected var gfx:GfxGui;
 		public var timeline:GuiTimeline;
+		protected var cardsDrawn:int = 0;
 		
 		protected var mainMenu:GuiMainMenu;
 		

@@ -75,9 +75,8 @@ package gui
 			card.x = index * cardSpacing;
 			card.y = 0;
 			guiActions[index] = card;
-			refresh();
 			
-			Gui.instance.drawNextCard();
+			Gui.instance.cardPlaced();
 		}
 		
 		protected function isNextCard(card:GuiCard):Boolean
@@ -91,7 +90,7 @@ package gui
 		/**
 		 * Called when any card is placed. Reload all stats and plotPoints
 		 */
-		protected function refresh():void
+		public function refresh():void
 		{
 			Game.reset();
 			for (var i :int = 0; i < Config.NUM_SLOTS; i++) {
