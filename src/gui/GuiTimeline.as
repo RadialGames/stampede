@@ -119,7 +119,7 @@ package gui
 			card.y = 0;
 			guiActions[index] = card;
 			Game.timeline[index] = card.action;
-			refresh();
+			//Utils.log("guitimeline card dropped");
 			if (isNaN(failX)) {
 				// NOT exist on timeline, standard
 				Gui.instance.cardPlaced();
@@ -148,6 +148,7 @@ package gui
 		public function refresh():void
 		{
 			Game.reset();
+			Utils.log("GuiTimeLineRefresh");
 			statsGraph.reset();
 			
 			for (var i :int = 0; i < Config.NUM_SLOTS; i++) {

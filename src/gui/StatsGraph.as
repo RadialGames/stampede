@@ -1,5 +1,6 @@
 package gui 
 {
+	import aze.motion.eaze;
 	import flash.display.Sprite;
 	import flash.text.TextField;
 	/**
@@ -31,10 +32,15 @@ package gui
 			lines = new Vector.<Sprite>();
 			for (var i:int = 0; i < Config.ALL_STATS.length; i++) {
 				lines.push(new Sprite());
-				lines[i].graphics.lineStyle(4, Config.STAT_COLOURS[i]);
+				lines[i].graphics.lineStyle(Config.STATS_LINE_THICKNESS, Config.STAT_COLOURS[i]);
 				lines[i].graphics.moveTo(0, graphHeight - (stats[i] / Config.STAT_MAX) * graphHeight);
 				lines[i].visible = Game.stats.activeStats[i];
+				lines[i].y += i * (Config.STATS_LINE_THICKNESS - 1);
 				addChild(lines[i]);
+				if (lines[i].visible) {
+					lines[i].alpha = 0.5;
+					eaze(lines[i]).to(0.8, { alpha:1 }, true);				
+				}
 			}
 		}
 		
@@ -50,12 +56,22 @@ package gui
 			}*/
 		}
 		
+		private var oldGraph:Sprite;
 		public function reset():void 
 		{
+			//Utils.log("StatGraph Reset");
+			if (oldGraph) removeChild(oldGraph);
+			oldGraph = new Sprite();
 			for (var i:int = 0; i < lines.length; i++) {
 				removeChild(lines[i]);
+				oldGraph.addChild(lines[i]);
 			}
 			initLines();
+			if (oldGraph) {
+				addChild(oldGraph);
+				oldGraph.alpha = 0.5;
+				eaze(oldGraph).to(0.8, { alphaVisible:0 }, true);
+			}
 		}
 		
 		public function update(stats:Vector.<Number>, currentSlot:int):void
@@ -65,7 +81,8 @@ package gui
 				yVal = graphHeight - yVal;
 				//yVal = Math.random() * graphHeight;
 				
-				lines[i].graphics.lineTo((currentSlot+1) * graphSpacing, yVal );
+				lines[i].graphics.lineTo((currentSlot + 0.75) * graphSpacing, yVal);
+				lines[i].graphics.lineTo((currentSlot + 1.25) * graphSpacing, yVal);
 			}
 		}
 		

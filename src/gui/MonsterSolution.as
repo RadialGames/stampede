@@ -45,8 +45,8 @@ package gui
 			lines = new Vector.<Sprite>();
 			for (var i:int = 0; i < Config.ALL_STATS.length; i++) {
 				lines.push(new Sprite());
-				lines[i].y += i*2;
-				lines[i].graphics.lineStyle(3, Config.STAT_COLOURS[i]);
+				lines[i].y += i*(Config.STATS_LINE_THICKNESS-1);
+				lines[i].graphics.lineStyle(Config.STATS_LINE_THICKNESS, Config.STAT_COLOURS[i]);
 				lines[i].graphics.moveTo(0, graphHeight - (Game.currentMonster.solution[i] / Config.STAT_MAX) * graphHeight);
 				lines[i].visible = Game.stats.activeStats[i];
 				addChild(lines[i]);
