@@ -13,7 +13,7 @@ package monsters
 			name = "Blorb";
 			description = Game.creatureName + " evolved into a Blorb!";
 			
-			solution = new <Number>[70,70,50,50,50,50];
+			solution = new <Number>[90,90,50,50,50,50];
 			activeStats = new <Boolean>[true, true, false, false, false, false];
 			
 			buildDeck(TWhite, TWhite, TBlue, TBlue);

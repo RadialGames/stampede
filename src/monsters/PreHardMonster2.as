@@ -14,7 +14,7 @@ package monsters
 			description = Game.creatureName + " evolved into a Firebat!";
 			
 			solution = new <Number>[90,90,70,70,90,90];
-			activeStats = new <Boolean>[true, true, false, false, true, false];
+			activeStats = new <Boolean>[true, true, false, false, true, true];
 			
 			buildDeck(TWhite, TBlue, TGreen, TGreen, TOrange, TStandardizeHigh);
 		}

@@ -62,7 +62,7 @@ package gui
 					//}
 				}
 				if (i != 0 && !SaveManager.hasCollectedMonster(monster)) {
-					monsterButton.enabled = false;
+					//monsterButton.enabled = false;
 				}
 				monsterButton.x = (i % 7) * monsterXSpacing;
 				if (i > 6) {

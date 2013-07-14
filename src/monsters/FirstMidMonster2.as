@@ -13,7 +13,7 @@ package monsters
 			name = "Terratrope";
 			description = Game.creatureName + " evolved into a Terratrope!";
 			
-			solution = new <Number>[30,30,30,30,30,30];
+			solution = new <Number>[30,30,30,30,50,50];
 			activeStats = new <Boolean>[true, true, true, true, false, false];
 			
 			buildDeck(TWhite, TBlue, TRed, TRed, TBrown, TBrown);
