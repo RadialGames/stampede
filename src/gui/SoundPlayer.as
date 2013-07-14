@@ -35,8 +35,7 @@
 		}
 		
 		/** How loud are the sounds by default */
-		public static const VOLUME :Number = 0.4;
-		public static const VOICE_VOLUME :Number = 0.4;
+		public static const VOLUME :Number = 1.0;
 		
 		protected static const SOUND_UP_1:Class = SndUp1;
 		protected static const SOUND_UP_2:Class = SndUp2;
