@@ -19,7 +19,6 @@ package gui
 			this.gfx = gfx;
 			
 			slotSpacing = gfx.slots.slot2.x;
-			cardSpacing = gfx.cards.card2.x;
 		}
 		
 		public function reset():void
@@ -36,13 +35,16 @@ package gui
 				
 				if (isPlotPoint(i)) {
 					var plotPoint:GuiPlotPoint = new GuiPlotPoint(Game.timeline[i] as PlotPoint);
-					plotPoint.x = cardSpacing * i;
+					plotPoint.x = slotSpacing * i;
 					gfx.cards.addChild(plotPoint);
 					guiActions.push(plotPoint);
 				} else {
 					guiActions.push(null);
 				}
 				
+				if (statsGraph != null) {
+					Utils.removeFromParent(statsGraph);
+				}
 				statsGraph = new StatsGraph(gfx.width, 130);
 				gfx.addChild(statsGraph);
 			}
@@ -64,7 +66,7 @@ package gui
 				return;
 			}
 			
-			var index:int = (cardSpacing / 2 + dropPoint.x) / cardSpacing;
+			var index:int = (slotSpacing / 2 + dropPoint.x) / slotSpacing;
 			Utils.log("drop index is " + index);
 			
 			if (isPlotPoint(index)) {
@@ -84,7 +86,7 @@ package gui
 			}
 			
 			gfx.cards.addChild(card);
-			card.x = index * cardSpacing;
+			card.x = index * slotSpacing;
 			card.y = 0;
 			guiActions[index] = card;
 			Game.timeline[index] = card.action;
@@ -132,7 +134,7 @@ package gui
 				}
 			}
 			
-			Gui.instance.setEndingMonsterName(Monster.whichMoster().name);
+			Gui.instance.setEndingMonster(Monster.whichMoster());
 		}
 		
 		/**
@@ -162,7 +164,6 @@ package gui
 		protected var gfx:MovieClip;
 		
 		protected var slotSpacing:Number;
-		protected var cardSpacing:Number;
 		protected var statsGraph:StatsGraph;
 	}
 }

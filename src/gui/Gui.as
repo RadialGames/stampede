@@ -43,7 +43,13 @@ package gui
 			gfx.strongFemaleProtagonist.gotoAndStop(1);
 			animationTick = 1000 * 10;
 			
+			// controls monster running around or whatever
+			monster = new GuiMonster(gfx.monster);
+			
 			MusicPlayer.playMusic(MusicPlayer.MAINMENU);
+			
+			Utils.removeFromParent(gfx.winScreen);
+			GuiButton.replaceButton(gfx.winScreen.doneButton, hideWinScreen);
 		}
 		
 		protected function showMainMenu():void
@@ -133,6 +139,10 @@ package gui
 		public var tooltipFadingIn:Boolean = false;
 		protected function showTooltip(guiAction:GuiAction):void
 		{
+			if (gfx.winScreen.stage) {
+				return;
+			}
+			
 			if (Utils.isEmpty(guiAction.action.outcomeDescription)) {
 				gfx.tooltip.info.text = "OutcomeDescription is blank for this";
 			} else {
@@ -161,7 +171,7 @@ package gui
 			EazeTween.killTweensOf(gfx.tooltip);
 			gfx.tooltip.alpha = 0;
 			gfx.tooltip.parent.removeChild(gfx.tooltip);
-			tooltipFadingIn = false;			
+			tooltipFadingIn = false;
 			//eaze(gfx.tooltip).to(0.2, { alphaVisible:0 }, true);
 			//Utils.fadeOut(gfx.tooltip, 100, true);
 		}
@@ -177,14 +187,29 @@ package gui
 			animationTick = 0;
 			
 			if (percentCardsDrawn >= 1) {
-				MusicPlayer.playMusic(MusicPlayer.ROCKIN);
-				var monster:Monster = Utils.pickRandom(Monster.allMonsters);
-				new GuiFloatText(this, "YOU got a " + monster.name + "!!!", new Point(100, 200));
-				SaveManager.collectMonster(monster);
-				gfx.monster.text = monster.name;
+				finishGame();
 			} else {
 				drawNextCard();
 			}
+		}
+		
+		protected function finishGame():void
+		{
+			MusicPlayer.playMusic(MusicPlayer.ROCKIN);
+			var finalMonster:Monster = Utils.pickRandom(Monster.allMonsters);
+			new GuiFloatText(Main.snipeLayer, "YOU got a " + finalMonster.name + "!!!", new Point(100, 200));
+			SaveManager.collectMonster(finalMonster);
+			setEndingMonster(finalMonster);
+			
+			GuiMonster.setMonsterSomewhere(gfx.winScreen.monster, finalMonster);
+			gfx.winScreen.info.text = "You raised a\n" + finalMonster.name;
+			Utils.addToParent(gfx, gfx.winScreen);
+		}
+		
+		protected function hideWinScreen():void
+		{
+			Utils.removeFromParent(gfx.winScreen);
+			showMainMenu();
 		}
 		
 		protected function drawNextCard():void
@@ -228,9 +253,10 @@ package gui
 			return gfx.nextCard.getChildAt(0) == card;
 		}
 		
-		public function setEndingMonsterName(value:String):void
+		public function setEndingMonster(value:Monster):void
 		{
-			gfx.monster.text = value;
+			gfx.monsterName.text = value.name;
+			monster.setMonster(value);
 		}
 		
 		/** fills a slot; either a GuiCard or a GfxEvent */
@@ -244,6 +270,7 @@ package gui
 		protected var animationTick:int = 0;
 		
 		protected var mainMenu:GuiMainMenu;
+		protected var monster:GuiMonster;
 		
 		public static var instance:Gui;
 	}

@@ -1,6 +1,8 @@
 package gui
 {
 	import actions.Action;
+	import aze.motion.easing.Quadratic;
+	import aze.motion.eaze;
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.display.SimpleButton;
@@ -25,6 +27,7 @@ package gui
 			GuiButton.replaceButton(gfx.credits.doneButton, hideCredits);
 			GuiButton.replaceButton(gfx.muteButton.selected, toggleMute);
 			GuiButton.replaceButton(gfx.muteButton.deselected, toggleMute);
+			GuiButton.replaceButton(gfx.resetButton, resetMonsters);
 			
 			monsterSpacing = gfx.monsters.monster2.x;
 			
@@ -49,7 +52,9 @@ package gui
 				for each (var inner:GfxMonsterInner in inners) {
 					inner.monsterName.text = monster.name;
 					if (!SaveManager.hasCollectedMonster(monster)) {
-						Utils.removeFromParent(inner.tungee);
+						Utils.removeFromParent(inner.monster);
+					} else {
+						GuiMonster.setMonsterSomewhere(inner.monster, monster);
 					}
 				}
 				if (!SaveManager.hasCollectedMonster(monster)) {
@@ -58,6 +63,7 @@ package gui
 				monsterButton.x = i * monsterSpacing;
 				gfx.monsters.addChild(monsterButton);
 			}
+			gfx.resetButton.text = "reset monsters";
 			
 			hideCredits();
 		}
@@ -87,6 +93,20 @@ package gui
 				MusicPlayer.playMusic(MusicPlayer.MAINMENU);
 			}
 			SaveManager.save();
+			eaze(gfx.muteButton).to(0.3, { scaleX:1.1, scaleY:1.1 } ).easing(Quadratic.easeOut)
+				.chain(gfx.muteButton).to(0.3, { scaleX:1.0, scaleY:1.0 } ).easing(Quadratic.easeIn);
+		}
+		
+		protected function resetMonsters():void
+		{
+			if (gfx.resetButton.text == "you sure??") {
+				SaveManager.clearCollectedMonsters();
+				new GuiFloatText(Main.snipeLayer, "okay, done!", new Point(200, 100));
+				gfx.resetButton.text = "reset monsters";
+				addedToStage();
+			} else {
+				gfx.resetButton.text = "you sure??";
+			}
 		}
 		
 		protected var gfx:MovieClip;

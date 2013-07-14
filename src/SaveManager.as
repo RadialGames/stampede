@@ -28,6 +28,12 @@
 			return Utils.vectorContains(collectedMonsters, monster);
 		}
 		
+		public static function clearCollectedMonsters():void
+		{
+			collectedMonsters = new Vector.<Monster>();
+			save();
+		}
+		
 		public static function load():void
 		{
 			collectedMonsters = new Vector.<Monster>();
