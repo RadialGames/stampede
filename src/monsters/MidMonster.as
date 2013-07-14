@@ -10,7 +10,7 @@ package monsters
 		
 		public function MidMonster() 
 		{
-			name = "Windross";
+			name = "Tonguy";
 			description = Game.creatureName + " evolved into a Windross!";
 			
 			solution = new <Number>[50,50,50,50,50,50];

@@ -21,13 +21,13 @@ package gui
 		Omniolyte
 		Tonguy
 		-- recolors:
-		Negagore
 		Mockalope
 		Terrortrope
 		Pinkdross
 		Pyrebat
 		Mlorb
 		Bobolyte
+		Negagore
 	 */
 	public dynamic class GuiMonster
 	{
