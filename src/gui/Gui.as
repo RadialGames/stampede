@@ -2,6 +2,8 @@ package gui
 {
 	import actions.Action;
 	import actions.cards.Card;
+	import aze.motion.eaze;
+	import aze.motion.EazeTween;
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.display.SimpleButton;
@@ -110,10 +112,11 @@ package gui
 			event.target.removeEventListener(Event.ENTER_FRAME, scrollerEnterFrame);
 		}
 		
+		public var tooltipFadingIn:Boolean = false;
 		protected function showTooltip(guiAction:GuiAction):void
 		{
 			if (Utils.isEmpty(guiAction.action.outcomeDescription)) {
-				gfx.tooltip.info.text = "Blah blahblahblah blah";
+				gfx.tooltip.info.text = "OutcomeDescription is blank for this";
 			} else {
 				gfx.tooltip.info.text = guiAction.action.outcomeDescription;
 			}
@@ -123,7 +126,13 @@ package gui
 				return;
 			}
 			Utils.addToParent(gfx, gfx.tooltip);
-			Utils.fadeIn(gfx.tooltip, 100, false);
+			
+			if (tooltipFadingIn) return;
+			
+			gfx.tooltip.alpha = 0;
+			eaze(gfx.tooltip).delay(0.5).to(0.5, { alpha:1 }, false);
+			tooltipFadingIn = true;
+			//Utils.fadeIn(gfx.tooltip, 100, false);
 		}
 		
 		public function hideTooltip(...ig):void
@@ -131,7 +140,12 @@ package gui
 			if (gfx.tooltip.parent == null) {
 				return;
 			}
-			Utils.fadeOut(gfx.tooltip, 100, true);
+			EazeTween.killTweensOf(gfx.tooltip);
+			gfx.tooltip.alpha = 0;
+			tooltipFadingIn = false;
+			
+			//eaze(gfx.tooltip).to(0.2, { alpha:0 }, true);
+			//Utils.fadeOut(gfx.tooltip, 100, true);
 		}
 		
 		/**
