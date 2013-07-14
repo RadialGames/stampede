@@ -48,7 +48,7 @@ package  {
 		}
 		
 		public static function reset():void {
-			stats.reset()
+			stats.reset(); // handled by guitimeline
 			_currentSlot = 0;
 		}
 		
