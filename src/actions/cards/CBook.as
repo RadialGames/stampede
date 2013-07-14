@@ -15,8 +15,11 @@ package actions.cards
 		
 		override public function doAction():void 
 		{
-			outcomeDescription = Game.creatureName + " quietly listens to the story.";
-			// add green/logic/air skill
+			simpleCardAction(
+				Game.creatureName + " quietly listens to the story.",
+				Config.STAT_SKY,
+				Config.CARD_LOW_CHANGE
+			);
 		}
 	}
 

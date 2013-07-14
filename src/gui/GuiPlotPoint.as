@@ -17,7 +17,7 @@ package gui
 			gfx = new GfxPlotPoint();
 			addChild(gfx);
 			
-			gfx.info.text = "plot pt";
+			gfx.info.text = plotPoint.title;
 		}
 		
 		protected var gfx:GfxPlotPoint;

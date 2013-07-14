@@ -25,6 +25,7 @@ package
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
+			Utils.pickOriginalRandomSeed();
 			Game.init();
 			addChild(new Gui());
 			new GuiFloatText(this, "Hello!", new Point(100, 200));
