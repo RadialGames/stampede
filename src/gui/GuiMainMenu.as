@@ -1,6 +1,8 @@
 package gui
 {
 	import actions.Action;
+	import aze.motion.easing.Quadratic;
+	import aze.motion.eaze;
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.display.SimpleButton;
@@ -95,6 +97,8 @@ package gui
 				MusicPlayer.playMusic(MusicPlayer.MAINMENU);
 			}
 			SaveManager.save();
+			eaze(gfx.muteButton).to(0.3, { scaleX:1.1, scaleY:1.1 } ).easing(Quadratic.easeOut)
+				.chain(gfx.muteButton).to(0.3, { scaleX:1.0, scaleY:1.0 } ).easing(Quadratic.easeIn);
 		}
 		
 		protected function resetMonsters():void
