@@ -43,6 +43,19 @@ package  {
 			}
 			return true;
 		}
+
+		public static function returnNextMonster():Monster
+		{
+			for (var i:int = 0; i < Monster.allMonsters.length; i++) {
+				if ( Monster.allMonsters[i] == currentMonster ) {
+					if ( i+1 == Monster.allMonsters.length ) {
+						return null;
+					}
+					return Monster.allMonsters[i+1];
+				}
+			}
+			return null;
+		}
 		
 		public static function nextMonster(prevMonster:Monster):void 
 		{
