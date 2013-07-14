@@ -11,7 +11,7 @@ package actions.cards
 		{
 			title = "Sparring"
 			colour = Config.RED;
-			outcomeDescription = "Teaching the monster how to fight.\nIncrementally lowers stats early, raises late.";
+			outcomeDescription = "Teaching the monster how to fight.\nIncrementally lowers the Red stat early, raises it late.";
 		}
 		
 		override public function doAction():void 
