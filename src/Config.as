@@ -11,7 +11,7 @@ package
 		public static const NUM_PLOTPOINTS:int = 0;
 		public static const DECK_SIZE:int = 40; //
 		
-		public static const ALWAYS_WIN_WITH_NO_DECK:Boolean = true;
+		public static const ALWAYS_WIN_WITH_NO_DECK:Boolean = false;
 		
 		public static const SNIPE_FONT_SIZE:int = 30;
 		public static const SNIPE_COLOUR:uint = BLUE;
