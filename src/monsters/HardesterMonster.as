@@ -10,11 +10,10 @@ package monsters
 		
 		public function HardesterMonster() 
 		{
-			name = "Windross";
-			description = Game.creatureName + " ascended into an Windross!";
+			name = "Omniolyte";
+			description = Game.creatureName + " evolved into an Omniolyte!";
 			
-			// NOT YET BALANCED
-			solution = new <Number>[45,45,45,45,45,45];
+			solution = new <Number>[85,65,65,65,85,85];
 			activeStats = new <Boolean>[true, true, true, true, true, true];
 			
 			buildDeck(TWhite, TBlue, TRed, TBrown, TGreen, TOrange, TStandardizeLow, TStandardizeHigh);

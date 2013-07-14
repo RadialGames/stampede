@@ -10,8 +10,8 @@ package monsters
 		
 		public function HardestMonster() 
 		{
-			name = "Windross";
-			description = Game.creatureName + " ascended into an Windross!";
+			name = "Negagore";
+			description = Game.creatureName + " evolved into a Negagore!";
 			
 			solution = new <Number>[45,45,45,45,45,45];
 			activeStats = new <Boolean>[true, true, true, true, true, true];

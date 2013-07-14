@@ -10,8 +10,8 @@ package monsters
 		
 		public function MidMonster() 
 		{
-			name = "Firebat";
-			description = Game.creatureName + " erupted into a Firebat!";
+			name = "Windross";
+			description = Game.creatureName + " evolved into a Windross!";
 			
 			solution = new <Number>[50,50,50,50,50,50];
 			activeStats = new <Boolean>[true, true, true, true, false, false];

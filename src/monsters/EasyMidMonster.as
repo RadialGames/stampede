@@ -10,8 +10,8 @@ package monsters
 		
 		public function EasyMidMonster() 
 		{
-			name = "Terratrope";
-			description = Game.creatureName + " burst into a Terratrope!";
+			name = "Blorb";
+			description = Game.creatureName + " evolved into a Blorb!";
 			
 			solution = new <Number>[50,50,50,50,50,50];
 			activeStats = new <Boolean>[true, true, false, false, false, false];

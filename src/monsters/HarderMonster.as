@@ -10,8 +10,8 @@ package monsters
 		
 		public function HarderMonster() 
 		{
-			name = "Omniolyte";
-			description = Game.creatureName + " ascended into an Omniolyte!";
+			name = "Aqualope";
+			description = Game.creatureName + " evolved into a Aqualope!";
 			
 			solution = new <Number>[90,90,90,90,90,90];
 			activeStats = new <Boolean>[true, true, true, true, true, true];

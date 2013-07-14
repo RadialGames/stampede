@@ -10,8 +10,8 @@ package monsters
 		
 		public function FirstMidMonster() 
 		{
-			name = "Aqualope";
-			description = Game.creatureName + " burst into a Aqualope!";
+			name = "Terratrope";
+			description = Game.creatureName + " evolved into a Terratrope!";
 			
 			solution = new <Number>[30,30,30,30,30,30];
 			activeStats = new <Boolean>[true, true, true, true, false, false];
