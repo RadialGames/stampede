@@ -294,14 +294,12 @@ package gui
 		
 		public function setEndingMonster(value:Monster):void
 		{
-			gfx.monsterName.text = value.name;
+			gfx.monsterName.text = "Trying to raise a\n" + value.name;
 			monster.setMonster(value);
 		}
 		
 		/** fills a slot; either a GuiCard or a GfxEvent */
 		protected var actions:Vector.<*> = new Vector.<*>();
-		
-		protected var stats:Vector.<GfxStat> = new Vector.<GfxStat>();
 		
 		protected var gfx:GfxGui;
 		public var timeline:GuiTimeline;

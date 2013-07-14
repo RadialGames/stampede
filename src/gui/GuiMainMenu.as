@@ -22,7 +22,7 @@ package gui
 			this.gfx = gfx;
 			addChild(gfx);
 			
-			GuiButton.replaceButton(gfx.playButton, Gui.instance.startGame);
+			//GuiButton.replaceButton(gfx.playButton, Gui.instance.startGame);
 			GuiButton.replaceButton(gfx.creditsButton, showCredits);
 			GuiButton.replaceButton(gfx.credits.doneButton, hideCredits);
 			GuiButton.replaceButton(gfx.muteButton.selected, toggleMute);
@@ -47,15 +47,16 @@ package gui
 			Utils.clearChildren(gfx.monsters);
 			for (var i :int = 0; i < Monster.allMonsters.length; i++) {
 				var monster:Monster = Monster.allMonsters[i];
-				var monsterButton:GfxMonster = new GfxMonster();
+				var monsterButton:GuiButton = GuiButton.replaceButton(new GfxMonster(), Gui.instance.startGame);
 				var inners:Array = Utils.buttonClasses(monsterButton, GfxMonsterInner);
 				for each (var inner:GfxMonsterInner in inners) {
-					inner.monsterName.text = monster.name;
-					if (!SaveManager.hasCollectedMonster(monster)) {
-						Utils.removeFromParent(inner.monster);
-					} else {
-						GuiMonster.setMonsterSomewhere(inner.monster, monster);
-					}
+					GuiMonster.setMonsterSomewhere(inner, monster);
+					//inner.monsterName.text = monster.name;
+					//if (!SaveManager.hasCollectedMonster(monster)) {
+						//Utils.removeFromParent(inner.monster);
+					//} else {
+						//GuiMonster.setMonsterSomewhere(inner.monster, monster);
+					//}
 				}
 				if (!SaveManager.hasCollectedMonster(monster)) {
 					monsterButton.enabled = false;
