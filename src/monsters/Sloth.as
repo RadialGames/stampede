@@ -11,7 +11,7 @@ package monsters
 		public function Sloth() 
 		{
 			name = "Sloth";
-			description = Game.creatureName + " was lazy and became a Sloth";
+			description = Game.creatureName + " was lazy and became a Sloth.";
 			graphic = new Sprite();
 		}
 		

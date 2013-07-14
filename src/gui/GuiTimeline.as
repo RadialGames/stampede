@@ -1,6 +1,8 @@
 package gui
 {
 	import actions.plots.PlotPoint;
+	import aze.motion.easing.Bounce;
+	import aze.motion.eaze;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -55,8 +57,9 @@ package gui
 			
 			if (dropPoint.y < -50 || dropPoint.y > card.height + 50 || dropPoint.x < -50) {
 				Utils.log("Dropped too far outside zone.");
-				card.x = 0;
-				card.y = 0;
+				//card.x = 0;
+				//card.y = 0;
+				eaze(card).to(0.3, { x:0, y:0 }, true);
 				return;
 			}
 			
@@ -65,8 +68,9 @@ package gui
 			
 			if (isPlotPoint(index)) {
 				Utils.log("drop index is on an event");
-				card.x = 0;
-				card.y = 0;
+				//card.x = 0;
+				//card.y = 0;
+				eaze(card).to(0.3, { x:0, y:0 }, true);
 				return;
 			}
 			
@@ -77,6 +81,7 @@ package gui
 			Game.timeline[index] = card.action;
 			refresh();
 			Gui.instance.cardPlaced();
+			eaze(card).from(0.6, { y:card.y - 50 }, false).easing(Bounce.easeOut);
 		}
 		
 		protected function isNextCard(card:GuiCard):Boolean
