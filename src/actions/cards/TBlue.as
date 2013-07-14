@@ -11,7 +11,7 @@ package actions.cards
 		{
 			title = "Reading"
 			colour = Config.BLUE;
-			outcomeDescription = "Reading to the monster.\nRaises stats early, lowers late.";
+			outcomeDescription = "Reading to the monster.\nRaises the blue stat early, lowers it late.";
 		}
 		
 		override public function doAction():void 

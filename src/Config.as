@@ -30,7 +30,7 @@ package
 		public static const STATS_LINE_THICKNESS:Number = 3;
 		public static const ALL_STATS:Vector.<String> = new <String>[STAT_WHITE, STAT_BLUE, STAT_RED, STAT_BROWN, STAT_GREEN, STAT_ORANGE];
 		public static const STAT_COLOURS:Vector.<uint> = new <uint>[
-			0xFFFFFF, 0x0000FF, 0xFF0000, 0x804000, 0x00FF00, 0xFF8000];
+			0xFFFFFF, 0x0000FF, 0xFF0000, 0x000000, 0x00FF00, 0xFF8000];
 		
 		public static const PLOT_LOW_THRESH:Number = 20;
 		public static const PLOT_MID_THRESH:Number = 50;

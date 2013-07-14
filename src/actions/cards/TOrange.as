@@ -11,7 +11,7 @@ package actions.cards
 		{
 			title = "Meat"
 			colour = Config.ORANGE;
-			outcomeDescription = "Feeding the monster some delicious meat.\nLowers states on even spaces, raises on odd.";
+			outcomeDescription = "Feeding the monster some delicious meat.\nLowers the Orange stat on even spaces, raises on odd.";
 		}
 		
 		override public function doAction():void 

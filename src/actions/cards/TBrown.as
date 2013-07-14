@@ -11,7 +11,7 @@ package actions.cards
 		{
 			title = "Grooming"
 			colour = Config.BROWN;			
-			outcomeDescription = "Brushing the monster's coat.\nIncrementally raises stats early, lowers late.";
+			outcomeDescription = "Brushing the monster's coat.\nIncrementally raises the black stat early, lowers it late.";
 		}
 		
 		override public function doAction():void 
