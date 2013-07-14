@@ -8,6 +8,7 @@ package gui
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	import monsters.Monster;
 	/**
 	 * Splash screen, credits etc.
 	 * @author Sarah Northway
@@ -24,7 +25,39 @@ package gui
 			GuiButton.replaceButton(gfx.credits.doneButton, hideCredits);
 			GuiButton.replaceButton(gfx.muteButton.selected, toggleMute);
 			GuiButton.replaceButton(gfx.muteButton.deselected, toggleMute);
-			Utils.removeFromParent(gfx.muteButton.deselected);
+			
+			monsterSpacing = gfx.monsters.monster2.x;
+			
+			addEventListener(Event.ADDED_TO_STAGE, addedToStage);
+		}
+		
+		protected function addedToStage(...ig):void
+		{
+			if (Config.MUTE) {
+				Utils.removeFromParent(gfx.muteButton.selected);
+				Utils.addToParent(gfx.muteButton, gfx.muteButton.deselected);
+			} else {
+				Utils.removeFromParent(gfx.muteButton.deselected);
+				Utils.addToParent(gfx.muteButton, gfx.muteButton.selected);
+			}
+			
+			Utils.clearChildren(gfx.monsters);
+			for (var i :int = 0; i < Monster.allMonsters.length; i++) {
+				var monster:Monster = Monster.allMonsters[i];
+				var monsterButton:GfxMonster = new GfxMonster();
+				var inners:Array = Utils.buttonClasses(monsterButton, GfxMonsterInner);
+				for each (var inner:GfxMonsterInner in inners) {
+					inner.monsterName.text = monster.name;
+					if (!SaveManager.hasCollectedMonster(monster)) {
+						Utils.removeFromParent(inner.tungee);
+					}
+				}
+				if (!SaveManager.hasCollectedMonster(monster)) {
+					monsterButton.enabled = false;
+				}
+				monsterButton.x = i * monsterSpacing;
+				gfx.monsters.addChild(monsterButton);
+			}
 			
 			hideCredits();
 		}
@@ -53,8 +86,10 @@ package gui
 				Utils.addToParent(gfx.muteButton, gfx.muteButton.selected);
 				MusicPlayer.playMusic(MusicPlayer.MAINMENU);
 			}
+			SaveManager.save();
 		}
 		
 		protected var gfx:MovieClip;
+		protected var monsterSpacing:Number;
 	}
 }

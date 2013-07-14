@@ -20,6 +20,14 @@
 			save();
 		}
 		
+		public static function hasCollectedMonster(monster:Monster):Boolean
+		{
+			if (collectedMonsters == null) {
+				load();
+			}
+			return Utils.vectorContains(collectedMonsters, monster);
+		}
+		
 		public static function load():void
 		{
 			collectedMonsters = new Vector.<Monster>();
@@ -124,6 +132,6 @@
 		}
 		
 		protected static const COOKIE_NAME:String = "Stampede";
-		public static var collectedMonsters:Vector.<Monster>;
+		protected static var collectedMonsters:Vector.<Monster>;
 	}
 }
