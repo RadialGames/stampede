@@ -30,8 +30,11 @@ package gui
 			}
 		}
 		
+		public var ticks:Number = 0;
 		protected function enterFrame(...ig):void
 		{
+			ticks++;
+			gfx.rotation = Math.sin(ticks / 5) * 5;
 			//Utils.log("im walking here");
 		}
 		
