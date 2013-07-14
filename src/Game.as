@@ -27,6 +27,7 @@ package  {
 		public static function get currentSlot():int { return _currentSlot; }
 		
 		public static function init(monster:Monster):void {
+			trace(monster.name);
 			currentMonster = monster;
 			stats = new Stats(monster);
 			initTimeline();
@@ -48,7 +49,9 @@ package  {
 		{
 			for (var i:int = 0; i < Monster.allMonsters.length; i++) {
 				if ( Monster.allMonsters[i] == currentMonster ) {
+					Utils.log("YAY");
 					if ( i+1 == Monster.allMonsters.length ) {
+						Utils.log("BOO");
 						return null;
 					}
 					return Monster.allMonsters[i+1];

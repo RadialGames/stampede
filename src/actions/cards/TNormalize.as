@@ -9,9 +9,9 @@ package actions.cards
 		
 		public function TNormalize() 
 		{
-			title = "Normalize"
-			colour = Config.BLUE;
-			outcomeDescription = "Moves stats toward the center.";
+			title = "Play with Others"
+			colour = Config.PURPLE;
+			outcomeDescription = "Have the monster play with other monsters.\nMoves stats toward the center.";
 		}
 		
 		override public function doAction():void 
