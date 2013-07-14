@@ -16,6 +16,8 @@ package actions.cards
 		
 		override public function doAction():void 
 		{
+			isOutcomePositive = true;
+			
 			var highestStat:Number = 0;
 			for each (var stat:String in Config.ALL_STATS) {
 				if (Game.stats.getStat(stat) > highestStat) {

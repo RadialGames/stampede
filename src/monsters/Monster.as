@@ -33,21 +33,14 @@ package monsters
 		
 		protected static function initMonsters():void
 		{
-			_allMonsters = new Vector.<Monster>();					
+			_allMonsters = new Vector.<Monster>();				
 			_allMonsters.push(new EasyMidMonster());
-			_allMonsters.push(new FirstMidMonster());
+			_allMonsters.push(new FirstMidMonster());	
 			_allMonsters.push(new MidMonster());
-			_allMonsters.push(new HardMonster());											
+			_allMonsters.push(new HardMonster());	
 			_allMonsters.push(new HarderMonster());
-			_allMonsters.push(new HardestMonster());				
-			_allMonsters.push(new HardesterMonster());	
-			/*_allMonsters.push(new OmniMonster());
-			_allMonsters.push(new NegaMonster());
-			_allMonsters.push(new EarthMonster());
-			_allMonsters.push(new SkyMonster());
-			_allMonsters.push(new WaterMonster());
-			_allMonsters.push(new FireMonster());
-			_allMonsters.push(new Sloth());*/
+			_allMonsters.push(new HardestMonster());										
+			_allMonsters.push(new HardesterMonster());
 		}
 		
 		public static function whichMoster():Monster

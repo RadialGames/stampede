@@ -38,6 +38,7 @@ package  {
 		public static function isFinished():Boolean
 		{
 			for (var i:int = 0; i < Config.ALL_STATS.length; i++) {
+				trace(Config.ALL_STATS[i], Game.stats.getStat(Config.ALL_STATS[i]))
 				if ( Game.stats.getStat(Config.ALL_STATS[i]) != currentMonster.solution[i] ) {
 					return false;
 				}
@@ -130,10 +131,18 @@ package  {
 				return false; // Slotnum shouldn't exist
 			}
 			
-			if (timeline[slotNum] != null && (!Config.ALLOW_CARD_OVERWRITE && !Config.ALLOW_SWAPPING_CARDS)) {
-				Utils.log("overwrite or swap false");
-				return false;
+			if (timeline[slotNum] != null && Config.ALLOW_SWAPPING_CARDS) {
+				if (Utils.vectorContains(timeline, card)) {
+					return true;
+				} else {
+					return false;
+				}
 			}
+
+			if (timeline[slotNum] != null && !Config.ALLOW_CARD_OVERWRITE) {
+				Utils.log("overwrite");
+				return false;
+			}			
 						
 			//timeline[slotNum] = deck.pop(); // this is handled elsewhere now cuz, sarah, that's what happened
 			return true;
