@@ -9,9 +9,9 @@ package actions.cards
 		
 		public function TBrown() 
 		{
-			title = "Brown"
+			title = "Grooming"
 			colour = Config.BROWN;			
-			outcomeDescription = "Incrementally raises early, lowers late.";
+			outcomeDescription = "Brushing the monster's coat.\nIncrementally raises stats early, lowers late.";
 		}
 		
 		override public function doAction():void 
