@@ -26,6 +26,7 @@ package gui
 		
 		protected function mouseDown(...ig):void
 		{
+			Utils.log('PICKED UP');
 			if (!Gui.instance.isNextCard(this)) {
 				return;
 			}
