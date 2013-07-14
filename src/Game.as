@@ -34,6 +34,16 @@ package  {
 			reset();
 		}
 		
+		public static function isFinished():Boolean
+		{
+			for (var i:int = 0; i < Config.ALL_STATS.length; i++) {
+				if ( Game.stats.getStat(Config.ALL_STATS[i]) != currentMonster.solution[i] ) {
+					return false;
+				}
+			}
+			return true;
+		}
+		
 		public static function nextMonster(prevMonster:Monster):void 
 		{
 			for (var i:int = 0; i < Monster.allMonsters.length; i++) {
