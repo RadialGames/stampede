@@ -2,6 +2,7 @@ package gui
 {
 	import actions.Action;
 	import actions.cards.Card;
+	import aze.motion.easing.Quadratic;
 	import aze.motion.eaze;
 	import aze.motion.EazeTween;
 	import flash.display.DisplayObject;
@@ -29,7 +30,6 @@ package gui
 			timeline = new GuiTimeline(gfx.timeline);
 			
 			Utils.removeFromParent(gfx.introMenu);
-			gfx.introMenu.addEventListener(MouseEvent.CLICK, closeIntro);
 			
 			//GuiButton.replaceButton(gfx.edgeScrollerLeft);
 			//gfx.edgeScrollerLeft.addEventListener(MouseEvent.MOUSE_OVER, scrollerOver);
@@ -73,19 +73,18 @@ package gui
 		public function startGame(monster:Monster):void
 		{
 			Game.init(monster);
-			Utils.removeFromParent(mainMenu);
 			cardsDrawn = 0;
 			drawNextCard();
 			timeline.reset();
-			Utils.addToParent(gfx, gfx.introMenu);
-			gfx.introMenu.gotoAndPlay(1);
-			MusicPlayer.playMusic(MusicPlayer.LULLABY);
+			eaze(mainMenu).to(0.6, { y: 640 }, true)
+				.easing(Quadratic.easeIn)
+				.onComplete(reallyStartGame);
 		}
 		
-		protected function closeIntro(...ig):void
-		{
-			Utils.removeFromParent(gfx.introMenu);
-			MusicPlayer.playMusic(Utils.pickRandom(MusicPlayer.GAME_SONGS));
+		public function reallyStartGame():void {
+			Utils.removeFromParent(mainMenu);
+			mainMenu.x = 0;
+			mainMenu.y = 0;
 		}
 		
 		/**
@@ -287,17 +286,17 @@ package gui
 			var nextCard:GuiCard = new GuiCard(card);
 			gfx.nextCard.addChild(nextCard);
 			
-			//if (percentCardsDrawn < 0.20) {
-				//MusicPlayer.playMusic(MusicPlayer.ORCHESTRAAAL);
-			//} else if (percentCardsDrawn < 0.40) {
-				//MusicPlayer.playMusic(MusicPlayer.DRUMS);
-			//} else if (percentCardsDrawn < 0.60) {
-				//MusicPlayer.playMusic(MusicPlayer.STAMPEDE);
-			//} else if (percentCardsDrawn < 0.70) {
-				//MusicPlayer.playMusic(MusicPlayer.LULLABY);
-			//} else {
-				//MusicPlayer.playMusic(MusicPlayer.RACIST);
-			//}
+			if (percentCardsDrawn < 0.20) {
+				MusicPlayer.playMusic(MusicPlayer.ORCHESTRAAAL);
+			} else if (percentCardsDrawn < 0.40) {
+				MusicPlayer.playMusic(MusicPlayer.DRUMS);
+			} else if (percentCardsDrawn < 0.60) {
+				MusicPlayer.playMusic(MusicPlayer.STAMPEDE);
+			} else if (percentCardsDrawn < 0.70) {
+				MusicPlayer.playMusic(MusicPlayer.LULLABY);
+			} else {
+				MusicPlayer.playMusic(MusicPlayer.RACIST);
+			}
 			cardsDrawn++;
 		}
 		
