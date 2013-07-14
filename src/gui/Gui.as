@@ -161,7 +161,7 @@ package gui
 			EazeTween.killTweensOf(gfx.tooltip);
 			gfx.tooltip.alpha = 0;
 			gfx.tooltip.parent.removeChild(gfx.tooltip);
-			tooltipFadingIn = false;			
+			tooltipFadingIn = false;
 			//eaze(gfx.tooltip).to(0.2, { alphaVisible:0 }, true);
 			//Utils.fadeOut(gfx.tooltip, 100, true);
 		}
@@ -179,7 +179,7 @@ package gui
 			if (percentCardsDrawn >= 1) {
 				MusicPlayer.playMusic(MusicPlayer.ROCKIN);
 				var monster:Monster = Utils.pickRandom(Monster.allMonsters);
-				new GuiFloatText(this, "YOU got a " + monster.name + "!!!", new Point(100, 200));
+				new GuiFloatText(Main.snipeLayer, "YOU got a " + monster.name + "!!!", new Point(100, 200));
 				SaveManager.collectMonster(monster);
 				gfx.monster.text = monster.name;
 			} else {

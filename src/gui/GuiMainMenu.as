@@ -27,6 +27,7 @@ package gui
 			GuiButton.replaceButton(gfx.credits.doneButton, hideCredits);
 			GuiButton.replaceButton(gfx.muteButton.selected, toggleMute);
 			GuiButton.replaceButton(gfx.muteButton.deselected, toggleMute);
+			GuiButton.replaceButton(gfx.resetButton, resetMonsters);
 			
 			monsterSpacing = gfx.monsters.monster2.x;
 			
@@ -60,6 +61,7 @@ package gui
 				monsterButton.x = i * monsterSpacing;
 				gfx.monsters.addChild(monsterButton);
 			}
+			gfx.resetButton.text = "reset monsters";
 			
 			hideCredits();
 		}
@@ -91,6 +93,18 @@ package gui
 			SaveManager.save();
 			eaze(gfx.muteButton).to(0.3, { scaleX:1.1, scaleY:1.1 } ).easing(Quadratic.easeOut)
 				.chain(gfx.muteButton).to(0.3, { scaleX:1.0, scaleY:1.0 } ).easing(Quadratic.easeIn);
+		}
+		
+		protected function resetMonsters():void
+		{
+			if (gfx.resetButton.text == "you sure??") {
+				SaveManager.clearCollectedMonsters();
+				new GuiFloatText(Main.snipeLayer, "okay, done!", new Point(200, 100));
+				gfx.resetButton.text = "reset monsters";
+				addedToStage();
+			} else {
+				gfx.resetButton.text = "you sure??";
+			}
 		}
 		
 		protected var gfx:MovieClip;
