@@ -1,6 +1,7 @@
 package gui
 {
 	import actions.cards.Card;
+	import aze.motion.eaze;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
@@ -28,6 +29,7 @@ package gui
 				return;
 			}
 			startDrag();
+			eaze(this).to(0.2, { scaleX:1.2, scaleY:1.2 }, false);
 			Main.addStageEventListener(MouseEvent.MOUSE_UP, mouseUp);
 		}
 		
@@ -35,6 +37,7 @@ package gui
 		{
 			Main.removeStageEventListener(MouseEvent.MOUSE_UP, mouseUp);
 			stopDrag();
+			eaze(this).to(0.2, { scaleX:1.0, scaleY:1.0 }, false);
 			Gui.instance.timeline.cardDropped(this);
 		}
 		
