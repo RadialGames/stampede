@@ -56,42 +56,64 @@ package gui
 		{
 			var dropPoint:Point = gfx.cards.globalToLocal(card.localToGlobal(new Point(0, 0)));
 			Utils.log("dropped at " + dropPoint);
+
+			var index:int = (slotSpacing / 2 + dropPoint.x) / slotSpacing;
+			Utils.log("drop index is " + index);
+
+			var failX:Number = NaN;
+			var failIndex:Number = NaN;
+			if (Utils.vectorContains(Game.timeline, card.action)) {
+				for (var i:Number = 0; i < Game.timeline.length; i++) {
+					if (Game.timeline[i] == card.action)
+						failIndex = i;
+				}
+				failX = failIndex * slotSpacing;
+			}
 			
 			if (dropPoint.y < -50 || dropPoint.y > card.height + 50 || dropPoint.x < -50) {
 				Utils.log("Dropped too far outside zone.");
-				//card.x = 0;
-				//card.y = 0;
-				eaze(card).to(0.3, { x:0, y:0 }, true);
+				eaze(card).to(0.3, { x:failX, y:0 }, true);
 				new GuiFloatText(Main.snipeLayer, "You suck at placing cards!", card.localToGlobal(new Point(0,-50)));
 				return;
 			}
 			
-			var index:int = (slotSpacing / 2 + dropPoint.x) / slotSpacing;
-			Utils.log("drop index is " + index);
-			
 			if (isPlotPoint(index)) {
 				Utils.log("drop index is on an event");
-				//card.x = 0;
-				//card.y = 0;
-				eaze(card).to(0.3, { x:0, y:0 }, true);
+				eaze(card).to(0.3, { x:failX, y:0 }, true);
 				new GuiFloatText(Main.snipeLayer, "You suck at placing cards!", card.localToGlobal(new Point(0,-50)));
 				return;
 			}
 			
 			if (!Game.putTopCardOnSlot(index)) {
 				Utils.log("drop index disallowed by game.as");
-				eaze(card).to(0.3, { x:0, y:0 }, true);
+				eaze(card).to(0.3, { x:failX, y:0 }, true);
 				new GuiFloatText(Main.snipeLayer, "You suck at placing cards!", card.localToGlobal(new Point(0,-50)));
 				return;
 			}
 			
-			gfx.cards.addChild(card);
+			if (isNaN(failX)) {
+				// card does NOT exist on the timeline already
+				gfx.cards.addChild(card);
+			} else {
+				// card DOES exist on the timeline
+				// remove the old entry
+				guiActions[failIndex] = null;
+				Game.timeline[failIndex] = null;
+			}
 			card.x = index * slotSpacing;
 			card.y = 0;
 			guiActions[index] = card;
 			Game.timeline[index] = card.action;
 			refresh();
-			Gui.instance.cardPlaced();
+			if (isNaN(failX)) {
+				// NOT exist on timeline, standard
+				Gui.instance.cardPlaced();
+				
+			} else {
+				// DOES exist on timeline
+				Gui.instance.cardMoved();
+				
+			}
 			eaze(card).from(0.6, { y:card.y - 50 }, false).easing(Bounce.easeOut);
 			if (card.action.outcomeDescription == null) Utils.log("no outcomedesc on card");
 			else new GuiFloatText(Main.snipeLayer, card.action.outcomeDescription, card.localToGlobal(new Point(0,-50)));
