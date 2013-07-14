@@ -28,6 +28,8 @@ package gui
 			
 			timeline = new GuiTimeline(gfx.timeline);
 			
+			Utils.removeFromParent(gfx.introMenu);
+			
 			//GuiButton.replaceButton(gfx.edgeScrollerLeft);
 			//gfx.edgeScrollerLeft.addEventListener(MouseEvent.MOUSE_OVER, scrollerOver);
 			//gfx.edgeScrollerLeft.useHandCursor = false;
@@ -230,23 +232,26 @@ package gui
 			}
 		}
 		
-		protected function finishGame():void
-		{
-			if ( Game.isFinished() ) {
-				
-			}else {
-				
-			}
-			
-			/*MusicPlayer.playMusic(MusicPlayer.ROCKIN);
-			var finalMonster:Monster = Utils.pickRandom(Monster.allMonsters);
-			new GuiFloatText(Main.snipeLayer, "YOU got a " + finalMonster.name + "!!!", new Point(100, 200));
-			SaveManager.collectMonster(finalMonster);
-			setEndingMonster(finalMonster);
-			
-			GuiMonster.setMonsterSomewhere(gfx.winScreen.monster, finalMonster);
-			gfx.winScreen.info.text = "You raised a\n" + finalMonster.name;
-			Utils.addToParent(gfx, gfx.winScreen);*/
+		protected function finishGame():void {
+			var monster:Monster;
+			if (Game.isFinished() || Config.ALWAYS_WIN_WITH_NO_DECK) {
+				monster = Game.returnNextMonster();
+				if (monster == null) {
+					Utils.log("Ran out of monsters");
+					MusicPlayer.playMusic(MusicPlayer.ROCKIN);
+					var finalMonster:Monster = Utils.pickRandom(Monster.allMonsters);
+					new GuiFloatText(Main.snipeLayer, "YOU got a " + finalMonster.name + "!!!", new Point(100, 200));
+					SaveManager.collectMonster(finalMonster);
+					setEndingMonster(finalMonster);
+					
+					GuiMonster.setMonsterSomewhere(gfx.winScreen.monster, finalMonster);
+					gfx.winScreen.info.text = "You raised a\n" + finalMonster.name;
+					Utils.addToParent(gfx, gfx.winScreen);
+				} else {
+					// more monsters to go
+					startGame(monster);
+				}
+			}	
 		}
 		
 		protected function hideWinScreen():void
