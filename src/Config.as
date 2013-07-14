@@ -33,6 +33,10 @@ package
 		public static const PLOT_MID_CHANGE:Number = 20;
 		public static const PLOT_HIGH_CHANGE:Number = 40;
 		
+		public static const EVOLVE_REQ_HIGH:Number = 70;
+		public static const EVOLVE_REQ_VERY_HIGH:Number = 100;
+		public static const EVOLVE_REQ_VERY_LOW:Number = 10;
+		
 		public static const CARD_LOW_CHANGE:Number = 5;
 		public static const CARD_MID_CHANGE:Number = 10;
 		public static const CARD_HIGH_CHANGE:Number = 15;
