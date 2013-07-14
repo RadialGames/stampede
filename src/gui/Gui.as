@@ -232,13 +232,21 @@ package gui
 			}
 		}
 		
-		protected function finishGame():void
-		{
+		protected function finishGame():void {
+			var monster:Monster;
 			if ( Game.isFinished() ) {
-				
-			}else {
-				
+				monster = Game.returnNextMonster();
+				if (monster == null) Utils.log("Ran out of monsters");
+				else startGame(monster);
+			} else {
+				if (Config.ALWAYS_WIN_WITH_NO_DECK) {
+					monster = Game.returnNextMonster();
+					if (monster == null) Utils.log("Ran out of monsters");
+					else startGame(monster);
+				}
 			}
+			
+			// this was old game gameover code:
 			
 			/*MusicPlayer.playMusic(MusicPlayer.ROCKIN);
 			var finalMonster:Monster = Utils.pickRandom(Monster.allMonsters);
