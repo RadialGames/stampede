@@ -31,7 +31,8 @@ package gui
 			GuiButton.replaceButton(gfx.muteButton.deselected, toggleMute);
 			GuiButton.replaceButton(gfx.resetButton, resetMonsters);
 			
-			monsterSpacing = gfx.monsters.monster2.x;
+			monsterXSpacing = gfx.monsters.monster2.x;
+			monsterYSpacing = gfx.monsters.monster14.y;
 			
 			addEventListener(Event.ADDED_TO_STAGE, addedToStage);
 		}
@@ -63,7 +64,10 @@ package gui
 				if (i != 0 && !SaveManager.hasCollectedMonster(monster)) {
 					monsterButton.enabled = false;
 				}
-				monsterButton.x = i * monsterSpacing;
+				monsterButton.x = (i % 7) * monsterXSpacing;
+				if (i > 6) {
+					monsterButton.y = monsterYSpacing;
+				}
 				gfx.monsters.addChild(monsterButton);
 			}
 			gfx.resetButton.text = "reset monsters";
@@ -80,7 +84,7 @@ package gui
 		protected function showCredits():void
 		{
 			Utils.addToParent(gfx, gfx.credits);
-			gfx.credits.y = 600;
+			gfx.credits.y = 640;
 			eaze(gfx.credits).to(1, { y:0 }, true)
 				.easing(Bounce.easeOut);
 			MusicPlayer.playMusic(MusicPlayer.CREDITS);
@@ -88,7 +92,7 @@ package gui
 		
 		protected function hideCredits():void
 		{
-			eaze(gfx.credits).to(0.6, { y:600 }, true)
+			eaze(gfx.credits).to(0.6, { y:640 }, true)
 				.easing(Quadratic.easeIn)
 				.onComplete(reallyHideCredits);
 			//reallyHideCredits();
@@ -129,6 +133,7 @@ package gui
 		}
 		
 		protected var gfx:MovieClip;
-		protected var monsterSpacing:Number;
+		protected var monsterXSpacing:Number;
+		protected var monsterYSpacing:Number;
 	}
 }

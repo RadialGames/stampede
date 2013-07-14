@@ -12,9 +12,27 @@ package gui
 	import monsters.Monster;
 	/**
 	 * Does something with the monster.
+	 *
+		Aqualope
+		Terratrope
+		Windross
+		Firebat
+		Blorb
+		Omniolyte
+		Tonguy
+		-- recolors:
+		Negagore
+		Mockalope
+		Terrortrope
+		Pinkdross
+		Pyrebat
+		Mlorb
+		Bobolyte
 	 */
 	public dynamic class GuiMonster
 	{
+		//protected static const ALL_MONSTER_NAMES:Array = ["Aqualope", "Terratrope", "Windross", "Firebat", "Blorb", "Omniolyte", "Tonguy", "Negagore", "Mockalope", "Terrortrope", "Pinkdross", "Pyrebat", "Mlorb", "Bobolyte"];
+		
 		public function GuiMonster(gfx:MovieClip)
 		{
 			this.gfx = gfx;
@@ -33,7 +51,7 @@ package gui
 			if (gfx.hasOwnProperty(monster.name)) {
 				Utils.toggleChildVisibility(gfx, monster.name);
 			} else {
-				Utils.toggleChildVisibility(gfx, "Negagore");
+				Utils.toggleChildVisibility(gfx, "Aqualope");
 			}
 		}
 		
