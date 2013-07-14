@@ -1,5 +1,6 @@
 package gui
 {
+	import actions.cards.Card;
 	import actions.plots.PlotPoint;
 	import aze.motion.easing.Bounce;
 	import aze.motion.eaze;
@@ -122,7 +123,7 @@ package gui
 			//Utils.log("guitimeline card dropped");
 			if (isNaN(failX)) {
 				// NOT exist on timeline, standard
-				Gui.instance.cardPlaced();
+				Gui.instance.cardPlaced(card.action as Card);
 				
 			} else {
 				// DOES exist on timeline

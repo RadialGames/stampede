@@ -2,8 +2,6 @@
 {
 	import flash.events.Event;
 	import flash.utils.Dictionary;
-	import worddog.*;
-	import worddog.game.*;
 	
 	/**
 	 * Handles sound effects in the game.  The same sound cannot be played over itself or
@@ -13,178 +11,94 @@
 	 */
 	public class SoundPlayer
 	{
-		public static function playBark () :void
+		public static function playMonsterSound (up:Boolean) :void
 		{
-			if (sounds == null) {
+			if (Config.MUTE) {
 				return;
 			}
 			
-			// don't play bark if already playing
-			if ((sounds[SOUND_BARK_ONCE] != null && sounds[SOUND_BARK_ONCE].playing)
-				|| (sounds[SOUND_BARK_TWICE] != null && sounds[SOUND_BARK_TWICE].playing)) {
-				return;
-			}
-			
-			if (Utils.getRandChance(1, 2)) {
-				playSound(SOUND_BARK_ONCE);
-			} else {
-				playSound(SOUND_BARK_TWICE);
-			}
-		}
-		
-		public static function playClick () :void
-		{
-			playSound(SOUND_CLICK);
-		}
-		
-		public static function playDynamite () :void
-		{
-			stopSound(SOUND_DYNAMITE);
-			playSound(SOUND_DYNAMITE);
-		}
-		
-		public static function playScratch () :void
-		{
-			playSound(SOUND_SCRATCH);
-		}
-		
-		public static function playRinging (short :Boolean) :void
-		{
-			if (short) {
-				playSound(SOUND_RINGING_SHORT);
-			} else {
-				playSound(SOUND_RINGING);
-			}
-		}
-		
-		public static function playVoice (num:int = 0) :void
-		{
-			if (num == 0) {
-				currentVoice = playSound(Utils.pickRandom(VOICE_FILES));
-			} else {
-				currentVoice = playSound("Voice" + num);
-			}
-			if (currentVoice != null) {
-				currentVoice.volume = VOICE_VOLUME;
-			}
-		}
-		
-		public static function stopVoice () :void
-		{
-			if (currentVoice != null) {
-				currentVoice.stop();
-				currentVoice = null;
-			}
-		}
-		
-		public static function playDigging (short :Boolean) :void
-		{
-			stopDigging();
-			if (short) {
-				playSound(SOUND_DIGGING_SHORT);
-			} else {
-				playSound(SOUND_DIGGING);
-			}
-		}
-		
-		public static function stopDigging () :void
-		{
-			if (!Player.sound) {
-				return;
-			}
-			stopSound(SOUND_DIGGING);
-			stopSound(SOUND_DIGGING_SHORT);
-		}
-		
-		protected static function stopSound (soundName :String) :void
-		{
-			if (!Player.sound || sounds == null) {
-				return;
-			}
-			var sound :Music = sounds[soundName];
-			if (sound != null) {
-				sound.stop();
-			}
-		}
-		
-		/**
-		 * Preload all the sound effects.
-		 */
-		protected static function init () :void
-		{
-			sounds  = new Dictionary();
-			for each (var soundFile :String in SOUND_FILES) {
-				// will start loading immediately but won't play
-				var sound :Music = new Music(soundFile, true);
-				sounds[soundFile] = sound;
-			}
-		}
-		
-		/**
-		 * Play the given sound.
-		 */
-		protected static function playSound (soundName :String) :Music
-		{
-			if (!Player.sound) {
-				return null;
-			}
-			
-			// only needs to be done once to initialize once instance of each sound
-			if (sounds == null) {
-				init();
-			}
+			var soundClass:Class = Utils.pickRandom((up) ? ALL_UP : ALL_DOWN);
+			var soundName:String = Utils.classNameFromClass(soundClass).substring("snd".length);
 			
 			var sound :Music = sounds[soundName];
 			if (sound == null) {
-				Utils.logError("Couldn't find preloaded sound: " + soundName);
-				return null;
+				sound = new Music(soundName, true);
+				sounds[soundName] = sound;
 			}
 			if (sound.playing) {
-				//Utils.log("sound currently playing, not restarting.");
-				return sound;
+				return;
 			}
 			sound.reset();
 			sound.play();
 			sound.volume = VOLUME;
-			return sound;
+			return;
 		}
-		
-		/** Scratch-voice being played (or last played if finished) */
-		protected static var currentVoice:Music;
 		
 		/** How loud are the sounds by default */
 		public static const VOLUME :Number = 0.4;
 		public static const VOICE_VOLUME :Number = 0.4;
 		
-		protected static const SOUND_BARK_ONCE :String = "BarkOnce";
-		protected static const SOUND_BARK_TWICE :String = "BarkTwice";
-		protected static const SOUND_CLICK :String = "Click";
-		protected static const SOUND_DIGGING :String = "Digging";
-		protected static const SOUND_DIGGING_SHORT :String = "DiggingShort";
-		protected static const SOUND_DYNAMITE :String = "Dynamite";
-		protected static const SOUND_SCRATCH :String = "Scratch";
-		protected static const SOUND_RINGING :String = "Ringing";
-		protected static const SOUND_RINGING_SHORT :String = "RingingShort";
-		protected static const SOUND_VOICE_1 :String = "Voice1";
-		protected static const SOUND_VOICE_2 :String = "Voice2";
-		protected static const SOUND_VOICE_3 :String = "Voice3";
-		protected static const SOUND_VOICE_4 :String = "Voice4";
-
-		protected static var SOUND_FILES :Vector.<String> = new <String>[
-			SOUND_BARK_ONCE, SOUND_BARK_TWICE,
-			SOUND_CLICK, SOUND_DIGGING, SOUND_DIGGING_SHORT, SOUND_DYNAMITE,
-			SOUND_SCRATCH, SOUND_RINGING, SOUND_RINGING_SHORT,
-			SOUND_VOICE_1, SOUND_VOICE_2, SOUND_VOICE_3, SOUND_VOICE_4];
-			
-		protected static var VOICE_FILES:Vector.<String> = new <String>[
-			SOUND_VOICE_1, SOUND_VOICE_2, SOUND_VOICE_3, SOUND_VOICE_4];
-			
-		// Music classes indexed by SOUND_ name string
-		protected static var sounds :Dictionary;
-	
-		// reference all the music classes so they'll be compiled into the swf
-		private static var classes :Array = [SndBarkOnce, SndBarkTwice, SndClick, SndDigging,
-			SndDiggingShort, SndDynamite, SndScratch, SndRinging, SndRingingShort,
-			SndVoice1, SndVoice2, SndVoice3, SndVoice4];
+		protected static const SOUND_UP_1:Class = SndUp1;
+		protected static const SOUND_UP_2:Class = SndUp2;
+		protected static const SOUND_UP_3:Class = SndUp3;
+		protected static const SOUND_UP_4:Class = SndUp4;
+		protected static const SOUND_UP_5:Class = SndUp5;
+		protected static const SOUND_UP_6:Class = SndUp6;
+		protected static const SOUND_UP_7:Class = SndUp7;
+		protected static const SOUND_UP_8:Class = SndUp8;
+		protected static const SOUND_UP_9:Class = SndUp9;
+		protected static const SOUND_UP_10:Class = SndUp10;
+		protected static const SOUND_UP_11:Class = SndUp11;
+		protected static const SOUND_UP_12:Class = SndUp12;
+		protected static const SOUND_UP_13:Class = SndUp13;
+		protected static const SOUND_UP_14:Class = SndUp14;
+		protected static const SOUND_UP_15:Class = SndUp15;
+		protected static const SOUND_UP_16:Class = SndUp16;
+		protected static const SOUND_UP_17:Class = SndUp17;
+		protected static const SOUND_UP_18:Class = SndUp18;
+		protected static const SOUND_UP_19:Class = SndUp19;
+		protected static const SOUND_UP_20:Class = SndUp20;
+		protected static const SOUND_UP_21:Class = SndUp21;
+		protected static const SOUND_UP_22:Class = SndUp22;
+		protected static const SOUND_UP_23:Class = SndUp23;
+		protected static const SOUND_UP_24:Class = SndUp24;
+		protected static const SOUND_UP_25:Class = SndUp25;
+		protected static const SOUND_UP_26:Class = SndUp26;
+		protected static const SOUND_UP_27:Class = SndUp27;
+		protected static const SOUND_UP_28:Class = SndUp28;
+		protected static const SOUND_UP_29:Class = SndUp29;
+		protected static const SOUND_UP_30:Class = SndUp30;
+		protected static const SOUND_UP_31:Class = SndUp31;
+		protected static const SOUND_UP_32:Class = SndUp32;
+		protected static const SOUND_UP_33:Class = SndUp33;
+		protected static const ALL_UP:Array = [SOUND_UP_1, SOUND_UP_2, SOUND_UP_3, SOUND_UP_4, SOUND_UP_5, SOUND_UP_6, SOUND_UP_7, SOUND_UP_8, SOUND_UP_9, SOUND_UP_10, SOUND_UP_11, SOUND_UP_12, SOUND_UP_13, SOUND_UP_14, SOUND_UP_15, SOUND_UP_16, SOUND_UP_17, SOUND_UP_18, SOUND_UP_19, SOUND_UP_20, SOUND_UP_21, SOUND_UP_22, SOUND_UP_23, SOUND_UP_24, SOUND_UP_25, SOUND_UP_26, SOUND_UP_27, SOUND_UP_28, SOUND_UP_29, SOUND_UP_30, SOUND_UP_31, SOUND_UP_32, SOUND_UP_33];
+		
+		protected static const SOUND_DOWN_1:Class = SndDown1;
+		protected static const SOUND_DOWN_2:Class = SndDown2;
+		protected static const SOUND_DOWN_3:Class = SndDown3;
+		protected static const SOUND_DOWN_4:Class = SndDown4;
+		protected static const SOUND_DOWN_5:Class = SndDown5;
+		protected static const SOUND_DOWN_6:Class = SndDown6;
+		protected static const SOUND_DOWN_7:Class = SndDown7;
+		protected static const SOUND_DOWN_8:Class = SndDown8;
+		protected static const SOUND_DOWN_9:Class = SndDown9;
+		protected static const SOUND_DOWN_10:Class = SndDown10;
+		protected static const SOUND_DOWN_11:Class = SndDown11;
+		protected static const SOUND_DOWN_12:Class = SndDown12;
+		protected static const SOUND_DOWN_13:Class = SndDown13;
+		protected static const SOUND_DOWN_14:Class = SndDown14;
+		protected static const SOUND_DOWN_15:Class = SndDown15;
+		protected static const SOUND_DOWN_16:Class = SndDown16;
+		protected static const SOUND_DOWN_17:Class = SndDown17;
+		protected static const SOUND_DOWN_18:Class = SndDown18;
+		protected static const SOUND_DOWN_19:Class = SndDown19;
+		protected static const SOUND_DOWN_20:Class = SndDown20;
+		protected static const SOUND_DOWN_21:Class = SndDown21;
+		protected static const SOUND_DOWN_22:Class = SndDown22;
+		protected static const SOUND_DOWN_23:Class = SndDown23;
+		protected static const ALL_DOWN:Array = [SOUND_DOWN_1, SOUND_DOWN_2, SOUND_DOWN_3, SOUND_DOWN_4, SOUND_DOWN_5, SOUND_DOWN_6, SOUND_DOWN_7, SOUND_DOWN_8, SOUND_DOWN_9, SOUND_DOWN_10, SOUND_DOWN_11, SOUND_DOWN_12, SOUND_DOWN_13, SOUND_DOWN_14, SOUND_DOWN_15, SOUND_DOWN_16, SOUND_DOWN_17, SOUND_DOWN_18, SOUND_DOWN_19, SOUND_DOWN_20, SOUND_DOWN_21, SOUND_DOWN_22, SOUND_DOWN_23];
+		
+		// Music classes indexed by sound name string
+		protected static var sounds :Dictionary = new Dictionary();
 	}
 }
