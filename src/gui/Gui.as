@@ -55,7 +55,7 @@ package gui
 		}
 		
 		private function onMouseDown(e:MouseEvent):void {
-			Main.particles.addParticle(new Point(stage.mouseX, stage.mouseY), Utils.getRandomNumber(2,5));			
+			Main.particles.addParticle(new Point(stage.mouseX, stage.mouseY), Utils.getRandomNumber(2,5));
 		}
 		
 		protected function showMainMenu():void
@@ -197,12 +197,14 @@ package gui
 		/**
 		 * After a card is placed, refresh the timeline, check for win & draw next card.
 		 */
-		public function cardPlaced():void
+		public function cardPlaced(card:Card):void
 		{
 			timeline.refresh();
 			
-			// will trigger gfx.strongFemaleCharacter to animation on enterFrame
+			// will trigger gfx.strongFemaleCharacter to animate on enterFrame
 			animationTick = 0;
+			
+			SoundPlayer.playMonsterSound(Utils.pickRandom([true, false]));
 			
 			if (percentCardsDrawn >= 1) {
 				finishGame();
