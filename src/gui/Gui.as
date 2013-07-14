@@ -30,11 +30,11 @@ package gui
 			
 			//GuiButton.replaceButton(gfx.edgeScrollerLeft);
 			//gfx.edgeScrollerLeft.addEventListener(MouseEvent.MOUSE_OVER, scrollerOver);
-			//gfx.edgeScrollerLeft.useHandCursor = false;
+			gfx.edgeScrollerLeft.useHandCursor = false;
 			
 			//GuiButton.replaceButton(gfx.edgeScrollerRight);
 			//gfx.edgeScrollerRight.addEventListener(MouseEvent.MOUSE_OVER, scrollerOver);
-			//gfx.edgeScrollerRight.useHandCursor = false;
+			gfx.edgeScrollerRight.useHandCursor = false;
 			
 			addEventListener(Event.ENTER_FRAME, enterFrame);
 			
@@ -55,7 +55,7 @@ package gui
 		}
 		
 		private function onMouseDown(e:MouseEvent):void {
-			//Main.particles.addParticle(new Point(stage.mouseX, stage.mouseY), Utils.getRandomNumber(2,5));
+			//Main.particles.addParticle(new Point(stage.mouseX, stage.mouseY), Utils.getRandomNumber(2,5));			
 		}
 		
 		protected function showMainMenu():void
@@ -110,7 +110,7 @@ package gui
 			}
 			
 			// if we're over a scroller, scroll that mutherfucker
-			//var scrollerFound:Boolean = false;
+			var scrollerFound:Boolean = false;
 			/*for each (var thingy:DisplayObject in objectsUnderPoint) {
 				var scroller:GfxEdgeScroller = Utils.findAncestor(thingy, GfxEdgeScroller);
 				if (scroller != null) {
@@ -123,36 +123,36 @@ package gui
 			}*/
 		}
 		
-		//protected function scrollerOver(scroller:GfxEdgeScroller):void
-		//{
-			//scroller.addEventListener(Event.ENTER_FRAME, scrollerEnterFrame);
-		//}
+		protected function scrollerOver(scroller:GfxEdgeScroller):void
+		{
+			scroller.addEventListener(Event.ENTER_FRAME, scrollerEnterFrame);
+		}
 		
-		//protected function scrollerEnterFrame(event:Event):void
-		//{
-			//var left:Boolean = (event.target == gfx.edgeScrollerLeft);
-			//
+		protected function scrollerEnterFrame(event:Event):void
+		{
+			var left:Boolean = (event.target == gfx.edgeScrollerLeft);
+			
 			// from 0 (inside) to 1 (outside)
-			//var scrollXPercent:Number = event.target.mouseX / event.target.width;
-			//var diffX:Number = 20 * scrollXPercent;
-			//if (event.target != gfx.edgeScrollerLeft) {
-				//diffX *= -1;
-			//}
-			//gfx.timeline.x += diffX;
-			//
+			var scrollXPercent:Number = event.target.mouseX / event.target.width;
+			var diffX:Number = 20 * scrollXPercent;
+			if (event.target != gfx.edgeScrollerLeft) {
+				diffX *= -1;
+			}
+			gfx.timeline.x += diffX;
+			
 			// stop from scrolling off the edge
-			//if (gfx.timeline.x > gfx.timelineMask.x) {
-				//gfx.timeline.x = gfx.timelineMask.x;
-			//} else if (gfx.timeline.x + gfx.timeline.width < gfx.timelineMask.x + gfx.timelineMask.width) {
-				//gfx.timeline.x = gfx.timelineMask.width + gfx.timelineMask.x - gfx.timeline.width;
-			//}
-		//}
+			if (gfx.timeline.x > gfx.timelineMask.x) {
+				gfx.timeline.x = gfx.timelineMask.x;
+			} else if (gfx.timeline.x + gfx.timeline.width < gfx.timelineMask.x + gfx.timelineMask.width) {
+				gfx.timeline.x = gfx.timelineMask.width + gfx.timelineMask.x - gfx.timeline.width;
+			}
+		}
 		
-		//protected function scrollerOut():void
-		//{
-			//gfx.edgeScrollerLeft.removeEventListener(Event.ENTER_FRAME, scrollerEnterFrame);
-			//gfx.edgeScrollerRight.removeEventListener(Event.ENTER_FRAME, scrollerEnterFrame);
-		//}
+		protected function scrollerOut():void
+		{
+			gfx.edgeScrollerLeft.removeEventListener(Event.ENTER_FRAME, scrollerEnterFrame);
+			gfx.edgeScrollerRight.removeEventListener(Event.ENTER_FRAME, scrollerEnterFrame);
+		}
 		
 		public var tooltipFadingIn:Boolean = false;
 		protected function showTooltip(guiAction:GuiAction):void
@@ -197,14 +197,12 @@ package gui
 		/**
 		 * After a card is placed, refresh the timeline, check for win & draw next card.
 		 */
-		public function cardPlaced(card:Card):void
+		public function cardPlaced():void
 		{
 			timeline.refresh();
 			
-			// will trigger gfx.strongFemaleCharacter to animate on enterFrame
+			// will trigger gfx.strongFemaleCharacter to animation on enterFrame
 			animationTick = 0;
-			
-			SoundPlayer.playMonsterSound(Utils.pickRandom([true, false]));
 			
 			if (percentCardsDrawn >= 1) {
 				finishGame();
@@ -232,29 +230,24 @@ package gui
 		
 		protected function finishGame():void {
 			var monster:Monster;
-			if ( Game.isFinished() ) {
+			if (Game.isFinished() || Config.ALWAYS_WIN_WITH_NO_DECK) {
 				monster = Game.returnNextMonster();
-				if (monster == null) Utils.log("Ran out of monsters");
-				else startGame(monster);
-			} else {
-				if (Config.ALWAYS_WIN_WITH_NO_DECK) {
-					monster = Game.returnNextMonster();
-					if (monster == null) Utils.log("Ran out of monsters");
-					else startGame(monster);
+				if (monster == null) {
+					Utils.log("Ran out of monsters");
+					MusicPlayer.playMusic(MusicPlayer.ROCKIN);
+					var finalMonster:Monster = Utils.pickRandom(Monster.allMonsters);
+					new GuiFloatText(Main.snipeLayer, "YOU got a " + finalMonster.name + "!!!", new Point(100, 200));
+					SaveManager.collectMonster(finalMonster);
+					setEndingMonster(finalMonster);
+					
+					GuiMonster.setMonsterSomewhere(gfx.winScreen.monster, finalMonster);
+					gfx.winScreen.info.text = "You raised a\n" + finalMonster.name;
+					Utils.addToParent(gfx, gfx.winScreen);
+				} else {
+					// more monsters to go
+					startGame(monster);
 				}
-			}
-			
-			// this was old game gameover code:
-			
-			/*MusicPlayer.playMusic(MusicPlayer.ROCKIN);
-			var finalMonster:Monster = Utils.pickRandom(Monster.allMonsters);
-			new GuiFloatText(Main.snipeLayer, "YOU got a " + finalMonster.name + "!!!", new Point(100, 200));
-			SaveManager.collectMonster(finalMonster);
-			setEndingMonster(finalMonster);
-			
-			GuiMonster.setMonsterSomewhere(gfx.winScreen.monster, finalMonster);
-			gfx.winScreen.info.text = "You raised a\n" + finalMonster.name;
-			Utils.addToParent(gfx, gfx.winScreen);*/
+			}			
 		}
 		
 		protected function hideWinScreen():void
