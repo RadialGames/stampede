@@ -62,6 +62,9 @@
 			if (currentMusic != null) {
 				currentMusic.loop = false;
 			}
+			if (fadingInMusic != null) {
+				fadingInMusic.stop();
+			}
 			fadingInVolumeChange = 0;
 			fadingInMusic = music;
 			fadingInMusic.play();

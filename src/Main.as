@@ -1,5 +1,6 @@
 package
 {
+	import flash.display.ShaderParameter;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.geom.Point;
@@ -28,7 +29,9 @@ package
 			Utils.pickOriginalRandomSeed();
 			Game.init();
 			addChild(new Gui());
-			new GuiFloatText(this, "Hello!", new Point(100, 200));
+			SaveManager.load();
+			snipeLayer = new Sprite();
+			addChild(snipeLayer);
 		}
 		
 		/**
@@ -53,6 +56,7 @@ package
 
 		public static var instance:Main;
 		public static var game:Game;
+		public static var snipeLayer:Sprite;
 	}
 
 }

@@ -2,6 +2,8 @@ package gui
 {
 	import actions.Action;
 	import actions.cards.Card;
+	import aze.motion.eaze;
+	import aze.motion.EazeTween;
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.display.SimpleButton;
@@ -9,6 +11,7 @@ package gui
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	import monsters.Monster;
 	/**
 	 * ...
 	 * @author Sarah Northway
@@ -37,11 +40,15 @@ package gui
 			addChild(mainMenu = new GuiMainMenu(gfx.mainMenu));
 			GuiButton.replaceButton(gfx.mainMenuButton, showMainMenu);
 			
+			gfx.strongFemaleProtagonist.gotoAndStop(1);
+			animationTick = 1000 * 10;
+			
 			MusicPlayer.playMusic(MusicPlayer.MAINMENU);
 		}
 		
 		protected function showMainMenu():void
 		{
+			MusicPlayer.playMusic(MusicPlayer.MAINMENU);
 			Utils.addToParent(this, mainMenu);
 		}
 		
@@ -53,6 +60,8 @@ package gui
 			Utils.removeFromParent(mainMenu);
 			cardsDrawn = 0;
 			drawNextCard();
+			Game.init();
+			timeline.reset();
 		}
 		
 		/**
@@ -60,7 +69,18 @@ package gui
 		 */
 		protected function enterFrame(...ig):void
 		{
+			// fade music in or out
 			MusicPlayer.threadTick();
+			
+			// animate strongFemaleCharacter for 2 seconds
+			if (animationTick < stage.frameRate * 2) {
+				// framerate is 1 frame every second/3
+				if (animationTick % (stage.frameRate/3) == 0) {
+					var newFrame:int = gfx.strongFemaleProtagonist.currentFrame % gfx.strongFemaleProtagonist.totalFrames + 1;
+					gfx.strongFemaleProtagonist.gotoAndStop(newFrame);
+				}
+				animationTick++;
+			}
 			
 			// if we're over a card or plotPoint, show the tooltip for it
 			var globalPoint:Point = new Point(stage.mouseX, stage.mouseY);
@@ -110,10 +130,11 @@ package gui
 			event.target.removeEventListener(Event.ENTER_FRAME, scrollerEnterFrame);
 		}
 		
+		public var tooltipFadingIn:Boolean = false;
 		protected function showTooltip(guiAction:GuiAction):void
 		{
 			if (Utils.isEmpty(guiAction.action.outcomeDescription)) {
-				gfx.tooltip.info.text = "Blah blahblahblah blah";
+				gfx.tooltip.info.text = "OutcomeDescription is blank for this";
 			} else {
 				gfx.tooltip.info.text = guiAction.action.outcomeDescription;
 			}
@@ -123,7 +144,13 @@ package gui
 				return;
 			}
 			Utils.addToParent(gfx, gfx.tooltip);
-			Utils.fadeIn(gfx.tooltip, 100, false);
+			
+			if (tooltipFadingIn) return;
+			
+			gfx.tooltip.alpha = 0;
+			eaze(gfx.tooltip).delay(0.5).to(0.5, { alpha:1 }, false);
+			tooltipFadingIn = true;
+			//Utils.fadeIn(gfx.tooltip, 100, false);
 		}
 		
 		public function hideTooltip(...ig):void
@@ -131,7 +158,12 @@ package gui
 			if (gfx.tooltip.parent == null) {
 				return;
 			}
-			Utils.fadeOut(gfx.tooltip, 100, true);
+			EazeTween.killTweensOf(gfx.tooltip);
+			gfx.tooltip.alpha = 0;
+			gfx.tooltip.parent.removeChild(gfx.tooltip);
+			tooltipFadingIn = false;			
+			//eaze(gfx.tooltip).to(0.2, { alphaVisible:0 }, true);
+			//Utils.fadeOut(gfx.tooltip, 100, true);
 		}
 		
 		/**
@@ -141,9 +173,15 @@ package gui
 		{
 			timeline.refresh();
 			
+			// will trigger gfx.strongFemaleCharacter to animation on enterFrame
+			animationTick = 0;
+			
 			if (percentCardsDrawn >= 1) {
 				MusicPlayer.playMusic(MusicPlayer.ROCKIN);
-				new GuiFloatText(this, "YOU finished the GAME!!!", new Point(100, 200));
+				var monster:Monster = Utils.pickRandom(Monster.allMonsters);
+				new GuiFloatText(this, "YOU got a " + monster.name + "!!!", new Point(100, 200));
+				SaveManager.collectMonster(monster);
+				gfx.monster.text = monster.name;
 			} else {
 				drawNextCard();
 			}
@@ -203,6 +241,7 @@ package gui
 		protected var gfx:GfxGui;
 		public var timeline:GuiTimeline;
 		protected var cardsDrawn:int = 0;
+		protected var animationTick:int = 0;
 		
 		protected var mainMenu:GuiMainMenu;
 		

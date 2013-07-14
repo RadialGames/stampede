@@ -20,11 +20,14 @@ package gui
 			
 			slotSpacing = gfx.slots.slot2.x;
 			cardSpacing = gfx.cards.card2.x;
-			statSpacing = gfx.stats.stat2.x;
-			
+		}
+		
+		public function reset():void
+		{
 			Utils.clearChildren(gfx.slots);
 			Utils.clearChildren(gfx.cards);
-			Utils.clearChildren(gfx.stats);
+			
+			Utils.clearVector(guiActions);
 			
 			for (var i :int = 0; i < Config.NUM_SLOTS; i++) {
 				var slot:GfxSlot = new GfxSlot();
@@ -57,6 +60,7 @@ package gui
 				//card.x = 0;
 				//card.y = 0;
 				eaze(card).to(0.3, { x:0, y:0 }, true);
+				new GuiFloatText(Main.snipeLayer, "You suck at placing cards!", card.localToGlobal(new Point(0,-50)));
 				return;
 			}
 			
@@ -68,6 +72,14 @@ package gui
 				//card.x = 0;
 				//card.y = 0;
 				eaze(card).to(0.3, { x:0, y:0 }, true);
+				new GuiFloatText(Main.snipeLayer, "You suck at placing cards!", card.localToGlobal(new Point(0,-50)));
+				return;
+			}
+			
+			if (!Game.putTopCardOnSlot(index)) {
+				Utils.log("drop index disallowed by game.as");
+				eaze(card).to(0.3, { x:0, y:0 }, true);
+				new GuiFloatText(Main.snipeLayer, "You suck at placing cards!", card.localToGlobal(new Point(0,-50)));
 				return;
 			}
 			
@@ -79,6 +91,8 @@ package gui
 			refresh();
 			Gui.instance.cardPlaced();
 			eaze(card).from(0.6, { y:card.y - 50 }, false).easing(Bounce.easeOut);
+			if (card.action.outcomeDescription == null) Utils.log("no outcomedesc on card");
+			else new GuiFloatText(Main.snipeLayer, card.action.outcomeDescription, card.localToGlobal(new Point(0,-50)));
 		}
 		
 		protected function isNextCard(card:GuiCard):Boolean
@@ -111,7 +125,7 @@ package gui
 				if (isPlotPoint(i)) {
 					var event:GfxPlotPoint = guiActions[i] as GfxPlotPoint;
 					if (event == null) {
-						Utils.logError("event is null for i " + i);
+						//Utils.logError("event is null for i " + i);
 						continue;
 					}
 					event.info.text = "evnt" + i;
@@ -145,13 +159,10 @@ package gui
 		/** fills a slot; either a GuiCard or a GuiPlotPoint */
 		protected var guiActions:Vector.<*> = new Vector.<*>();
 		
-		protected var stats:Vector.<GfxStat> = new Vector.<GfxStat>();
-		
 		protected var gfx:MovieClip;
 		
 		protected var slotSpacing:Number;
 		protected var cardSpacing:Number;
-		protected var statSpacing:Number;
 		protected var statsGraph:StatsGraph;
 	}
 }
