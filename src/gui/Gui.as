@@ -276,12 +276,10 @@ package gui
 				Utils.logError(error);
 				card = new Card();
 			}
-			if ( card == null ) {
-				card = new Card();
+			if ( card != null ) {
+				var nextCard:GuiCard = new GuiCard(card);
+				gfx.nextCard.addChild(nextCard);
 			}
-			
-			var nextCard:GuiCard = new GuiCard(card);
-			gfx.nextCard.addChild(nextCard);
 			
 			if (percentCardsDrawn < 0.20) {
 				MusicPlayer.playMusic(MusicPlayer.ORCHESTRAAAL);
@@ -289,7 +287,7 @@ package gui
 				MusicPlayer.playMusic(MusicPlayer.DRUMS);
 			} else if (percentCardsDrawn < 0.60) {
 				MusicPlayer.playMusic(MusicPlayer.STAMPEDE);
-			} else if (percentCardsDrawn < 0.70) {
+			} else if(percentCardsDrawn < 0.70) {
 				MusicPlayer.playMusic(MusicPlayer.LULLABY);
 			} else {
 				MusicPlayer.playMusic(MusicPlayer.RACIST);
@@ -304,7 +302,7 @@ package gui
 		
 		public function isNextCard(card:GuiCard):Boolean
 		{
-			if (gfx.nextCard.numChildren == 0) {
+			if (gfx.nextCard.numChildren == 0 ) {
 				return false;
 			}
 			return gfx.nextCard.getChildAt(0) == card;
