@@ -29,6 +29,7 @@ package gui
 			timeline = new GuiTimeline(gfx.timeline);
 			
 			Utils.removeFromParent(gfx.introMenu);
+			gfx.introMenu.addEventListener(MouseEvent.CLICK, closeIntro);
 			
 			//GuiButton.replaceButton(gfx.edgeScrollerLeft);
 			//gfx.edgeScrollerLeft.addEventListener(MouseEvent.MOUSE_OVER, scrollerOver);
@@ -76,6 +77,15 @@ package gui
 			cardsDrawn = 0;
 			drawNextCard();
 			timeline.reset();
+			Utils.addToParent(gfx, gfx.introMenu);
+			gfx.introMenu.gotoAndPlay(1);
+			MusicPlayer.playMusic(MusicPlayer.LULLABY);
+		}
+		
+		protected function closeIntro(...ig):void
+		{
+			Utils.removeFromParent(gfx.introMenu);
+			MusicPlayer.playMusic(Utils.pickRandom(MusicPlayer.GAME_SONGS));
 		}
 		
 		/**
@@ -283,17 +293,17 @@ package gui
 			var nextCard:GuiCard = new GuiCard(card);
 			gfx.nextCard.addChild(nextCard);
 			
-			if (percentCardsDrawn < 0.20) {
-				MusicPlayer.playMusic(MusicPlayer.ORCHESTRAAAL);
-			} else if (percentCardsDrawn < 0.40) {
-				MusicPlayer.playMusic(MusicPlayer.DRUMS);
-			} else if (percentCardsDrawn < 0.60) {
-				MusicPlayer.playMusic(MusicPlayer.STAMPEDE);
-			} else if (percentCardsDrawn < 0.70) {
-				MusicPlayer.playMusic(MusicPlayer.LULLABY);
-			} else {
-				MusicPlayer.playMusic(MusicPlayer.RACIST);
-			}
+			//if (percentCardsDrawn < 0.20) {
+				//MusicPlayer.playMusic(MusicPlayer.ORCHESTRAAAL);
+			//} else if (percentCardsDrawn < 0.40) {
+				//MusicPlayer.playMusic(MusicPlayer.DRUMS);
+			//} else if (percentCardsDrawn < 0.60) {
+				//MusicPlayer.playMusic(MusicPlayer.STAMPEDE);
+			//} else if (percentCardsDrawn < 0.70) {
+				//MusicPlayer.playMusic(MusicPlayer.LULLABY);
+			//} else {
+				//MusicPlayer.playMusic(MusicPlayer.RACIST);
+			//}
 			cardsDrawn++;
 		}
 		
