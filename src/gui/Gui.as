@@ -67,9 +67,9 @@ package gui
 		/**
 		 * Called by mainMenu startButton.
 		 */
-		public function startGame():void
+		public function startGame(monster:Monster):void
 		{
-			Game.init(Monster.allMonsters[0]);
+			Game.init(monster);
 			Utils.removeFromParent(mainMenu);
 			cardsDrawn = 0;
 			drawNextCard();
@@ -230,6 +230,12 @@ package gui
 		
 		protected function finishGame():void
 		{
+			if ( Game.isFinished() ) {
+				
+			}else {
+				
+			}
+			
 			/*MusicPlayer.playMusic(MusicPlayer.ROCKIN);
 			var finalMonster:Monster = Utils.pickRandom(Monster.allMonsters);
 			new GuiFloatText(Main.snipeLayer, "YOU got a " + finalMonster.name + "!!!", new Point(100, 200));

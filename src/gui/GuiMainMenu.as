@@ -47,7 +47,7 @@ package gui
 			Utils.clearChildren(gfx.monsters);
 			for (var i :int = 0; i < Monster.allMonsters.length; i++) {
 				var monster:Monster = Monster.allMonsters[i];
-				var monsterButton:GuiButton = GuiButton.replaceButton(new GfxMonster(), Gui.instance.startGame);
+				var monsterButton:GuiButton = GuiButton.replaceButton(new GfxMonster(), function():void{Gui.instance.startGame(monster)});
 				var inners:Array = Utils.buttonClasses(monsterButton, GfxMonsterInner);
 				for each (var inner:GfxMonsterInner in inners) {
 					GuiMonster.setMonsterSomewhere(inner, monster);
@@ -58,7 +58,7 @@ package gui
 						//GuiMonster.setMonsterSomewhere(inner.monster, monster);
 					//}
 				}
-				if (!SaveManager.hasCollectedMonster(monster)) {
+				if (i != 0 && !SaveManager.hasCollectedMonster(monster)) {
 					monsterButton.enabled = false;
 				}
 				monsterButton.x = i * monsterSpacing;
