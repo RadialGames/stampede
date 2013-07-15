@@ -85,7 +85,8 @@ package gui
 		
 		protected function replaceMonsterButton(monster:Monster):GuiButton
 		{
-			var monsterButton:GuiButton = GuiButton.replaceButton(new GfxMonster(), function():void { Gui.instance.startGame(monster) } );
+			var monsterButton:GuiButton = GuiButton.replaceButton(new GfxMonster(), function():void {
+				Gui.instance.startGame(monster, true) } );
 			return monsterButton;
 		}
 		
