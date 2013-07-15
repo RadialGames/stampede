@@ -75,19 +75,22 @@ package gui
 		/**
 		 * Called by mainMenu startButton.
 		 */
-		public function startGame(monster:Monster):void
+		public function startGame(monster:Monster, showIntro:Boolean = false):void
 		{
 			Game.init(monster);
 			cardsDrawn = 0;
 			drawNextCard();
 			timeline.reset();
-			Utils.addToParent(gfx, gfx.introMenu);
-			gfx.introMenu.gotoAndPlay(1);
-			gfx.introMenu.y = 0;
+			if (showIntro) {
+				Utils.addToParent(gfx, gfx.introMenu);
+				gfx.introMenu.gotoAndPlay(1);
+				gfx.introMenu.y = 0;
+			}
 			MusicPlayer.playMusic(MusicPlayer.LULLABY);
 			eaze(mainMenu).to(0.6, { y: 640 }, true)
 				.easing(Quadratic.easeIn)
 				.onComplete(reallyStartGame);
+			
 				
 			SaveManager.collectMonster(monster);
 		}
@@ -270,7 +273,7 @@ package gui
 				if (monster == null) {
 					MusicPlayer.playMusic(MusicPlayer.ROCKIN);
 					
-					new GuiFloatText(Main.snipeLayer, "YOU got a " + Game.currentMonster.name + "!!!", new Point(100, 200));
+					//new GuiFloatText(Main.snipeLayer, "YOU got a " + Game.currentMonster.name + "!!!", new Point(100, 200));
 					setEndingMonster(Game.currentMonster);
 					GuiMonster.setMonsterSomewhere(gfx.winScreen.monster, Game.currentMonster);
 					gfx.winScreen.info.text = "You raised a " + Game.currentMonster.name + "!";
