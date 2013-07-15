@@ -39,6 +39,9 @@ package  {
 		{
 			for (var i:int = 0; i < Config.ALL_STATS.length; i++) {
 				trace(Config.ALL_STATS[i], Game.stats.getStat(Config.ALL_STATS[i]))
+				if ( !currentMonster.activeStats[i] ) {
+					continue;
+				}
 				if ( Game.stats.getStat(Config.ALL_STATS[i]) != currentMonster.solution[i] ) {
 					return false;
 				}
