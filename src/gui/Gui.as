@@ -282,6 +282,7 @@ package gui
 					gfx.winScreen.scaleX = 1;
 					gfx.winScreen.scaleY = 1;
 					gfx.winScreen.y = 640;
+					Game.youWin = true;
 					eaze(gfx.winScreen).to(0.6, { y:0 }, true)
 						.easing(Bounce.easeOut);
 				} else {
@@ -308,7 +309,7 @@ package gui
 		
 		private function reallyHideWinScreen():void {
 			Utils.removeFromParent(gfx.winScreen);
-			if ( Game.currentMonster == Monster.allMonsters[Monster.allMonsters.length-1] ){
+			if ( Game.youWin ){
 				showMainMenu();
 			}
 		}

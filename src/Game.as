@@ -23,6 +23,7 @@ package  {
 		public static var creatureName:String = "Rabaroo";
 		protected static var _currentSlot:int;
 		public static var currentMonster:Monster;
+		public static var youWin:Boolean = false;
 		
 		public static function get currentSlot():int { return _currentSlot; }
 		
@@ -33,6 +34,7 @@ package  {
 			initTimeline();
 			initDeck(monster);
 			reset();
+			youWin = false;
 		}
 		
 		public static function isFinished():Boolean
@@ -69,7 +71,7 @@ package  {
 			for (var i:int = 0; i < Monster.allMonsters.length; i++) {
 				if ( Monster.allMonsters[i] == prevMonster ) {
 					if ( i+1 == Monster.allMonsters.length ) {
-						trace("YOU WIN!")
+						Game.youWin = true;
 						return;
 					}
 					init(Monster.allMonsters[i+1]);
